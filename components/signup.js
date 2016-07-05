@@ -62,19 +62,16 @@ export default class Signup1 extends Component {
           style = { styles.logo }
           source={require("../images/Logo1.png")}
         />
-        <Text style={styles.heading}>
-          Welcome to Grasp
-         </Text>
-         <Text style={styles.caption}>
+         <Text style={styles.heading}>
          Sign up as...
          </Text>
          <SegmentedControls
-  			tint= {'#f80046'}
+  			tint= {'#3498DB'}
   			selectedTint= {'white'}
-  			backTint= {'#1e2126'}
+  			backTint= {'#ffffff'}
   			options={ options }
   			allowFontScaling={ false } // default: true
-  			onSelection={ setSelectedOption.bind(this) }
+  			onSelection={ setSelectedOption.bind(this)}
   			selectedOption={ this.state.user }
 			/>
 		<TextInput

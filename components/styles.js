@@ -32,6 +32,7 @@ module.exports = StyleSheet.create({
   },
   line: {
     width: 227,
+    height: 1,
     marginTop: 10,
     marginBottom: 10,
     resizeMode: 'stretch'
