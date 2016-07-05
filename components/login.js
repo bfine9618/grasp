@@ -28,7 +28,7 @@ export default class Login extends Component {
      return (
        <View style={styles.container}>
         <Image
-          style = {styles.homeLogo}
+          style = {styles.logo}
           source={require("../images/Logo1.png")}
         />
         <Text style={styles.heading}>
@@ -39,6 +39,10 @@ export default class Login extends Component {
           onChangeText={(text) => this.setState({email : text})}
           value={this.state.email}
           placeholder="email"
+        />
+        <Image
+          style = {styles.line}
+          source={require("../images/Line.png")}
         />
         <TextInput
           style={styles.wideInput}

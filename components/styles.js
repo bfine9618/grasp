@@ -24,38 +24,42 @@ module.exports = StyleSheet.create({
     marginBottom: 5,
     fontSize:15,
   },
-  homeLogo: {
+  logo: {
     height:153,
     width: 112,
     marginTop: 77,
     resizeMode: 'stretch'
   },
-  icon: {
-    height:153,
-    width: 112,
-    marginTop: 30,
+  line: {
+    width: 227,
+    marginTop: 10,
+    marginBottom: 10,
     resizeMode: 'stretch'
   },
   wideInput: {
-    height: 40,
+    height: 20,
     alignSelf: 'stretch',
-    backgroundColor: '#dcdcdc',
-    marginBottom: 10,
     marginLeft: 5,
+    marginTop:12,
+    marginBottom: 12,
     marginRight: 5,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 18,
+    color: '#3498DB'
   },
   fullWidthButton: {
-    backgroundColor: 'thistle',
-    height:40,
+    backgroundColor: '#3498DB',
+    height:60,
+    width: 228,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'stretch',
+    borderRadius: 30,
+    alignSelf: 'center',
     marginBottom: 10
   },
   fullWidthButtonText: {
-    fontSize:18,
-    color: 'black'
+    fontSize:24,
+    color: 'white'
   }
 });

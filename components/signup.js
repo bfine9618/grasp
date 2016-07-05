@@ -3,7 +3,7 @@ import {
   Text,
   View,
   Image,
-  TextInput, 
+  TextInput,
   TouchableHighlight
 } from 'react-native';
 
@@ -24,8 +24,8 @@ export default class Signup1 extends Component {
  	 	if (this.state.user === "Student") {
  	 		component = StudentSignUp;
  	 	}
- 	 	this.props.navigator.push({component: component, 
- 	 		  passProps: { name: this.state.name || '', 
+ 	 	this.props.navigator.push({component: component,
+ 	 		  passProps: { name: this.state.name || '',
  	 		  	email: this.state.email|| '',
  	 		  	password: this.state.password || ''
  	 		  }
@@ -34,7 +34,7 @@ export default class Signup1 extends Component {
  	 }
 	render() {
 		  const options = [
-			"Student", 
+			"Student",
 			"Tutor"
 			];
 
@@ -59,8 +59,8 @@ export default class Signup1 extends Component {
 		return (
        <View style={styles.container}>
         <Image
-          style = { styles.icon }
-          source={require("../images/Logo1.png")} 
+          style = { styles.logo }
+          source={require("../images/Logo1.png")}
         />
         <Text style={styles.heading}>
           Welcome to Grasp
@@ -82,25 +82,33 @@ export default class Signup1 extends Component {
           onChangeText={(text) => this.setState({name : text})}
           value={this.state.name}
           placeholder="Name"
-        /> 
+        />
+        <Image
+          style = {styles.line}
+          source={require("../images/Line.png")}
+        />
         <TextInput
           style={styles.wideInput}
           onChangeText={(text) => this.setState({email : text})}
           value={this.state.email}
           placeholder="School Email"
-        /> 
+        />
+        <Image
+          style = {styles.line}
+          source={require("../images/Line.png")}
+        />
         <TextInput
           style={styles.wideInput}
           onChangeText={(text) => this.setState({password : text})}
           value={this.state.password}
           placeholder="Password"
-        /> 
-        <TouchableHighlight 
+        />
+        <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
           onPress={this.nextStep.bind(this)}>
-        <Text style={styles.fullWidthButtonText}>Next Step</Text>
+        <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
 
          </View>
@@ -115,8 +123,8 @@ class TutorSignUp extends Component {
     };
   }
   payment() {
-  	this.props.navigator.push({component: TutorPayment, 
- 	 		  passProps: { phoneNumber: this.state.phoneNumber || '', 
+  	this.props.navigator.push({component: TutorPayment,
+ 	 		  passProps: { phoneNumber: this.state.phoneNumber || '',
  	 		  	major: this.state.major|| '',
  	 		  	graduatingYear: this.state.graduatingYear || '',
  	 		  	bio: this.state.bio || '',
@@ -128,7 +136,7 @@ class TutorSignUp extends Component {
 		return (  <View style={styles.container}>
 			 <Image
           		style = { styles.icon, { height:76, width: 56, } }
-          		source={require("../images/Logo1.png")} 
+          		source={require("../images/Logo1.png")}
        		 />
 
 			<Text style={styles.caption}> Photo upload coming soon! </Text>
@@ -137,43 +145,67 @@ class TutorSignUp extends Component {
           		onChangeText={(text) => this.setState({phoneNumber : text})}
           		value={this.state.phoneNumber}
           		placeholder="Phone number (xxx)-xxx-xxxx"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({major : text})}
           		value={this.state.major}
           		placeholder="Major"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({graduatingYear : text})}
           		value={this.state.graduatingYear}
           		placeholder="Year/Class"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
 			<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({password : text})}
           		value={this.state.password}
           		placeholder="Password"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
         	<TextInput
           		style={{ height: 100}, styles.wideInput }
           		onChangeText={(text) => this.setState({bio : text})}
           		value={this.state.bio}
           		placeholder="Short bio (optional, but helpful for students)"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({skype : text})}
           		value={this.state.skype}
           		placeholder="Skype Username (optional)"
-        	/> 
-        	<TouchableHighlight 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+        	<TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
           onPress={this.payment.bind(this)}>
-        <Text style={styles.fullWidthButtonText}>Continue to Payment</Text>
+        <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
         </View>
 			);
@@ -187,8 +219,8 @@ class StudentSignUp extends Component{
     };
   }
   payment() {
-  	this.props.navigator.push({component: StudentPayment, 
- 	 		  passProps: { phoneNumber: this.state.phoneNumber || '', 
+  	this.props.navigator.push({component: StudentPayment,
+ 	 		  passProps: { phoneNumber: this.state.phoneNumber || '',
  	 		  	major: this.state.major|| '',
  	 		  	graduatingYear: this.state.graduatingYear || '',
  	 		  	skype: this.state.skype || ''
@@ -199,7 +231,7 @@ class StudentSignUp extends Component{
 		return ( <View style={styles.container}>
  			<Image
           		style = { styles.icon, { height:76, width: 56, } }
-          		source={require("../images/Logo1.png")} 
+          		source={require("../images/Logo1.png")}
        		 />
 
 			<Text style={styles.caption}> Photo upload coming soon! </Text>
@@ -208,33 +240,45 @@ class StudentSignUp extends Component{
           		onChangeText={(text) => this.setState({phoneNumber : text})}
           		value={this.state.phoneNumber}
           		placeholder="Phone number (xxx)-xxx-xxxx"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({major : text})}
           		value={this.state.major}
           		placeholder="Major (optional)"
-        	/> 
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({graduatingYear : text})}
           		value={this.state.graduatingYear}
           		placeholder="Year/Class (optional)"
-        	/> 
-			
-        	
+        	/>
+
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({skype : text})}
           		value={this.state.skype}
           		placeholder="Skype Username (optional)"
-        	/> 
-        	<TouchableHighlight 
+        	/>
+        	<TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
           onPress={this.payment.bind(this)}>
-        <Text style={styles.fullWidthButtonText}>Continue to Payment Info</Text>
+        <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
         </View>
 			);
@@ -254,34 +298,34 @@ class StudentPayment extends Component {
 
   render() {
   	return (
-  		<View style={styles.container}>
+      <View style={styles.container}>
   			<Text style = {styles.heading}>Enter Payment Info</Text>
   			<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({creditCardNumber : text})}
           		value={this.state.creditCardNumber}
           		placeholder="Credit Card Number"
-        	/> 
+        	/>
         	<View style = { styles.container, { flexDirection: 'row'}}>
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({ccExpDate : text})}
           		value={this.state.ccExpDate}
-          		placeholder="Expiration Date"
-        	/> 
+          		placeholder="Exp."
+        	/>
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({CVV : text})}
           		value={this.state.CVV}
           		placeholder="CVV"
-        	/> 
+        	/>
         	</View>
-        	<TouchableHighlight 
+        	<TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
           onPress={this.register.bind(this)}>
-        <Text style={styles.fullWidthButtonText}>Complete Sign Up!</Text>
+        <Text style={styles.fullWidthButtonText}>FINISH</Text>
         </TouchableHighlight>
   		</View>
 		);
@@ -298,7 +342,7 @@ class TutorPayment extends Component {
   register() {}
   render() {
   	const options = [
-			"Bank Account", 
+			"Bank Account",
 			"Venmo"
 			];
 
@@ -335,19 +379,23 @@ class TutorPayment extends Component {
 			{(() => {
         		switch (this.state.paymentMethod) {
           		case "Bank Account":   return (
-          			<View style={{width: 300}} >
+          			<View>
           			<TextInput
           				style={styles.wideInput}
           				onChangeText={(text) => this.setState({accountNumber : text})}
           				value={this.state.accountNumber}
           				placeholder="Account Number"
-        			/> 
+        			/>
+              <Image
+                style = {styles.line}
+                source={require("../images/Line.png")}
+              />
         			<TextInput
           				style={styles.wideInput}
           				onChangeText={(text) => this.setState({routingNumber : text})}
           				value={this.state.routingNumber}
           				placeholder="Routing Number"
-        			/> 
+        			/>
         			</View>
           			);
          		 case "Venmo": return (
@@ -356,18 +404,18 @@ class TutorPayment extends Component {
           				onChangeText={(text) => this.setState({venmo : text})}
           				value={this.state.venmo}
           				placeholder="Venmo Email"
-        			/> 
+        			/>
           			);
           		default:      return "";
         	}
      		})() }
-  			
-        	<TouchableHighlight 
+
+        	<TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
           onPress={this.register.bind(this)}>
-        <Text style={styles.fullWidthButtonText}>Start Tutoring!</Text>
+        <Text style={styles.fullWidthButtonText}>FINISH</Text>
         </TouchableHighlight>
   		</View>
 		);
