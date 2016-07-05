@@ -34,9 +34,6 @@ export default class Login extends Component {
         <Text style={styles.heading}>
           Welcome to Grasp
          </Text>
-         <Text style={styles.caption}>
-         Let's get unstuck together.
-         </Text>
          <TextInput
           style={styles.wideInput}
           onChangeText={(text) => this.setState({email : text})}
