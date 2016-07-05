@@ -3,7 +3,7 @@ import {
   Text,
   View,
   Image,
-  TextInput, 
+  TextInput,
   TouchableHighlight
 } from 'react-native';
 import Grasp from './home';
@@ -28,8 +28,8 @@ export default class Login extends Component {
      return (
        <View style={styles.container}>
         <Image
-          style = { styles.icon }
-          source={require("../images/Logo1.png")} 
+          style = {styles.homeLogo}
+          source={require("../images/Logo1.png")}
         />
         <Text style={styles.heading}>
           Welcome to Grasp
@@ -39,21 +39,21 @@ export default class Login extends Component {
           onChangeText={(text) => this.setState({email : text})}
           value={this.state.email}
           placeholder="email"
-        /> 
+        />
         <TextInput
           style={styles.wideInput}
           onChangeText={(text) => this.setState({password : text})}
           value={this.state.password}
           placeholder="password"
-        /> 
-        <TouchableHighlight 
+        />
+        <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
           onPress={() => console.log("login")}>
         <Text style={styles.fullWidthButtonText}>Log In</Text>
         </TouchableHighlight>
-        <TouchableHighlight 
+        <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
@@ -61,13 +61,13 @@ export default class Login extends Component {
         <Text style={styles.fullWidthButtonText}>Register</Text>
         </TouchableHighlight>
       </View>
-     ); 
+     );
     }
     else {
       return (
         <Grasp />
       );
     }
-    
+
   }
 }

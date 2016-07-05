@@ -24,9 +24,16 @@ module.exports = StyleSheet.create({
     marginBottom: 5,
     fontSize:15,
   },
-  icon: {
-    height:153, 
+  homeLogo: {
+    height:153,
     width: 112,
+    marginTop: 77,
+    resizeMode: 'stretch'
+  },
+  icon: {
+    height:153,
+    width: 112,
+    marginTop: 30,
     resizeMode: 'stretch'
   },
   wideInput: {
@@ -35,7 +42,8 @@ module.exports = StyleSheet.create({
     backgroundColor: '#dcdcdc',
     marginBottom: 10,
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
+    textAlign: 'center'
   },
   fullWidthButton: {
     backgroundColor: 'thistle',

@@ -4,7 +4,7 @@ import {
   Text,
   View,
   Image,
-  TextInput, 
+  TextInput,
   TouchableHighlight
 } from 'react-native';
 
@@ -22,10 +22,10 @@ export default class initial extends Component{
     	<View style={styles.container}>
         <Image
           style = { styles.icon }
-          source={require("../images/Logo1.png")} 
+          source={require("../images/Logo1.png")}
         />
         <Text style={styles.heading}>
-          Hi there! I'm Ace 
+          Hi there! I&#39!m Ace 
          </Text>
          <Text style={styles.caption}>
          What do you need to grasp today?
@@ -35,8 +35,8 @@ export default class initial extends Component{
           onChangeText={(text) => this.setState({coursecode : text})}
           value={this.state.coursecode}
           placeholder="course code"
-        /> 
-        <TouchableHighlight 
+        />
+        <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
