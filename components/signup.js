@@ -32,6 +32,15 @@ export default class Signup1 extends Component {
 		});
 
  	 }
+
+   prevStep() {
+    var component = TutorSignUp;
+    if (this.state.user === "Student") {
+      component = StudentSignUp;
+    }
+    this.props.navigator.pop();
+  }
+
 	render() {
 		  const options = [
 			"Student",
@@ -58,6 +67,17 @@ export default class Signup1 extends Component {
  		 }
 		return (
        <View style={styles.container}>
+           <TouchableHighlight
+              style={styles.prevButton}
+              activeOpacity={0.6}
+              underlayColor={'white'}
+              onPress={this.prevStep.bind(this)}>
+              <Image
+                style = {styles.prevImg}
+                source={require("../images/back.png")}
+              />
+            </TouchableHighlight>
+
         <Image
           style = { styles.logo }
           source={require("../images/Logo1.png")}
@@ -103,12 +123,11 @@ export default class Signup1 extends Component {
         <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
-          underlayColor={'purple'}
           onPress={this.nextStep.bind(this)}>
         <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
 
-         </View>
+        </View>
          );
 	}
 }
@@ -129,8 +148,28 @@ class TutorSignUp extends Component {
  	 		  }
 		});
   }
+
+  prevStep() {
+   var component = TutorSignUp;
+   if (this.state.user === "Student") {
+     component = StudentSignUp;
+   }
+   this.props.navigator.pop();
+ }
+
 	render() {
 		return (  <View style={styles.container}>
+      <TouchableHighlight
+         style={styles.prevButton}
+         activeOpacity={0.6}
+         underlayColor={'white'}
+         onPress={this.prevStep.bind(this)}>
+         <Image
+           style = {styles.prevImg}
+           source={require("../images/back.png")}
+         />
+       </TouchableHighlight>
+
 			 <Image
           		style = { styles.icon, { height:76, width: 56, } }
           		source={require("../images/Logo1.png")}
@@ -224,8 +263,27 @@ class StudentSignUp extends Component{
  	 		  }
 		});
   }
+
+  prevStep() {
+   var component = TutorSignUp;
+   if (this.state.user === "Student") {
+     component = StudentSignUp;
+   }
+   this.props.navigator.pop();
+ }
+
 	render() {
 		return ( <View style={styles.container}>
+      <TouchableHighlight
+         style={styles.prevButton}
+         activeOpacity={0.6}
+         underlayColor={'white'}
+         onPress={this.prevStep.bind(this)}>
+         <Image
+           style = {styles.prevImg}
+           source={require("../images/back.png")}
+         />
+       </TouchableHighlight>
  			<Image
           		style = { styles.icon, { height:76, width: 56, } }
           		source={require("../images/Logo1.png")}
@@ -293,9 +351,28 @@ class StudentPayment extends Component {
 
   }
 
+  prevStep() {
+   var component = TutorSignUp;
+   if (this.state.user === "Student") {
+     component = StudentSignUp;
+   }
+   this.props.navigator.pop();
+ }
+
   render() {
   	return (
       <View style={styles.container}>
+      <TouchableHighlight
+         style={styles.prevButton}
+         activeOpacity={0.6}
+         underlayColor={'white'}
+         onPress={this.prevStep.bind(this)}>
+         <Image
+           style = {styles.prevImg}
+           source={require("../images/back.png")}
+         />
+       </TouchableHighlight>
+       
   			<Text style = {styles.heading}>Enter Payment Info</Text>
   			<TextInput
           		style={styles.wideInput}
@@ -304,6 +381,16 @@ class StudentPayment extends Component {
           		placeholder="Credit Card Number"
         	/>
         	<View style = { styles.container, { flexDirection: 'row'}}>
+          <TouchableHighlight
+             style={styles.prevButton}
+             activeOpacity={0.6}
+             underlayColor={'white'}
+             onPress={this.prevStep.bind(this)}>
+             <Image
+               style = {styles.prevImg}
+               source={require("../images/back.png")}
+             />
+           </TouchableHighlight>
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({ccExpDate : text})}
@@ -336,6 +423,16 @@ class TutorPayment extends Component {
     	paymentMethod: 'Bank Account'
     };
   }
+
+  prevStep() {
+   var component = TutorSignUp;
+   if (this.state.user === "Student") {
+     component = StudentSignUp;
+   }
+   this.props.navigator.pop();
+ }
+
+
   register() {}
   render() {
   	const options = [
@@ -363,6 +460,18 @@ class TutorPayment extends Component {
  		 }
   	return (
   		<View style={styles.container}>
+
+      <TouchableHighlight
+         style={styles.prevButton}
+         activeOpacity={0.6}
+         underlayColor={'white'}
+         onPress={this.prevStep.bind(this)}>
+         <Image
+           style = {styles.prevImg}
+           source={require("../images/back.png")}
+         />
+       </TouchableHighlight>
+
   			<Text style = {styles.heading}>How should we pay you?</Text>
 			<SegmentedControls
   			tint= {'#f80046'}

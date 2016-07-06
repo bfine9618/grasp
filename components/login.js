@@ -38,13 +38,14 @@ export default class Login extends Component {
           style={styles.wideInput}
           onChangeText={(text) => this.setState({email : text})}
           value={this.state.email}
-          placeholder="email"
+          placeholder=".edu email"
         />
         <Image
           style = {styles.line}
           source={require("../images/Line.png")}
         />
         <TextInput
+          secureTextEntry={true}
           style={styles.wideInput}
           onChangeText={(text) => this.setState({password : text})}
           value={this.state.password}

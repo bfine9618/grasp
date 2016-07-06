@@ -7,16 +7,22 @@ var {
 } = React;
 
 module.exports = StyleSheet.create({
+  baseText: {
+    fontFamily: 'Montserrat-Light',
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    margin: 30
+    margin: 30,
+  },
+  centerView: {
   },
   heading: {
-    fontSize: 20,
+    fontSize: 32,
     textAlign: 'center',
     margin: 10,
+    fontFamily: 'Montserrat-Light'
   },
   caption: {
     textAlign: 'center',
@@ -62,5 +68,36 @@ module.exports = StyleSheet.create({
   fullWidthButtonText: {
     fontSize:24,
     color: 'white'
-  }
+  },
+
+  prevImg: {
+    top: 20,
+    left: 14,
+    width: 12,
+    height: 25,
+  },
+
+  prevButton: {
+    width:25,
+    height:25,
+
+  },
+
+  toolbar:{
+        backgroundColor:'#81c04d',
+        paddingTop:30,
+        paddingBottom:10,
+        flexDirection:'row'    //Step 1
+    },
+    toolbarButton:{
+        width: 50,            //Step 2
+        color:'#fff',
+        textAlign:'center'
+    },
+    toolbarTitle:{
+        color:'#fff',
+        textAlign:'center',
+        fontWeight:'bold',
+        flex:1                //Step 3
+    }
 });

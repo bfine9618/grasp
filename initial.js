@@ -25,7 +25,7 @@ export default class initial extends Component{
           source={require("../images/Logo1.png")}
         />
         <Text style={styles.heading}>
-          Hi there! I&#39!m Ace 
+          Hi there! I&#39!m Ace
          </Text>
          <Text style={styles.caption}>
          What do you need to grasp today?

@@ -4,7 +4,7 @@ import {
   Text,
   View,
   Image,
-  TextInput, 
+  TextInput,
   TouchableHighlight
 } from 'react-native';
 
@@ -17,7 +17,7 @@ export default class loading extends Component{
       loggedIn: true
     };
   }
-  
+
   render () {
     var progressBar =
       <View style={styles.container}>
@@ -33,7 +33,7 @@ export default class loading extends Component{
         <ProgressBar styleAttr="Large" color="blue"/>
          <Text style={styles.heading}>
          {"\n"}{"\n"}
-         We're finding you a tutor.
+         We"\'"re finding you a tutor.
          </Text>
       </View>
     );
