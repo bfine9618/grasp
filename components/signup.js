@@ -66,20 +66,24 @@ export default class Signup1 extends Component {
    		 );
  		 }
 		return (
-       <View style={styles.container}>
-           <TouchableHighlight
-              style={styles.prevButton}
-              activeOpacity={0.6}
-              underlayColor={'white'}
-              onPress={this.prevStep.bind(this)}>
-              <Image
-                style = {styles.prevImg}
-                source={require("../images/back.png")}
-              />
-            </TouchableHighlight>
+       <View style={styles.mainContainer}>
 
+       <View style={{paddingTop:25}}>
+             <TouchableHighlight
+                style={styles.prevButton}
+                activeOpacity={0.6}
+                underlayColor={'white'}
+                onPress={this.prevStep.bind(this)}>
+                <Image
+                  style = {styles.prevImg}
+                  source={require("../images/back.png")}
+                />
+              </TouchableHighlight>
+          </View>
+
+        <View style={styles.container}>
         <Image
-          style = { styles.logo }
+          style = { styles.headLogo }
           source={require("../images/Logo1.png")}
         />
          <Text style={styles.heading}>
@@ -126,7 +130,7 @@ export default class Signup1 extends Component {
           onPress={this.nextStep.bind(this)}>
         <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
-
+        </View>
         </View>
          );
 	}
@@ -158,20 +162,31 @@ class TutorSignUp extends Component {
  }
 
 	render() {
-		return (  <View style={styles.container}>
-      <TouchableHighlight
-         style={styles.prevButton}
-         activeOpacity={0.6}
-         underlayColor={'white'}
-         onPress={this.prevStep.bind(this)}>
-         <Image
-           style = {styles.prevImg}
-           source={require("../images/back.png")}
-         />
-       </TouchableHighlight>
+		return (
+      <View style={styles.mainContainer}>
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>Tutor sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepActive}>Step 1</Text>
+                <Text style={styles.stepText}>Step 2</Text>
+                <Text style={styles.stepText}>Step 3</Text>
+                <Text style={styles.stepText}>Step 4</Text>
+          </View>
 
+       <View style={styles.container}>
 			 <Image
-          		style = { styles.icon, { height:76, width: 56, } }
+          		style = {{height:76, width: 56,} }
           		source={require("../images/Logo1.png")}
        		 />
 
@@ -244,6 +259,7 @@ class TutorSignUp extends Component {
         <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
         </View>
+        </View>
 			);
 	}
 }
@@ -273,17 +289,30 @@ class StudentSignUp extends Component{
  }
 
 	render() {
-		return ( <View style={styles.container}>
-      <TouchableHighlight
-         style={styles.prevButton}
-         activeOpacity={0.6}
-         underlayColor={'white'}
-         onPress={this.prevStep.bind(this)}>
-         <Image
-           style = {styles.prevImg}
-           source={require("../images/back.png")}
-         />
-       </TouchableHighlight>
+		return (
+      <View style={styles.mainContainer}>
+
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>Student sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepComplete}>Step 1</Text>
+                <Text style={styles.stepActive}>Step 2</Text>
+                <Text style={styles.stepText}>Step 3</Text>
+                <Text style={styles.stepText}>Step 4</Text>
+          </View>
+
+       <View style={styles.container}>
  			<Image
           		style = { styles.icon, { height:76, width: 56, } }
           		source={require("../images/Logo1.png")}
@@ -336,6 +365,7 @@ class StudentSignUp extends Component{
         <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
         </View>
+        </View>
 			);
 	}
 }
@@ -361,18 +391,29 @@ class StudentPayment extends Component {
 
   render() {
   	return (
-      <View style={styles.container}>
-      <TouchableHighlight
-         style={styles.prevButton}
-         activeOpacity={0.6}
-         underlayColor={'white'}
-         onPress={this.prevStep.bind(this)}>
-         <Image
-           style = {styles.prevImg}
-           source={require("../images/back.png")}
-         />
-       </TouchableHighlight>
-       
+      <View style={styles.mainContainer}>
+
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>Student sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepComplete}>Step 1</Text>
+                <Text style={styles.stepComplete}>Step 2</Text>
+                <Text style={styles.stepComplete}>Step 3</Text>
+                <Text style={styles.stepActive}>Step 4</Text>
+          </View>
+
+       <View style={styles.container}>
   			<Text style = {styles.heading}>Enter Payment Info</Text>
   			<TextInput
           		style={styles.wideInput}
@@ -381,16 +422,6 @@ class StudentPayment extends Component {
           		placeholder="Credit Card Number"
         	/>
         	<View style = { styles.container, { flexDirection: 'row'}}>
-          <TouchableHighlight
-             style={styles.prevButton}
-             activeOpacity={0.6}
-             underlayColor={'white'}
-             onPress={this.prevStep.bind(this)}>
-             <Image
-               style = {styles.prevImg}
-               source={require("../images/back.png")}
-             />
-           </TouchableHighlight>
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({ccExpDate : text})}
@@ -411,7 +442,8 @@ class StudentPayment extends Component {
           onPress={this.register.bind(this)}>
         <Text style={styles.fullWidthButtonText}>FINISH</Text>
         </TouchableHighlight>
-  		</View>
+      </View>
+      </View>
 		);
   }
 }
@@ -459,18 +491,29 @@ class TutorPayment extends Component {
    		 );
  		 }
   	return (
-  		<View style={styles.container}>
+      <View style={styles.mainContainer}>
 
-      <TouchableHighlight
-         style={styles.prevButton}
-         activeOpacity={0.6}
-         underlayColor={'white'}
-         onPress={this.prevStep.bind(this)}>
-         <Image
-           style = {styles.prevImg}
-           source={require("../images/back.png")}
-         />
-       </TouchableHighlight>
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>Tutor sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepActive}>Step 1</Text>
+                <Text style={styles.stepText}>Step 2</Text>
+                <Text style={styles.stepText}>Step 3</Text>
+                <Text style={styles.stepText}>Step 4</Text>
+          </View>
+
+       <View style={styles.container}>
 
   			<Text style = {styles.heading}>How should we pay you?</Text>
 			<SegmentedControls
@@ -523,6 +566,7 @@ class TutorPayment extends Component {
           onPress={this.register.bind(this)}>
         <Text style={styles.fullWidthButtonText}>FINISH</Text>
         </TouchableHighlight>
+      </View>
   		</View>
 		);
   }
