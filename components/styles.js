@@ -142,5 +142,5 @@ module.exports = StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         fontSize: 20,
         flex:1                //Step 3
-    }
+    },
 });
