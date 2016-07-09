@@ -12,6 +12,7 @@ import {
 var styles = require('./styles');
 import Login from "./login";
 import StudentSignUp from "./signup"
+import Topic from "./topicInput"
 
 export default class stuInitial extends Component{
 	constructor(props) {
@@ -27,10 +28,13 @@ export default class stuInitial extends Component{
    if (this.state.user === "Student") {
      component = StudentSignUp;
    }
-   this.props.navigator.push({component: component,
+
+   if(this.canNext()) {
+   this.props.navigator.push({component: Topic,
        passProps: { coursecode: this.state.coursecode || ''
        }
    });
+ }
 
   }
 
@@ -85,7 +89,7 @@ export default class stuInitial extends Component{
               style={styles.textLinkButton}
               activeOpacity={0.6}
               underlayColor={'white'}
-              onPress={() => console.log("Find")}>
+              onPress={this.nextStep.bind(this)}>
             <Text style={[styles.textLink, !this.canNext() && styles.disabled]}>NEXT</Text>
             </TouchableHighlight>
             </View>

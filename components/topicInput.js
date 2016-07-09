@@ -1,5 +1,5 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Navigator,
   Text,
@@ -12,9 +12,14 @@ import {
 var styles = require('./styles');
 import Login from "./login";
 import StudentSignUp from "./signup"
+import LengthReq from "./length"
 
 export default class topicInput extends Component{
-	constructor(props) {
+  static propTypes = {
+    coursecode: PropTypes.string.isRequired
+  }
+
+  constructor(props) {
     super(props);
     this.state = {
       loggedIn: true,
@@ -39,12 +44,18 @@ export default class topicInput extends Component{
  }
 
  nextStep() {
-   if (this.canNext()){
-    console.log("Next");
+  var component = Login;
+  if (this.state.user === "Student") {
+    component = StudentSignUp;
   }
-  else{
-    return null;
-  }
+
+  if(this.canNext()) {
+  this.props.navigator.push({component: LengthReq,
+      passProps: { topic: this.state.topic || '',
+      coursecode: this.props.coursecode || '',
+      }
+  });
+ }
  }
 
   render() {
@@ -65,7 +76,7 @@ export default class topicInput extends Component{
 
           <View style={styles.container}>
             <Text style={styles.confirmHead}> Course:</Text>
-            <Text style={[styles.confirmInput, {marginBottom:68}]}>courseCode</Text>
+            <Text style={[styles.confirmInput, {marginBottom:68}]}>{this.props.coursecode}</Text>
             <Text style={[{marginBottom: 34}, styles.courseCodeAsk]}>
               What topic?
              </Text>

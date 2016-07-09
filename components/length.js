@@ -1,5 +1,5 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Navigator,
   Text,
@@ -14,7 +14,13 @@ import Login from "./login";
 import StudentSignUp from "./signup"
 
 export default class length extends Component{
-	constructor(props) {
+  static propTypes = {
+    coursecode: PropTypes.string.isRequired,
+    topic: PropTypes.string.isRequired
+  }
+
+
+  constructor(props) {
     super(props);
     this.state = {
       loggedIn: true,
@@ -65,9 +71,9 @@ export default class length extends Component{
 
           <View style={styles.container}>
             <Text style={styles.confirmHead}> Course:</Text>
-            <Text style={styles.confirmInput}>courseCode</Text>
+            <Text style={styles.confirmInput}>{this.props.coursecode}</Text>
             <Text style={styles.confirmHead}> Topic:</Text>
-            <Text style={styles.confirmInput}>topicText</Text>
+            <Text style={styles.confirmInput}>{this.props.topic}</Text>
 
             <View style={{paddingTop:30}}>
                 <Text style={styles.courseCodeAsk}>
