@@ -13,7 +13,7 @@ var styles = require('./styles');
 import Login from "./login";
 import StudentSignUp from "./signup"
 
-export default class topicInput extends Component{
+export default class length extends Component{
 	constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ export default class topicInput extends Component{
   }
 
   canNext() {
-         return this.state.topic
+         return this.state.len
      }
 
   prevStep() {
@@ -65,18 +65,32 @@ export default class topicInput extends Component{
 
           <View style={styles.container}>
             <Text style={styles.confirmHead}> Course:</Text>
-            <Text style={[styles.confirmInput, {marginBottom:68}]}>courseCode</Text>
-            <Text style={[{marginBottom: 34}, styles.courseCodeAsk]}>
-              What topic?
-             </Text>
-             <TextInput
-              style={styles.wideInput}
-              onChangeText={(text) => this.setState({topic : text})}
-              value={this.state.topic}
-              placeholder="ie. animal vs plant cells"
-            />
-            <View style={[styles.line, !this.canNext() && styles.disabledLine]}>
-            </View>
+            <Text style={styles.confirmInput}>courseCode</Text>
+            <Text style={styles.confirmHead}> Topic:</Text>
+            <Text style={styles.confirmInput}>topicText</Text>
+
+            <View style={{paddingTop:30}}>
+                <Text style={styles.courseCodeAsk}>
+                  For how long?
+                </Text>
+                <View style={styles.howLongView}>
+                <View>
+                  <TextInput
+                      style={styles.wideInput}
+                      onChangeText={(text) => this.setState({len : text})}
+                      value={this.state.len}
+                      placeholder="20"
+                   />
+                    <View style={[styles.shortLine, !this.canNext() && styles.disabledLine]}>
+                    </View>
+                  </View>
+
+                  <View style={{marginTop: 8}}>
+                  <Text style={{fontFamily: 'Montserrat-Light', fontSize: 20, color: '#3498DB'}}> minutes</Text>
+                  </View>
+
+                </View>
+              </View>
           </View>
 
           <View>

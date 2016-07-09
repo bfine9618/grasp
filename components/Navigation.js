@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Grasp from './home';
 import Login from './login';
+import Request from './stuInitial'
 var styles = require('./styles');
 
 
@@ -30,6 +31,8 @@ export default class Navigation extends Component{
         return <Grasp navigator={navigator} />;
       case 'login':
         return <Login navigator={navigator} />;
+      case 'request':
+        return <Request navigator={navigator} />;
 
     }
   }

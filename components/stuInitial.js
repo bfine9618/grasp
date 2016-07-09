@@ -34,13 +34,12 @@ export default class stuInitial extends Component{
 
   }
 
-  prevStep() {
-   var component = Login;
-   if (this.state.user === "Student") {
-     component = StudentSignUp;
-   }
-   this.props.navigator.pop();
+  menu() {
  }
+
+ canNext() {
+        return this.state.coursecode
+    }
 
   render() {
     return (
@@ -50,13 +49,12 @@ export default class stuInitial extends Component{
                  style={styles.prevButton}
                  activeOpacity={0.6}
                  underlayColor={'#3498DB'}
-                 onPress={this.prevStep.bind(this)}>
+                 onPress={this.menu.bind(this)}>
                  <Image
-                   style = {styles.prevImg}
-                   source={require("../images/back_white.png")}
+                   style = {styles.hamburger}
+                   source={require("../images/hamburger.png")}
                  />
                </TouchableHighlight>
-               <Text style={styles.toolbarTitle}>Tutor sign up</Text>
            </View>
 
           <View style={styles.container}>
@@ -65,30 +63,32 @@ export default class stuInitial extends Component{
               source={require("../images/ace.png")}
               />
             <Text style={styles.courseCodeAsk}>
-              Hi there! I{"\'"}m Ace
+              Hi there! I{"\'"}m Ace.
              What do you need to grasp today?
              </Text>
+             <View style={{paddingTop: 49, alignItems: 'center', justifyContent: 'center'}}>
              <TextInput
               style={styles.wideInput}
               onChangeText={(text) => this.setState({coursecode : text})}
               value={this.state.coursecode}
               placeholder="course code"
             />
-            <Image
-              style = {styles.line}
-              source={require("../images/Line.png")}
-            />
+            <View style={[styles.line, !this.canNext() && styles.disabledLine]}>
+            </View>
+
+            </View>
           </View>
 
-          <View style={styles.next}>
+          <View>
+            <View style={styles.nextBackView}>
             <TouchableHighlight
               style={styles.textLinkButton}
               activeOpacity={0.6}
-              underlayColor={'purple'}
+              underlayColor={'white'}
               onPress={() => console.log("Find")}>
-            <Text style={styles.textLink}>NEXT</Text>
+            <Text style={[styles.textLink, !this.canNext() && styles.disabled]}>NEXT</Text>
             </TouchableHighlight>
-
+            </View>
             <KeyboardSpacer/>
           </View>
       </View>

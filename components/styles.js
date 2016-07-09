@@ -7,7 +7,8 @@ var {
 } = React;
 
 var blue = '#3498DB';
-var darkGrey = '#4A4A4A'
+var darkGrey = '#4A4A4A';
+var lightGrey = "#D3D3D3";
 
 module.exports = StyleSheet.create({
   baseText: {
@@ -50,7 +51,17 @@ module.exports = StyleSheet.create({
     height: 1,
     marginTop: 8,
     marginBottom: 8,
-    resizeMode: 'stretch'
+    backgroundColor: blue,
+  },
+  shortLine: {
+    width: 47,
+    height: 1,
+    marginTop: 8,
+    marginBottom: 8,
+    backgroundColor: blue,
+  },
+  disabledLine: {
+    backgroundColor: lightGrey,
   },
   wideInput: {
     height: 20,
@@ -88,7 +99,6 @@ module.exports = StyleSheet.create({
   prevButton: {
     width:25,
     height:25,
-
   },
 
   mainContainer:{
@@ -158,20 +168,49 @@ module.exports = StyleSheet.create({
       color: blue,
       textAlign: 'center',
     },
-    next: {
+    nextBackView: {
       alignItems: 'center',
       marginBottom: 16,
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
     },
+
     aceImg: {
       height: 101,
       width: 101,
       marginBottom: 19,
     },
     courseCodeAsk: {
-      fontFamily: "Montserrat-Light",
       fontSize: 20,
       color: darkGrey,
-      marginBottom: 49,
+      fontFamily: 'Montserrat-Regular',
       textAlign: 'center',
     },
+    confirmHead: {
+      fontSize: 16,
+      color: darkGrey,
+      textAlign: 'center',
+      marginBottom: 9,
+    },
+    confirmInput: {
+      fontSize: 16,
+      color: blue,
+      textAlign: 'center',
+      marginBottom: 9,
+    },
+    hamburger: {
+      width: 23,
+      height: 16,
+      left: 14,
+    },
+    disabled: {
+      color: lightGrey,
+    },
+    howLongView: {
+      justifyContent: 'center',
+      flex: 1,
+      flexDirection: 'row',
+      paddingTop: 25,
+    }
 });
