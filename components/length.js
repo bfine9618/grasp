@@ -11,7 +11,8 @@ import {
 
 var styles = require('./styles');
 import Login from "./login";
-import StudentSignUp from "./signup"
+import StudentSignUp from "./signup";
+import Loc from "./location";
 
 export default class length extends Component{
   static propTypes = {
@@ -45,12 +46,19 @@ export default class length extends Component{
  }
 
  nextStep() {
-   if (this.canNext()){
-    console.log("Next");
+  var component = Login;
+  if (this.state.user === "Student") {
+    component = StudentSignUp;
   }
-  else{
-    return null;
-  }
+
+  if(this.canNext()) {
+  this.props.navigator.push({component: Loc,
+      passProps: { topic: this.props.topic,
+      coursecode: this.props.coursecode || '',
+      len: this.state.len,
+      }
+  });
+ }
  }
 
   render() {
