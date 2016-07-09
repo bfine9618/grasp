@@ -88,12 +88,12 @@ export default class Location extends Component{
           <Text style={styles.confirmInput}>{this.props.len}</Text>
 
 
-          <View style={{paddingTop:25}}>
+          <View style={{paddingTop:15}}>
             <Text style={styles.courseCodeAsk}>
               Where would you like to meet?
             </Text>
           </View>
-          <View style={{paddingTop: 25}}>
+          <View style={{paddingTop: 15}}>
               <TextInput
                style={styles.wideInput}
                onChangeText={(text) => this.setState({topic : text})}
