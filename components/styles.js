@@ -6,6 +6,9 @@ var {
   StyleSheet,
 } = React;
 
+var blue = '#3498DB';
+var darkGrey = '#4A4A4A'
+
 module.exports = StyleSheet.create({
   baseText: {
     fontFamily: 'Montserrat-Light',
@@ -142,5 +145,33 @@ module.exports = StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         fontSize: 20,
         flex:1                //Step 3
+    },
+
+    textLinkButton: {
+      width:100,
+      height: 20,
+      backgroundColor: 'white',
+    },
+    textLink: {
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 16,
+      color: blue,
+      textAlign: 'center',
+    },
+    next: {
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    aceImg: {
+      height: 101,
+      width: 101,
+      marginBottom: 19,
+    },
+    courseCodeAsk: {
+      fontFamily: "Montserrat-Light",
+      fontSize: 20,
+      color: darkGrey,
+      marginBottom: 49,
+      textAlign: 'center',
     },
 });

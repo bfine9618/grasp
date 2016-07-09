@@ -22,18 +22,6 @@ export default class stuInitial extends Component{
     };
   }
 
-  nextStep() {
-   var component = Login;
-   if (this.state.user === "Student") {
-     component = StudentSignUp;
-   }
-   this.props.navigator.push({component: component,
-       passProps: { coursecode: this.state.coursecode || ''
-       }
-   });
-
-  }
-
   prevStep() {
    var component = Login;
    if (this.state.user === "Student") {
