@@ -4,7 +4,7 @@ import {
   Text,
   View,
   Image,
-  TextInput, 
+  TextInput,
   TouchableHighlight
 } from 'react-native';
 import Grasp from './home';
@@ -15,7 +15,7 @@ var styles = require('./styles');
 export default class Navigation extends Component{
   render() {
     return (
-      <Navigator 
+      <Navigator
         style = {{ flex: 1}}
         initialRoute={{component: Grasp}}
         renderScene={this.navigatorRenderScene}/>

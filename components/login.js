@@ -9,6 +9,7 @@ import {
 import Grasp from './home';
 var styles = require('./styles');
 import Signup1 from "./signup";
+import Onboarding1 from "./studentOnboarding";
 
 export default class Login extends Component {
   constructor(props) {
@@ -21,6 +22,12 @@ export default class Login extends Component {
           console.log(this);
 
       this.props.navigator.push({component: Signup1});
+    }
+
+    onboarding() {
+      console.log(this);
+
+      this.props.navigator.push({component: Onboarding1});
     }
 
   render () {
@@ -55,7 +62,7 @@ export default class Login extends Component {
           style={styles.fullWidthButton}
           activeOpacity={0.6}
           underlayColor={'purple'}
-          onPress={() => console.log("login")}>
+          onPress={this.onboarding.bind(this)}>
         <Text style={styles.fullWidthButtonText}>Log In</Text>
         </TouchableHighlight>
         <TouchableHighlight
