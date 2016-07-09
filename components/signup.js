@@ -141,6 +141,7 @@ class TutorSignUp extends Component {
     super(props);
     this.state = {
     };
+    console.log(this.props);
   }
   payment() {
   	this.props.navigator.push({component: TutorPayment,
