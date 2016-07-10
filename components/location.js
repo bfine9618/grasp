@@ -14,6 +14,7 @@ import Login from "./login";
 import StudentSignUp from "./signup";
 import LengthReq from "./length";
 import ManLoc from "./manLocation";
+import Loading from "./loading";
 
 export default class Location extends Component{
   static propTypes = {
@@ -56,7 +57,9 @@ export default class Location extends Component{
   });
  }
 
- request() {}
+ submit() {
+   this.props.navigator.push({component: Loading});
+ }
 
   render() {
     return (
@@ -92,7 +95,7 @@ export default class Location extends Component{
                 style={styles.fullWidthButton}
                 activeOpacity={0.6}
                 underlayColor={'white'}
-                onPress={this.request.bind(this)}>
+                onPress={this.submit.bind(this)}>
               <Text style={styles.fullWidthButtonText}>YES</Text>
               </TouchableHighlight>
           </View>
@@ -102,8 +105,7 @@ export default class Location extends Component{
                 activeOpacity={0.6}
                 underlayColor={'white'}
                 onPress={this.nextStep.bind(this)}>
-              <Text style={{fontFamily: 'Montserrat-Light',
-              fontSize: 14, color: '#4A4A4A', textAlign:'center'}}>
+              <Text style={styles.footerText}>
               No, I’ll type in where I want to meet manually
               </Text>
               </TouchableHighlight>

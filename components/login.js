@@ -9,7 +9,7 @@ import {
 import Grasp from './home';
 var styles = require('./styles');
 import Signup1 from "./signup";
-import stuHome from "./studentOnboarding";
+import stuHome from "./loading";
 
 export default class Login extends Component {
   constructor(props) {

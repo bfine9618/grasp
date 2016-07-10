@@ -11,8 +11,9 @@ import {
 
 var styles = require('./styles');
 import Login from "./login";
-import StudentSignUp from "./signup"
-import LengthReq from "./length"
+import StudentSignUp from "./signup";
+import LengthReq from "./length";
+import Loading from "./loading";
 
 export default class Location extends Component{
   static propTypes = {
@@ -61,7 +62,9 @@ export default class Location extends Component{
  }
  }
 
- submit() {}
+ submit() {
+   this.props.navigator.push({component: Loading});
+ }
 
   render() {
     return (

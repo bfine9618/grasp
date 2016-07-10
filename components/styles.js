@@ -14,6 +14,7 @@ module.exports = StyleSheet.create({
   baseText: {
     fontFamily: 'Montserrat-Light',
   },
+
   container: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -212,5 +213,16 @@ module.exports = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       paddingTop: 25,
-    }
+    },
+
+  progress: {
+    marginTop:250,
+    marginBottom: 24,
+  },
+  footerText: {
+    fontFamily: 'Montserrat-Light',
+    fontSize: 14,
+    color: '#4A4A4A',
+    textAlign:'center',
+  },
 });
