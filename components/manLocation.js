@@ -34,9 +34,6 @@ export default class Location extends Component{
 
   }
 
-  canNext() {
-         return this.state.topic
-     }
 
   prevStep() {
    var component = Login;
@@ -52,14 +49,12 @@ export default class Location extends Component{
     component = StudentSignUp;
   }
 
-  if(this.canNext()) {
   this.props.navigator.push({component: LengthReq,
       passProps: { topic: this.state.topic || '',
       coursecode: this.props.coursecode || '',
       len: this.props.len || '',
       }
-  });
- }
+    });
  }
 
  submit() {
