@@ -55,7 +55,7 @@ export default class Welcome extends Component {
               <TouchableHighlight
                 style={styles.textLinkButton}
                 activeOpacity={0.6}
-                underlayColor={'purple'}
+                underlayColor={'white'}
                 onPress={this.signup.bind(this)}>
               <Text style={{textAlign: 'center', fontFamily: 'Montserrat-Light',
             color: "#3498DB"}}> or Sign Up

@@ -226,4 +226,26 @@ module.exports = StyleSheet.create({
     color: '#4A4A4A',
     textAlign:'center',
   },
+  checkboxStyle: {
+        width: 26,
+        height: 26,
+        borderWidth: 2,
+        borderColor: '#ddd',
+        borderRadius: 5
+    },
+    statusbarActive: {
+      height:6,
+      width: 93.75,
+      backgroundColor: '#1ABC9C',
+    },
+    statusbarGrey: {
+      height:6,
+      width: 93.75,
+      backgroundColor: '#E0E0E0',
+    },
+    statusBar: {
+      height: 6,
+      flexDirection:'row',
+      alignItems: 'center',
+    }
 });

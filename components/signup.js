@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Text,
   View,
   Image,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import { SegmentedControls } from 'react-native-radio-buttons';
+import { RadioButtons } from 'react-native-radio-buttons';
 
 var styles = require('./styles');
 
@@ -20,24 +22,15 @@ export default class Signup1 extends Component {
     	};
  	 }
  	 nextStep() {
- 	 	var component = TutorSignUp;
- 	 	if (this.state.user === "Student") {
- 	 		component = StudentSignUp;
- 	 	}
+     var component = BasicInfo;
  	 	this.props.navigator.push({component: component,
- 	 		  passProps: { name: this.state.name || '',
- 	 		  	email: this.state.email|| '',
- 	 		  	password: this.state.password || ''
+ 	 		  passProps: { user: this.state.user
  	 		  }
 		});
 
  	 }
 
    prevStep() {
-    var component = TutorSignUp;
-    if (this.state.user === "Student") {
-      component = StudentSignUp;
-    }
     this.props.navigator.pop();
   }
 
@@ -47,24 +40,29 @@ export default class Signup1 extends Component {
 			"Tutor"
 			];
 
-		function setSelectedOption(selectedOption){
-    		this.setState({
-      			user: selectedOption
-   			 });
-  		}
+      function setSelectedOption(selectedOption){
+        this.setState({
+          user: selectedOption
+        });
+      }
 
+      function renderOption(option, selected, onSelect, index){
+        const style = selected ? { fontWeight: 'bold', color: '#3498DB',
+        fontSize: 34, fontFamily: 'Montserrat-Regular'} :
+        {fontWeight: 'bold', color: '#E0E0E0',
+        fontSize: 34, fontFamily: 'Montserrat-Regular'};
 
- 		 function renderContainer(optionNodes){
-   		 return <View>{optionNodes}</View>;
-  		}
-  		function renderOption(option, selected, onSelect, index){
-    		const style = selected ? { fontWeight: 'bold'} : {};
-		 return (
-      		<TouchableWithoutFeedback onPress={onSelect} key={index}>
-       		 <Text style={style}>{option}</Text>
-     		 </TouchableWithoutFeedback>
-   		 );
- 		 }
+        return (
+          <TouchableWithoutFeedback onPress={onSelect} key={index}>
+            <Text style={style}>{option}</Text>
+          </TouchableWithoutFeedback>
+        );
+      }
+
+      function renderContainer(optionNodes){
+        return <View>{optionNodes}</View>;
+      }
+
 		return (
        <View style={styles.mainContainer}>
 
@@ -89,41 +87,21 @@ export default class Signup1 extends Component {
          <Text style={styles.heading}>
          Sign up as...
          </Text>
-         <SegmentedControls
-  			tint= {'#3498DB'}
-  			selectedTint= {'white'}
-  			backTint= {'#ffffff'}
-  			options={ options }
-  			allowFontScaling={ false } // default: true
-  			onSelection={ setSelectedOption.bind(this)}
-  			selectedOption={ this.state.user }
-			/>
-		<TextInput
-          style={styles.wideInput}
-          onChangeText={(text) => this.setState({name : text})}
-          value={this.state.name}
-          placeholder="Name"
-        />
-        <Image
-          style = {styles.line}
-          source={require("../images/Line.png")}
-        />
-        <TextInput
-          style={styles.wideInput}
-          onChangeText={(text) => this.setState({email : text})}
-          value={this.state.email}
-          placeholder="School Email"
-        />
-        <Image
-          style = {styles.line}
-          source={require("../images/Line.png")}
-        />
-        <TextInput
-          style={styles.wideInput}
-          onChangeText={(text) => this.setState({password : text})}
-          value={this.state.password}
-          placeholder="Password"
-        />
+
+         <View style={{marginBottom: 100, marginTop: 37,  alignItems:'center'}}>
+          <RadioButtons
+            options={ options }
+            onSelection={ setSelectedOption.bind(this) }
+            selectedOption={this.state.user}
+            renderOption={renderOption}
+            renderContainer={RadioButtons.getViewContainerRenderer({
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              width: 318,
+            })}
+          />
+        </View>
+
         <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
@@ -134,6 +112,114 @@ export default class Signup1 extends Component {
         </View>
          );
 	}
+}
+
+class BasicInfo extends Component {
+  static propTypes = {
+    user: PropTypes.string.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: false,
+    };
+    this.selectCheckbox = this.selectCheckbox.bind(this);
+  }
+
+  nextStep() {
+   var component = TutorSignUp;
+   if (this.props.user === "Student") {
+     component = StudentSignUp;
+   }
+   this.props.navigator.push({component: component,
+       passProps: { user: this.state.user
+       }
+   });
+  }
+
+  prevStep() {
+   this.props.navigator.pop();
+ }
+
+  selectCheckbox() {
+        this.setState({
+            selected: !this.state.selected
+        });
+    }
+
+  render() {
+		return (
+      <View style={styles.mainContainer}>
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepActive}>Step 1</Text>
+                <Text style={styles.stepText}>Step 2</Text>
+                <Text style={styles.stepText}>Step 3</Text>
+                <Text style={styles.stepText}>Step 4</Text>
+          </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarGrey}></View>
+              <View style={styles.statusbarGrey}></View>
+              <View style={styles.statusbarGrey}></View>
+          </View>
+
+       <View style={styles.container}>
+          <TextInput
+            style={styles.wideInput}
+            onChangeText={(text) => this.setState({name : text})}
+            value={this.state.name}
+            placeholder="Name"
+          />
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+          <TextInput
+            style={styles.wideInput}
+            onChangeText={(text) => this.setState({email : text})}
+            value={this.state.email}
+            placeholder="School Email"
+          />
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+          <TextInput
+            style={styles.wideInput}
+            onChangeText={(text) => this.setState({password : text})}
+            value={this.state.password}
+            placeholder="Password"
+          />
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+            <View style={{height:50}}></View>
+            <TouchableHighlight
+            style={styles.fullWidthButton}
+            activeOpacity={0.6}
+            underlayColor={'purple'}
+            onPress={this.nextStep.bind(this)}>
+            <Text style={styles.fullWidthButtonText}>Next</Text>
+            </TouchableHighlight>
+        </View>
+        </View>
+        );
+      }
 }
 
 class TutorSignUp extends Component {
@@ -178,10 +264,16 @@ class TutorSignUp extends Component {
              <Text style={styles.toolbarTitle}>Tutor sign up</Text>
          </View>
          <View style={styles.stepbar}>
-                <Text style={styles.stepActive}>Step 1</Text>
-                <Text style={styles.stepText}>Step 2</Text>
+                <Text style={styles.stepComplete}>Step 1</Text>
+                <Text style={styles.stepActive}>Step 2</Text>
                 <Text style={styles.stepText}>Step 3</Text>
                 <Text style={styles.stepText}>Step 4</Text>
+          </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarGrey}></View>
+              <View style={styles.statusbarGrey}></View>
           </View>
 
        <View style={styles.container}>
@@ -258,6 +350,7 @@ class TutorSignUp extends Component {
           onPress={this.payment.bind(this)}>
         <Text style={styles.fullWidthButtonText}>Next</Text>
         </TouchableHighlight>
+
         </View>
         </View>
 			);
@@ -310,6 +403,12 @@ class StudentSignUp extends Component{
                 <Text style={styles.stepActive}>Step 2</Text>
                 <Text style={styles.stepText}>Step 3</Text>
                 <Text style={styles.stepText}>Step 4</Text>
+          </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarGrey}></View>
+              <View style={styles.statusbarGrey}></View>
           </View>
 
        <View style={styles.container}>
@@ -412,6 +511,12 @@ class StudentPayment extends Component {
                 <Text style={styles.stepComplete}>Step 3</Text>
                 <Text style={styles.stepActive}>Step 4</Text>
           </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+          </View>
 
        <View style={styles.container}>
   			<Text style = {styles.heading}>Enter Payment Info</Text>
@@ -442,6 +547,8 @@ class StudentPayment extends Component {
           onPress={this.register.bind(this)}>
         <Text style={styles.fullWidthButtonText}>FINISH</Text>
         </TouchableHighlight>
+        <Text style={{textAlign: 'center', fontFamily: 'Montserrat-Light',
+      color: "#3498DB"}}> by continuing, i agree to all terms and services.</Text>
       </View>
       </View>
 		);
@@ -507,10 +614,16 @@ class TutorPayment extends Component {
              <Text style={styles.toolbarTitle}>Tutor sign up</Text>
          </View>
          <View style={styles.stepbar}>
-                <Text style={styles.stepActive}>Step 1</Text>
-                <Text style={styles.stepText}>Step 2</Text>
-                <Text style={styles.stepText}>Step 3</Text>
-                <Text style={styles.stepText}>Step 4</Text>
+                <Text style={styles.stepComplete}>Step 1</Text>
+                <Text style={styles.stepComplete}>Step 2</Text>
+                <Text style={styles.stepComplete}>Step 3</Text>
+                <Text style={styles.stepActive}>Step 4</Text>
+          </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
           </View>
 
        <View style={styles.container}>
@@ -566,6 +679,8 @@ class TutorPayment extends Component {
           onPress={this.register.bind(this)}>
         <Text style={styles.fullWidthButtonText}>FINISH</Text>
         </TouchableHighlight>
+        <Text style={{textAlign: 'center', fontFamily: 'Montserrat-Light',
+      color: "#3498DB"}}> by submitting, i agree to all terms and services.</Text>
       </View>
   		</View>
 		);
