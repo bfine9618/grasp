@@ -39,6 +39,7 @@ module.exports = StyleSheet.create({
     height:153,
     width: 112,
     marginTop: 77,
+    marginBottom: 30,
     resizeMode: 'stretch'
   },
   headLogo :{
@@ -159,7 +160,7 @@ module.exports = StyleSheet.create({
     },
 
     textLinkButton: {
-      width:100,
+      width:150,
       height: 20,
       backgroundColor: 'white',
     },

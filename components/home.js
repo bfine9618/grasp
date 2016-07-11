@@ -4,7 +4,7 @@ import {
   View,
 
 } from 'react-native';
-import Login from './login';
+import Welcome from './welcome';
 var styles = require('./styles');
 
 export default class Grasp extends Component {
@@ -27,11 +27,11 @@ export default class Grasp extends Component {
 
     componentDidMount() {
       if (! this.state.loggedIn) {
-          this.props.navigator.push({component: Login});
+          this.props.navigator.push({component: Welcome});
       }
     }
 
-  logout () {    
+  logout () {
     this.setState({
       loggedIn: false,
     });
@@ -45,13 +45,11 @@ export default class Grasp extends Component {
          </Text>
          <Button style={{color: 'black'}} onPress={this.logout.bind(this)}>Logout</Button>
        </View>
-     ); 
+     );
     }
     else {
       return <View/>;
     }
-    
+
   }
 }
-
-
