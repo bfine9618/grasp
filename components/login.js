@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {
   Text,
   View,
@@ -61,13 +62,15 @@ export default class Login extends Component {
           style = {styles.headLogo}
           source={require("../images/Logo1.png")}
         />
-        <View style={{height:25}}></View>
+        <View style={{height:15}}></View>
         <Text style={styles.heading}>
           Login
          </Text>
-         <View style={{height:35}}></View>
+         <View style={{height:25}}></View>
          <TextInput
           style={styles.wideInput}
+          keyboardType={'email-address'}
+          returnKeyType={'next'}
           onChangeText={(text) => this.setState({email : text})}
           value={this.state.email}
           placeholder=".edu email"
@@ -83,7 +86,9 @@ export default class Login extends Component {
           value={this.state.password}
           placeholder="password"
         />
-        <View style={{height:40}}></View>
+
+        <KeyboardSpacer/>
+        <View style={{height: 20}}></View>
         <TouchableHighlight
           style={styles.fullWidthButton}
           activeOpacity={0.6}
