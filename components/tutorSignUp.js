@@ -30,7 +30,7 @@ export default class TutorPayment extends Component {
 
 
   register() {}
-  
+
   render() {
   	const options = [
 			"Bank Account",
@@ -92,7 +92,8 @@ export default class TutorPayment extends Component {
        <View style={styles.container}>
 
   			<Text style = {{fontFamily:'Montserrat-Light', marginBottom:20,
-        fontSize:28, width:210, color: '#3498DB', textAlign:'center', }}>How should we pay you?</Text>
+          fontSize:28, width:210, color: '#3498DB', textAlign:'center', }}>
+          How should we pay you?</Text>
         <View style={{height: 150, alignItems:'center'}}>
         <RadioButtons
           options={ options }

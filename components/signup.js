@@ -443,9 +443,11 @@ class BasicInfo3 extends Component {
           />
         	<TextInput
           		style={styles.wideInput}
+              keyboardType={'numeric'}
+              maxLength={4}
           		onChangeText={(text) => this.setState({graduatingYear : text})}
           		value={this.state.graduatingYear}
-          		placeholder="Year/Class"
+          		placeholder="graduation year"
         	/>
           <Image
             style = {styles.line}
