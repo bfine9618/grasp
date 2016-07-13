@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import ImagePicker from 'react-native-image-picker';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {
   Text,
   View,
   Image,
   TextInput,
   TouchableHighlight,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  TouchableOpacity
 } from 'react-native';
 
-import { SegmentedControls } from 'react-native-radio-buttons';
 import { RadioButtons } from 'react-native-radio-buttons';
 import StudentSignUp from './studentSignUp';
 import TutorSignUp from './tutorSignUp';
 
 var styles = require('./styles');
+
 
 
 export default class Signup1 extends Component {
@@ -124,18 +127,12 @@ class BasicInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: false,
     };
-    this.selectCheckbox = this.selectCheckbox.bind(this);
   }
 
   nextStep() {
-   var component = TutorSignUp;
-   if (this.props.user === "Student") {
-     component = StudentSignUp;
-   }
-   this.props.navigator.push({component: component,
-       passProps: { user: this.state.user
+   this.props.navigator.push({component: BasicInfo2,
+       passProps: { user: this.props.user
        }
    });
   }
@@ -143,12 +140,6 @@ class BasicInfo extends Component {
   prevStep() {
    this.props.navigator.pop();
  }
-
-  selectCheckbox() {
-        this.setState({
-            selected: !this.state.selected
-        });
-    }
 
   render() {
 		return (
@@ -210,6 +201,16 @@ class BasicInfo extends Component {
             style = {styles.line}
             source={require("../images/Line.png")}
           />
+          <TextInput
+            style={styles.wideInput}
+            onChangeText={(text) => this.setState({password : text})}
+            value={this.state.password}
+            placeholder="Confirm Password"
+          />
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
             <View style={{height:50}}></View>
             <TouchableHighlight
             style={styles.fullWidthButton}
@@ -222,4 +223,256 @@ class BasicInfo extends Component {
         </View>
         );
       }
+}
+
+class BasicInfo2 extends Component {
+  static propTypes = {
+    user: PropTypes.string.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      avatarSource: null,
+      videoSource: null
+    };
+  }
+
+  nextStep() {
+   this.props.navigator.push({component: BasicInfo3,
+       passProps: { user: this.props.user,
+         phoneNumber: this.state.phoneNumber || '',
+  	 		  	skype: this.state.skype || '',
+            profpic: this.state.avatarSource,
+       }
+   });
+  }
+
+  prevStep() {
+   this.props.navigator.pop();
+ }
+
+ selectPhotoTapped() {
+   const options = {
+     quality: 0.5,
+     maxWidth: 300,
+     maxHeight: 300,
+     allowsEditing: false,
+     mediaType: 'photo',
+     storageOptions: {
+       skipBackup: true
+     }
+   };
+
+   ImagePicker.showImagePicker(options, (response) => {
+     console.log('Response = ', response);
+
+     if (response.didCancel) {
+       console.log('User cancelled photo picker');
+     }
+     else if (response.error) {
+       console.log('ImagePicker Error: ', response.error);
+     }
+     else if (response.customButton) {
+       console.log('User tapped custom button: ', response.customButton);
+     }
+     else {
+       var source;
+
+       // You can display the image using either:
+       source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+
+       // Or:
+       // if (Platform.OS === 'android') {
+       //   source = {uri: response.uri, isStatic: true};
+       // } else {
+       //   source = {uri: response.uri.replace('file://', ''), isStatic: true};
+       // }
+
+       this.setState({
+         avatarSource: source
+       });
+     }
+   });
+ }
+
+	render() {
+		return (
+      <View style={styles.mainContainer}>
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepComplete}>Step 1</Text>
+                <Text style={styles.stepActive}>Step 2</Text>
+                <Text style={styles.stepText}>Step 3</Text>
+                <Text style={styles.stepText}>Step 4</Text>
+          </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarGrey}></View>
+              <View style={styles.statusbarGrey}></View>
+          </View>
+
+          <View style={styles.avatarContainer}>
+           <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+             <View style={[styles.avatar, styles.avatar, {marginBottom: 20}]}>
+             { this.state.avatarSource === null ?
+               <View>
+               <Image style={styles.avatar} source={require("../images/profpicture.png")}/>
+               <Text style={{fontFamily: 'Montserrat-Regular',
+               fontSize: 14, color:'#8D8D8D', marginTop:12}}>+ profile picture</Text></View> :
+               <Image style={styles.avatar} source={this.state.avatarSource} />
+             }
+           </View>
+           </TouchableOpacity>
+         </View>
+
+       <View style={styles.container}>
+			    <TextInput
+          		style={styles.wideInput}
+          		onChangeText={(text) => this.setState({phoneNumber : text})}
+          		value={this.state.phoneNumber}
+          		placeholder="Phone number (xxx)-xxx-xxxx"
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+        	<TextInput
+          		style={styles.wideInput}
+          		onChangeText={(text) => this.setState({skype : text})}
+          		value={this.state.skype}
+          		placeholder="Skype Username (optional)"
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+          <View style={{height:30}}></View>
+        	<TouchableHighlight
+          style={styles.fullWidthButton}
+          activeOpacity={0.6}
+          underlayColor={'purple'}
+          onPress={this.nextStep.bind(this)}>
+        <Text style={styles.fullWidthButtonText}>Next</Text>
+        </TouchableHighlight>
+        <KeyboardSpacer/>
+        </View>
+        </View>
+			);
+	}
+}
+
+class BasicInfo3 extends Component {
+  static propTypes = {
+    user: PropTypes.string.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  nextStep() {
+   var component = TutorSignUp;
+   if (this.props.user === "Student") {
+     component = StudentSignUp;
+   }
+   this.props.navigator.push({component: component,
+       passProps: { user: this.state.user
+       }
+   });
+  }
+
+  prevStep() {
+   this.props.navigator.pop();
+ }
+
+	render() {
+		return (
+      <View style={styles.mainContainer}>
+      <View style={styles.toolbar}>
+            <TouchableHighlight
+               style={styles.prevButton}
+               activeOpacity={0.6}
+               underlayColor={'#3498DB'}
+               onPress={this.prevStep.bind(this)}>
+               <Image
+                 style = {styles.prevImg}
+                 source={require("../images/back_white.png")}
+               />
+             </TouchableHighlight>
+             <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
+         </View>
+         <View style={styles.stepbar}>
+                <Text style={styles.stepComplete}>Step 1</Text>
+                <Text style={styles.stepComplete}>Step 2</Text>
+                <Text style={styles.stepActive}>Step 3</Text>
+                <Text style={styles.stepText}>Step 4</Text>
+          </View>
+          <View style={styles.statusBar}>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarActive}></View>
+              <View style={styles.statusbarGrey}></View>
+          </View>
+
+       <View style={styles.container}>
+          <TextInput
+          		style={styles.wideInput}
+          		onChangeText={(text) => this.setState({major : text})}
+          		value={this.state.major}
+          		placeholder="Major"
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+        	<TextInput
+          		style={styles.wideInput}
+          		onChangeText={(text) => this.setState({graduatingYear : text})}
+          		value={this.state.graduatingYear}
+          		placeholder="Year/Class"
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+          <TextInput
+          		style={styles.wideInput}
+          		onChangeText={(text) => this.setState({bio : text})}
+          		value={this.state.bio}
+              maxLength={60}
+          		placeholder="Short bio (optional)"
+        	/>
+          <Image
+            style = {styles.line}
+            source={require("../images/Line.png")}
+          />
+          <View style={{height:30}}></View>
+        	<TouchableHighlight
+          style={styles.fullWidthButton}
+          activeOpacity={0.6}
+          underlayColor={'purple'}
+          onPress={this.nextStep.bind(this)}>
+        <Text style={styles.fullWidthButtonText}>Next</Text>
+        </TouchableHighlight>
+        <KeyboardSpacer/>
+        </View>
+        </View>
+			);
+	}
 }

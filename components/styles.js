@@ -247,5 +247,16 @@ module.exports = StyleSheet.create({
       height: 6,
       flexDirection:'row',
       alignItems: 'center',
+    },
+    avatarContainer: {
+      backgroundColor: '#f5f5f5',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 170,
+    },
+    avatar: {
+      borderRadius: 60,
+      width: 120,
+      height: 120
     }
 });
