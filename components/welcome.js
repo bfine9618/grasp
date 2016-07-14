@@ -11,7 +11,6 @@ var styles = require('./styles');
 import Signup1 from "./signup";
 import Login from "./login";
 import stuHome from "./stuInitial";
-import profile from './profile';
 
 export default class Welcome extends Component {
   constructor(props) {

@@ -1,9 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import {Text,View,Image,TouchableHighlight,Animated} from 'react-native';
+import {Text,
+  View, Image,
+  TouchableHighlight, Animated,
+  Navigator} from 'react-native';
 
+import Profile from '../profile';
 var styles = require('../styles');
 
-class Menu extends Component{
+export default class Menu extends Component{
     constructor(props){
         super(props);
 
@@ -47,9 +51,18 @@ class Menu extends Component{
         });
     }
 
-    settings(){}
-    history(){}
-    switchProf(){}
+    settings(){
+
+    }
+    history(){
+
+    }
+    switchProf(){
+
+    }
+    toProfile() {
+      this.props.navigator.push({component: Profile});
+    }
 
     render(){
       let icon = this.icons['down'];
@@ -74,11 +87,17 @@ class Menu extends Component{
                 </View>
 
                 <View onLayout={this._setMaxHeight.bind(this)}>
-                  <View style={{marginTop:10, alignItems:'center'}}>
+                  <View style={{alignItems:'center'}}>
+                  <TouchableHighlight
+                      style={[styles.menuButton,
+                        {width:120, height:120, marginTop:-20}]}
+                      onPress={this.toProfile.bind(this)}
+                      underlayColor="#3498DB">
                   <Image
                     style={[styles.avatar, {borderColor: 'white', borderWidth: 3}]}
                     source={require("Grasp/images/jeff.png")}
                     />
+                  </TouchableHighlight>
                   <Text style={[styles.menuText, {fontSize:20, marginTop:5}]}> Jeff Wang</Text>
                   <Text style={[styles.menuText,{marginTop:0}]}> student</Text>
                   </View>

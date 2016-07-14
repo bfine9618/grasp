@@ -268,20 +268,19 @@ module.exports = StyleSheet.create({
       alignSelf: 'center'
     },
     menuButton: {
-      width:25,
-      height:25,
+      width:56,
+      height:56,
     },
     menuText: {
       fontFamily: 'Montserrat-Light',
       fontSize: 12,
       color: 'white',
       textAlign: 'center',
-      marginTop: 35,
+      marginTop: 5,
     },
     profileText: {
       fontFamily: 'Montserrat-Light',
       fontSize: 18,
       color: darkGrey,
-      marginLeft: 31,
     }
 });

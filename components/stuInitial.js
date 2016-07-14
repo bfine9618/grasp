@@ -14,8 +14,9 @@ import {
 
 var styles = require('./styles');
 import Login from "./login";
-import StudentSignUp from "./signup"
-import Topic from "./topicInput"
+import StudentSignUp from "./signup";
+import Profile from './profile';
+import Topic from "./topicInput";
 
 export default class stuInitial extends Component{
 	constructor(props) {
@@ -44,10 +45,14 @@ export default class stuInitial extends Component{
         return this.state.coursecode
     }
 
+    toProfile() {
+      this.props.navigator.push({component : Profile});
+    }
+
   render() {
     return (
     	<View style={styles.mainContainer}>
-           <Menu/>
+           <Menu navigator={this.props.navigator}/>
 
           <View style={styles.container}>
             <Image

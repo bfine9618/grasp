@@ -57,8 +57,8 @@ export default class stuInitial extends Component{
              style={[styles.avatar, {borderColor: 'white', borderWidth: 3}]}
              source={require("Grasp/images/jeff.png")}
              />
-           <Text style={[styles.menuText, {fontSize:20, marginTop:5}]}> Jeff Wang</Text>
-           <Text style={[styles.menuText, {marginTop:5}]}> student</Text>
+           <Text style={[styles.menuText, {fontSize:20, marginTop:5}]}>{this.state.user.name}</Text>
+           <Text style={[styles.menuText, {marginTop:5}]}>{this.state.user.type}</Text>
          </View>
 
           <View>
