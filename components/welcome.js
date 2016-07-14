@@ -28,7 +28,7 @@ export default class Welcome extends Component {
     signIn() {
       console.log(this);
 
-      this.props.navigator.push({component: Login});
+      this.props.navigator.push({component: stuHome});
     }
 
   render () {
