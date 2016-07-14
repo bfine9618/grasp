@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {
-  Alert,
   Text,
   View,
   Image,
@@ -17,6 +16,8 @@ import StudentSignUp from './studentSignUp';
 import TutorSignUp from './tutorSignUp';
 
 var styles = require('./styles');
+
+
 
 export default class Signup1 extends Component {
 	constructor(props) {
@@ -126,38 +127,16 @@ class BasicInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
     };
     console.log(this.props);
   }
 
-  canNext() {
-    var ans = this.state.name && (this.state.email.indexOf("upenn.edu") > -1)
-    && (this.state.password === this.state.cpassword) &&
-    !(this.state.password === null);
-
-    if (!ans) {
-      Alert.alert(
-        'Uh Oh!',
-        "")}
-
-    return ans;
-  }
-
-  renderProblems() {
-  }
-
   nextStep() {
-    if (this.canNext()) {
    this.props.navigator.push({component: BasicInfo2,
-       passProps: { user: this.props.user,
-         name: this.state.name || '',
-         email: this.state.email || '',
-         password: this.state.password || '',
+       passProps: { user: this.props.user
        }
-     });
-    }
-   }
+   });
+  }
 
   prevStep() {
    this.props.navigator.pop();
@@ -180,7 +159,6 @@ class BasicInfo extends Component {
              <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
          </View>
          <View style={styles.stepbar}>
-
                 <Text style={styles.stepActive}>Step 1</Text>
                 <Text style={styles.stepText}>Step 2</Text>
                 <Text style={styles.stepText}>Step 3</Text>
@@ -218,7 +196,6 @@ class BasicInfo extends Component {
             style={styles.wideInput}
             onChangeText={(text) => this.setState({password : text})}
             value={this.state.password}
-            secureTextEntry={true}
             placeholder="Password"
           />
           <Image
@@ -227,22 +204,19 @@ class BasicInfo extends Component {
           />
           <TextInput
             style={styles.wideInput}
-            onChangeText={(text) => this.setState({cpassword : text})}
-            value={this.state.cpassword}
-            secureTextEntry={true}
+            onChangeText={(text) => this.setState({password : text})}
+            value={this.state.password}
             placeholder="Confirm Password"
           />
           <Image
             style = {styles.line}
             source={require("../images/Line.png")}
           />
-
-          <KeyboardSpacer/>
             <View style={{height:50}}></View>
             <TouchableHighlight
             style={styles.fullWidthButton}
             activeOpacity={0.6}
-            underlayColor={'white'}
+            underlayColor={'purple'}
             onPress={this.nextStep.bind(this)}>
             <Text style={styles.fullWidthButtonText}>Next</Text>
             </TouchableHighlight>
