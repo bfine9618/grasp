@@ -31,6 +31,7 @@ export default class StudentPayment extends Component {
       <View style={styles.mainContainer}>
 
       <View style={styles.toolbar}>
+          <Text style={styles.toolbarTitle}>Student sign up</Text>
             <TouchableHighlight
                style={styles.prevButton}
                activeOpacity={0.6}
@@ -41,7 +42,6 @@ export default class StudentPayment extends Component {
                  source={require("../images/back_white.png")}
                />
              </TouchableHighlight>
-             <Text style={styles.toolbarTitle}>Student sign up</Text>
          </View>
          <View style={styles.stepbar}>
                 <Text style={styles.stepComplete}>Step 1</Text>

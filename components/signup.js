@@ -146,6 +146,7 @@ class BasicInfo extends Component {
 		return (
       <View style={styles.mainContainer}>
       <View style={styles.toolbar}>
+            <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
             <TouchableHighlight
                style={styles.prevButton}
                activeOpacity={0.6}
@@ -156,7 +157,7 @@ class BasicInfo extends Component {
                  source={require("../images/back_white.png")}
                />
              </TouchableHighlight>
-             <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
+
          </View>
          <View style={styles.stepbar}>
                 <Text style={styles.stepActive}>Step 1</Text>
@@ -301,6 +302,7 @@ class BasicInfo2 extends Component {
 		return (
       <View style={styles.mainContainer}>
       <View style={styles.toolbar}>
+          <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
             <TouchableHighlight
                style={styles.prevButton}
                activeOpacity={0.6}
@@ -311,7 +313,6 @@ class BasicInfo2 extends Component {
                  source={require("../images/back_white.png")}
                />
              </TouchableHighlight>
-             <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
          </View>
          <View style={styles.stepbar}>
                 <Text style={styles.stepComplete}>Step 1</Text>
@@ -406,6 +407,7 @@ class BasicInfo3 extends Component {
 		return (
       <View style={styles.mainContainer}>
       <View style={styles.toolbar}>
+          <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
             <TouchableHighlight
                style={styles.prevButton}
                activeOpacity={0.6}
@@ -416,7 +418,6 @@ class BasicInfo3 extends Component {
                  source={require("../images/back_white.png")}
                />
              </TouchableHighlight>
-             <Text style={styles.toolbarTitle}>{this.props.user} sign up</Text>
          </View>
          <View style={styles.stepbar}>
                 <Text style={styles.stepComplete}>Step 1</Text>

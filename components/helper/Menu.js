@@ -63,7 +63,7 @@ class Menu extends Component{
                 style={[styles.toolbar, {height: this.state.animation, overflow: 'hidden'}]}>
                 <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
                 <TouchableHighlight
-                    style={styles.prevButton}
+                    style={styles.menuButton}
                     onPress={this.toggle.bind(this)}
                     underlayColor="#3498DB">
                     <Image
@@ -80,12 +80,13 @@ class Menu extends Component{
                     source={require("Grasp/images/jeff.png")}
                     />
                   <Text style={[styles.menuText, {fontSize:20, marginTop:5}]}> Jeff Wang</Text>
-                  <Text style={[styles.menuText, {marginTop:5}]}> student</Text>
+                  <Text style={[styles.menuText,{marginTop:0}]}> student</Text>
                   </View>
-                  <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 15}}>
+                  <View style={{flexDirection:'row',
+                    alignItems: 'center', justifyContent: 'space-around', marginTop: 20}}>
                     <View style={{alignItems:'center'}}>
                       <TouchableHighlight
-                          style={styles.prevButton}
+                          style={styles.menuButton}
                           onPress={this.settings.bind(this)}
                           underlayColor="#3498DB">
                           <Image
@@ -97,7 +98,7 @@ class Menu extends Component{
                     </View>
                     <View style={{alignItems:'center'}}>
                       <TouchableHighlight
-                          style={styles.prevButton}
+                          style={styles.menuButton}
                           onPress={this.history.bind(this)}
                           underlayColor="#3498DB">
                           <Image
@@ -109,7 +110,7 @@ class Menu extends Component{
                     </View>
                     <View style={{alignItems:'center'}}>
                       <TouchableHighlight
-                          style={styles.prevButton}
+                          style={styles.menuButton}
                           onPress={this.switchProf.bind(this)}
                           underlayColor="#3498DB">
                           <Image

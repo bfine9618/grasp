@@ -23,9 +23,6 @@ export default class stuInitial extends Component{
     this.state = {
       loggedIn: true,
       user: "Student",
-      title: props.title,
-      expanded: true,
-      animation: new Animated.Value()
     };
   }
 
@@ -40,12 +37,8 @@ export default class stuInitial extends Component{
        passProps: { coursecode: this.state.coursecode || ''
        }
    });
- }
-
   }
-
-  menu() {
- }
+  }
 
  canNext() {
         return this.state.coursecode

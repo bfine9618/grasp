@@ -12,10 +12,10 @@ import {
 
 import { RadioButtons } from 'react-native-radio-buttons';
 
-var Accordion = require('react-native-accordion');
+
 var styles = require('./styles');
 
-var that; 
+var that;
 export default class TutorFound extends Component {
   constructor(props) {
     super(props);
@@ -54,14 +54,14 @@ export default class TutorFound extends Component {
                <Text>About goes here</Text>
                </View>
                 );
-              default:      
+              default:
               return "";
           }
         })() }
       </View>
     );
   }
- 
+
 
   _renderRow() {
     var header = (
@@ -84,8 +84,8 @@ export default class TutorFound extends Component {
 
       </View>
     );
- 
-    
+
+
 
     const options = [
       "Reviews",
@@ -132,10 +132,10 @@ export default class TutorFound extends Component {
               width: 318,
             })}
           />
-        
+
       </View>
     );
- 
+
     return (
       <Accordion
         header={header}

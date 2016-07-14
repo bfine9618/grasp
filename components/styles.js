@@ -101,6 +101,9 @@ module.exports = StyleSheet.create({
   prevButton: {
     width:25,
     height:25,
+    position: 'absolute',
+    top: 25,
+    left: 12,
   },
 
   mainContainer:{
@@ -264,11 +267,21 @@ module.exports = StyleSheet.create({
       borderRadius: 28,
       alignSelf: 'center'
     },
+    menuButton: {
+      width:25,
+      height:25,
+    },
     menuText: {
       fontFamily: 'Montserrat-Light',
       fontSize: 12,
       color: 'white',
       textAlign: 'center',
       marginTop: 35,
+    },
+    profileText: {
+      fontFamily: 'Montserrat-Light',
+      fontSize: 18,
+      color: darkGrey,
+      marginLeft: 31,
     }
 });

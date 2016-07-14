@@ -12,8 +12,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import Home from "./stuInitial";
-
 var styles = require('./styles');
 var ProgressBar = require('ProgressBarAndroid')
 export default class loading extends Component{
@@ -26,8 +24,8 @@ export default class loading extends Component{
     };
   }
 
-  home() {
-    this.props.navigator.push({component: Home});
+  found() {
+    this.props.navigator.push({component: Found});
   }
 
   componentDidMount() {
@@ -74,7 +72,7 @@ export default class loading extends Component{
                 style={{width: 50, height: 50}}
                 activeOpacity={0.6}
                 underlayColor={'white'}
-                onPress={this.home.bind(this)}>
+                onPress={this.found.bind(this)}>
               <Image
                   style = {{width:50, height:50}}
                   source={require("../images/cancel.png")}

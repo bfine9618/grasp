@@ -11,6 +11,7 @@ var styles = require('./styles');
 import Signup1 from "./signup";
 import Login from "./login";
 import stuHome from "./stuInitial";
+import profile from './profile';
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export default class Welcome extends Component {
     signIn() {
       console.log(this);
 
-      this.props.navigator.push({component: Login});
+      this.props.navigator.push({component: stuHome});
     }
 
   render () {
