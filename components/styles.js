@@ -39,6 +39,7 @@ module.exports = StyleSheet.create({
     height:153,
     width: 112,
     marginTop: 77,
+    marginBottom: 30,
     resizeMode: 'stretch'
   },
   headLogo :{
@@ -159,7 +160,7 @@ module.exports = StyleSheet.create({
     },
 
     textLinkButton: {
-      width:100,
+      width:150,
       height: 20,
       backgroundColor: 'white',
     },
@@ -225,4 +226,37 @@ module.exports = StyleSheet.create({
     color: '#4A4A4A',
     textAlign:'center',
   },
+  checkboxStyle: {
+        width: 26,
+        height: 26,
+        borderWidth: 2,
+        borderColor: '#ddd',
+        borderRadius: 5
+    },
+    statusbarActive: {
+      height:6,
+      width: 93.75,
+      backgroundColor: '#1ABC9C',
+    },
+    statusbarGrey: {
+      height:6,
+      width: 93.75,
+      backgroundColor: '#E0E0E0',
+    },
+    statusBar: {
+      height: 6,
+      flexDirection:'row',
+      alignItems: 'center',
+    },
+    avatarContainer: {
+      backgroundColor: '#f5f5f5',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 170,
+    },
+    avatar: {
+      borderRadius: 60,
+      width: 120,
+      height: 120
+    }
 });
