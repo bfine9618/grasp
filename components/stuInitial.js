@@ -1,12 +1,15 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component } from 'react';
+import Menu from './helper/Menu';  // Step 1
 import {
   Navigator,
   Text,
   View,
   Image,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  Animated,
+  ScrollView
 } from 'react-native';
 
 var styles = require('./styles');
@@ -19,7 +22,10 @@ export default class stuInitial extends Component{
     super(props);
     this.state = {
       loggedIn: true,
-      user: "Student"
+      user: "Student",
+      title: props.title,
+      expanded: true,
+      animation: new Animated.Value()
     };
   }
 
@@ -48,18 +54,7 @@ export default class stuInitial extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
-        <View style={styles.toolbar}>
-              <TouchableHighlight
-                 style={styles.prevButton}
-                 activeOpacity={0.6}
-                 underlayColor={'#3498DB'}
-                 onPress={this.menu.bind(this)}>
-                 <Image
-                   style = {styles.hamburger}
-                   source={require("../images/hamburger.png")}
-                 />
-               </TouchableHighlight>
-           </View>
+           <Menu/>
 
           <View style={styles.container}>
             <Image

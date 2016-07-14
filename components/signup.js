@@ -59,7 +59,7 @@ export default class Signup1 extends Component {
 
         return (
           <TouchableWithoutFeedback onPress={onSelect} key={index}>
-            <Text style={style}>{option}</Text>
+            <View><Text style={style}>{option}</Text></View>
           </TouchableWithoutFeedback>
         );
       }

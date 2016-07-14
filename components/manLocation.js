@@ -1,5 +1,6 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component, PropTypes } from 'react';
+import Menu from './helper/Menu';
 import {
   Navigator,
   Text,
@@ -43,39 +44,23 @@ export default class Location extends Component{
    this.props.navigator.pop();
  }
 
- nextStep() {
-  var component = Login;
-  if (this.state.user === "Student") {
-    component = StudentSignUp;
-  }
-
-  this.props.navigator.push({component: LengthReq,
-      passProps: { topic: this.state.topic || '',
-      coursecode: this.props.coursecode || '',
-      len: this.props.len || '',
-      }
-    });
- }
+ canNext() {
+        return this.state.loc;
+    }
 
  submit() {
-   this.props.navigator.push({component: Loading});
+   if (this.canNext()){
+     this.props.navigator.push({component: Loading,
+       passProps: { loc: this.state.loc || ''
+     }
+   });
+  }
  }
 
   render() {
     return (
     	<View style={styles.mainContainer}>
-        <View style={styles.toolbar}>
-              <TouchableHighlight
-                 style={styles.prevButton}
-                 activeOpacity={0.6}
-                 underlayColor={'#3498DB'}
-                 onPress={this.menu.bind(this)}>
-                 <Image
-                   style = {styles.hamburger}
-                   source={require("../images/hamburger.png")}
-                 />
-               </TouchableHighlight>
-           </View>
+        <Menu/>
 
           <View style={styles.container}>
           <Text style={styles.confirmHead}> Course:</Text>
@@ -94,8 +79,8 @@ export default class Location extends Component{
           <View style={{paddingTop: 15}}>
               <TextInput
                style={styles.wideInput}
-               onChangeText={(text) => this.setState({topic : text})}
-               value={this.state.topic}
+               onChangeText={(text) => this.setState({loc : text})}
+               value={this.state.loc}
                placeholder="ie Houston, downstairs"
              />
              <View style={[styles.line, !this.canNext() && styles.disabledLine]}>

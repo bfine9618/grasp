@@ -1,5 +1,6 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component, PropTypes } from 'react';
+import Menu from './helper/Menu';
 import {
   Navigator,
   Text,
@@ -61,18 +62,7 @@ export default class topicInput extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
-        <View style={styles.toolbar}>
-              <TouchableHighlight
-                 style={styles.prevButton}
-                 activeOpacity={0.6}
-                 underlayColor={'#3498DB'}
-                 onPress={this.menu.bind(this)}>
-                 <Image
-                   style = {styles.hamburger}
-                   source={require("../images/hamburger.png")}
-                 />
-               </TouchableHighlight>
-           </View>
+        <Menu/>
 
           <View style={styles.container}>
             <Text style={styles.confirmHead}> Course:</Text>

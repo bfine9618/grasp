@@ -111,8 +111,7 @@ module.exports = StyleSheet.create({
         backgroundColor: '#3498DB',
         paddingTop:25,
         paddingBottom:10,
-        flexDirection:'row',
-        height: 60,   //Step 1
+        height: 60,
     },
   stepbar:{
     backgroundColor: '#f5f5f5',
@@ -258,5 +257,18 @@ module.exports = StyleSheet.create({
       borderRadius: 60,
       width: 120,
       height: 120
+    },
+    menuImg: {
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      alignSelf: 'center'
+    },
+    menuText: {
+      fontFamily: 'Montserrat-Light',
+      fontSize: 12,
+      color: 'white',
+      textAlign: 'center',
+      marginTop: 35,
     }
 });

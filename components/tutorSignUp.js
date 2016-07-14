@@ -52,7 +52,7 @@ export default class TutorPayment extends Component {
 
         return (
           <TouchableWithoutFeedback onPress={onSelect} key={index}>
-            <Text style={style}>{option}</Text>
+            <View><Text style={style}>{option}</Text></View>
           </TouchableWithoutFeedback>
         );
       }
