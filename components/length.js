@@ -83,6 +83,7 @@ export default class length extends Component{
                       style={styles.wideInput}
                       onChangeText={(text) => this.setState({len : text})}
                       value={this.state.len}
+                      keyboardType={'numeric'}
                       placeholder="20"
                    />
                     <View style={[styles.shortLine, !this.canNext() && styles.disabledLine]}>
