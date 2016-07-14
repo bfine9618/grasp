@@ -262,11 +262,13 @@ module.exports = StyleSheet.create({
       width: 56,
       height: 56,
       borderRadius: 28,
+      alignSelf: 'center'
     },
     menuText: {
       fontFamily: 'Montserrat-Light',
       fontSize: 12,
       color: 'white',
-      textAlign: 'center'
+      textAlign: 'center',
+      marginTop: 35,
     }
 });

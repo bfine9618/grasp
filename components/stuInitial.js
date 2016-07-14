@@ -1,6 +1,6 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component } from 'react';
-import Panel from './helper/Panel';  // Step 1
+import Menu from './helper/Menu';  // Step 1
 import {
   Navigator,
   Text,
@@ -54,11 +54,7 @@ export default class stuInitial extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
-          <View>
-           <Panel>
-              
-           </Panel>
-           </View>
+           <Menu/>
 
           <View style={styles.container}>
             <Image
