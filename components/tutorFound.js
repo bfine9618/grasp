@@ -27,8 +27,11 @@ export default class TutorFound extends Component {
         phone: "(123)-456-789",
         rating: "4.5",
         reviewCount: "12",
+        bio: 'I’m a Systems Engineering major from Dallas',
+        year: '2019',
+        major: 'Systems Engineering'
       },
-      info: "Reviews",
+      selectedOption: "REVIEWS",
       animation: new Animated.Value(77),
       expanded: false,
     };
@@ -64,6 +67,34 @@ export default class TutorFound extends Component {
       if(this.state.expanded){
           icon = this.icons['up'];
       }
+
+      const options = [
+        "REVIEWS",
+        "ABOUT"
+        ];
+
+        function setSelectedOption(selectedOption){
+          this.setState({
+            selectedOption: selectedOption
+          });
+        }
+
+        function renderOption(option, selected, onSelect, index){
+          const style = selected ? { fontWeight: 'bold', color: '#3498DB',
+          fontSize: 20, fontFamily: 'Montserrat-Light',
+          textDecorationLine:'underline'} :
+          {color: '#E0E0E0', fontSize: 20, fontFamily: 'Montserrat-Light'};
+
+          return (
+            <TouchableWithoutFeedback onPress={onSelect} key={index}>
+              <View><Text style={style}>{option}</Text></View>
+            </TouchableWithoutFeedback>
+          );
+        }
+
+        function renderContainer(optionNodes){
+          return <View>{optionNodes}</View>;
+        }
 
     return (
       <View>
@@ -112,8 +143,54 @@ export default class TutorFound extends Component {
                 color:'#3498DB', fontSize:24}}>4 min.</Text>
             </View>
           </View>
-          <View style={{justifyContent:'space-between', marginTop: 20,
-          flexDirection:'row', paddingLeft: 20, paddingRight:20}}>
+          <View style={{justifyContent:'center', alignItems:'center'}}>
+            <Text style={{color:'#4a4a4a', fontSize:16, marginBottom: 7,
+            fontFamily: "Montserrat-Light"}}>
+            {this.state.tutorObject.reviewCount} reviews</Text>
+            <Image style={{width: 168, resizeMode:'contain', height: 27}}
+              source={require('../images/reviews.png')}/>
+          </View>
+          <View style={{height: 350, alignItems:'center', marginTop: 25}}>
+          <RadioButtons
+            options={options}
+            onSelection={ setSelectedOption.bind(this) }
+            selectedOption={this.state.selectedOption}
+            renderOption={renderOption}
+            renderContainer={RadioButtons.getViewContainerRenderer({
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              width: 318,
+            })}
+          />
+  			{(() => {
+          		switch (this.state.selectedOption) {
+            		case "REVIEWS":   return (
+            			<View>
+          			</View>
+            			);
+           		 case "ABOUT": return (
+                <View>
+                 <View>
+                    <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
+                    textAlign:'center', marginTop:30, width: 300}]}>{'\"'}
+                    {this.state.tutorObject.bio}{'\"'}</Text>
+                </View>
+                 <View style={{paddingLeft: 30}}>
+                   <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
+                   textAlign:'left', marginTop:25}]}>Major:</Text>
+                   <Text style={[styles.profileText, {fontFamily:'Montserrat-Regular',
+                   textAlign:'left', marginTop:5}]}>
+                   {this.state.tutorObject.major}</Text>
+                   <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
+                   textAlign:'left', marginTop:20}]}>Graduation Year:</Text>
+                   <Text style={[styles.profileText, {fontFamily:'Montserrat-Regular',
+                   textAlign:'left', marginTop:5}]}>{this.state.tutorObject.year}</Text>
+                  </View>
+                  </View>
+            			);
+            		default:      return <Text>""</Text>;
+          	}
+       		})() }
           </View>
         </View>
       </View>
