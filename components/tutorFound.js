@@ -83,7 +83,7 @@ export default class TutorFound extends Component {
           const style = selected ? { fontWeight: 'bold', color: '#3498DB',
           fontSize: 20, fontFamily: 'Montserrat-Light',
           textDecorationLine:'underline'} :
-          {color: '#E0E0E0', fontSize: 20, fontFamily: 'Montserrat-Light'};
+          {color: '#d3d3d3', fontSize: 20, fontFamily: 'Montserrat-Light'};
 
           return (
             <TouchableWithoutFeedback onPress={onSelect} key={index}>
@@ -126,15 +126,12 @@ export default class TutorFound extends Component {
                     source={icon}
                 ></Image>
             </TouchableHighlight>
-            <TouchableHighlight
-                style={[styles.menuButton, {marginTop:-20}]}
-                onPress={this.toggle.bind(this)}
-                underlayColor="#f6f6f6">
-                <Image
-                    style={styles.hamburger}
-                    source={icon}
-                ></Image>
-            </TouchableHighlight>
+            <TouchableOpacity>
+              <View style={{marginTop:-30, marginBottom: 10,
+                backgroundColor:"blue", width: 50, height: 30}}>
+                <Text>Make phonecall</Text>
+              </View>
+            </TouchableOpacity>
             </View>
             <View style={{alignItems:'center'}}>
               <Text style={{color:'#3498DB', fontSize:24,
@@ -145,7 +142,7 @@ export default class TutorFound extends Component {
           </View>
           <View style={{justifyContent:'center', alignItems:'center'}}>
             <Text style={{color:'#4a4a4a', fontSize:16, marginBottom: 7,
-            fontFamily: "Montserrat-Light"}}>
+            fontFamily: "Montserrat-Light", marginTop: 10,}}>
             {this.state.tutorObject.reviewCount} reviews</Text>
             <Image style={{width: 168, resizeMode:'contain', height: 27}}
               source={require('../images/reviews.png')}/>
