@@ -282,5 +282,43 @@ module.exports = StyleSheet.create({
       fontFamily: 'Montserrat-Light',
       fontSize: 18,
       color: darkGrey,
+    },
+    historyHead: {
+      fontSize: 21,
+      color: darkGrey,
+      fontFamily: 'Montserrat-Regular'
+    },
+    historyText: {
+      fontSize: 21,
+      color: darkGrey,
+      fontFamily: 'Montserrat-Light'
+    },
+    historyView: {
+      marginLeft: 12,
+      marginRight: 12,
+      borderLeftColor: '#3498DB',
+      borderLeftWidth: 4,
+      height: 124,
+      backgroundColor: 'white',
+      marginTop:21,
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
+    cInput: {
+      height: 20,
+      alignSelf: 'stretch',
+      marginLeft: 5,
+      marginRight: 5,
+      marginTop: -10,
+      marginBottom: 5,
+      textAlign: 'center',
+      fontSize: 16,
+      color: blue
+    },
+    map: {
+      height: 150,
+      margin: 10,
+      borderWidth: 1,
+      borderColor: '#000000',
     }
 });

@@ -51,7 +51,7 @@ export default class Location extends Component{
  submit() {
    if (this.canNext()){
      this.props.navigator.push({component: Loading,
-       passProps: { loc: this.state.loc || ''
+       passProps: { loc: this.state.loc
      }
    });
   }
@@ -60,7 +60,7 @@ export default class Location extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
-        <Menu/>
+         <Menu navigator={this.props.navigator}/>
 
           <View style={styles.container}>
           <Text style={styles.confirmHead}> Course:</Text>

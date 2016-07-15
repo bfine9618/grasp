@@ -5,6 +5,7 @@ import {Text,
   Navigator} from 'react-native';
 
 import Profile from '../profile';
+import History from '../history';
 var styles = require('../styles');
 
 export default class Menu extends Component{
@@ -52,13 +53,12 @@ export default class Menu extends Component{
     }
 
     settings(){
-
+      
     }
     history(){
-
+      this.props.navigator.push({component: History});
     }
     switchProf(){
-
     }
     toProfile() {
       this.props.navigator.push({component: Profile});

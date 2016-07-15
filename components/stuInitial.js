@@ -52,7 +52,7 @@ export default class stuInitial extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
-           <Menu navigator={this.props.navigator}/>
+          <Menu navigator={this.props.navigator}/>
 
           <View style={styles.container}>
             <Image

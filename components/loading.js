@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import * as Progress from 'react-native-progress';
 import TimerMixin from 'react-timer-mixin';
-
+import Home from './stuInitial';
+import Found from './tutorFound';
 import {
   Navigator,
   Text,
@@ -13,7 +14,8 @@ import {
 } from 'react-native';
 
 var styles = require('./styles');
-var ProgressBar = require('ProgressBarAndroid')
+var ProgressBar = require('ProgressBarAndroid');
+
 export default class loading extends Component{
 	constructor(props) {
     super(props);

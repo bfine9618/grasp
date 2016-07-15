@@ -65,7 +65,7 @@ export default class length extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
-        <Menu/>
+         <Menu navigator={this.props.navigator}/>
 
           <View style={styles.container}>
             <Text style={styles.confirmHead}> Course:</Text>

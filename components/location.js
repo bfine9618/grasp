@@ -11,11 +11,8 @@ import {
 } from 'react-native';
 
 var styles = require('./styles');
-import Login from "./login";
-import StudentSignUp from "./signup";
-import LengthReq from "./length";
 import ManLoc from "./manLocation";
-import Loading from "./loading";
+import Confirm from "./confirm";
 
 export default class Location extends Component{
   static propTypes = {
@@ -46,10 +43,16 @@ export default class Location extends Component{
  }
 
  nextStep() {
-  var component = Login;
-  if (this.state.user === "Student") {
-    component = StudentSignUp;
-  }
+  this.props.navigator.push({component: Confirm,
+      passProps: { topic: this.props.topic || '',
+      coursecode: this.props.coursecode || '',
+      len: this.props.len || '',
+      loc: 'Your current location'
+      }
+  });
+ }
+
+ manLoc() {
   this.props.navigator.push({component: ManLoc,
       passProps: { topic: this.props.topic || '',
       coursecode: this.props.coursecode || '',
@@ -58,14 +61,10 @@ export default class Location extends Component{
   });
  }
 
- submit() {
-   this.props.navigator.push({component: Loading});
- }
-
   render() {
     return (
     	<View style={styles.mainContainer}>
-        <Menu/>
+         <Menu navigator={this.props.navigator}/>
 
           <View style={styles.container}>
           <Text style={styles.confirmHead}> Course:</Text>
@@ -85,7 +84,7 @@ export default class Location extends Component{
                 style={styles.fullWidthButton}
                 activeOpacity={0.6}
                 underlayColor={'white'}
-                onPress={this.submit.bind(this)}>
+                onPress={this.nextStep.bind(this)}>
               <Text style={styles.fullWidthButtonText}>YES</Text>
               </TouchableHighlight>
           </View>
@@ -94,7 +93,7 @@ export default class Location extends Component{
                 style={{width: 240, height: 34}}
                 activeOpacity={0.6}
                 underlayColor={'white'}
-                onPress={this.nextStep.bind(this)}>
+                onPress={this.manLoc.bind(this)}>
               <Text style={styles.footerText}>
               No, I’ll type in where I want to meet manually
               </Text>

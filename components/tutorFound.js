@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import Menu from './helper/Menu';
+import Map from './helper/map';
 import {
   Text,
   ListView,
@@ -7,7 +9,8 @@ import {
   TextInput,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  MapView
 } from 'react-native';
 
 import { RadioButtons } from 'react-native-radio-buttons';
@@ -26,38 +29,23 @@ export default class TutorFound extends Component {
         name: "Braden Fineberg",
         number: "555-5555",
         rating: "4.5",
-        reviewCount: "12"
+        reviewCount: "12",
       },
       info: "Reviews"
     };
     that = this;
   }
 
-
   render() {
 
     return (
       <View>
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-      />
-      {(() => {
-            switch (that.state.info) {
-              case "Reviews":   return (
-                <View>
-                <Text>Reviews go here{that.state.info}</Text>
-              </View>
-                );
-             case "About": return (
-               <View>
-               <Text>About goes here</Text>
-               </View>
-                );
-              default:
-              return "";
-          }
-        })() }
+        <Menu/>
+        <MapView
+          style={{height:200, opacity:.5}}
+          showsUserLocation={true}
+          followUserLocation={true}
+        />
       </View>
     );
   }
