@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Menu from './helper/Menu';
-import Map from './helper/map';
 import {
   Text,
   ListView,
@@ -10,7 +9,7 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  MapView
+  MapView, Animated
 } from 'react-native';
 
 import { RadioButtons } from 'react-native-radio-buttons';
@@ -22,114 +21,102 @@ var that;
 export default class TutorFound extends Component {
   constructor(props) {
     super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1']),
       tutorObject: {
-        name: "Braden Fineberg",
-        number: "555-5555",
+        name: "Braden",
+        phone: "(123)-456-789",
         rating: "4.5",
         reviewCount: "12",
       },
-      info: "Reviews"
+      info: "Reviews",
+      animation: new Animated.Value(77),
+      expanded: false,
     };
+
+    this.icons = {
+        'up'    : require('Grasp/images/up_blue.png'),
+        'down'  : require('Grasp/images/down.png')
+    };
+
     that = this;
   }
 
+  toggle() {
+    let initialValue    = this.state.expanded? 516 : 77,
+        finalValue      = this.state.expanded? 77 : 516;
+
+    this.setState({
+        expanded : !this.state.expanded
+    });
+
+    this.state.animation.setValue(initialValue);
+    Animated.spring(
+        this.state.animation,
+        {
+            toValue: finalValue
+        }
+    ).start();
+  }
+
   render() {
+    let icon = this.icons['down'];
+
+      if(this.state.expanded){
+          icon = this.icons['up'];
+      }
 
     return (
       <View>
         <Menu/>
-        <MapView
-          style={{height:200, opacity:.5}}
-          showsUserLocation={true}
-          followUserLocation={true}
-        />
-      </View>
-    );
-  }
-
-
-  _renderRow() {
-    var header = (
-      <View>
-      <View style = {{flexDirection:'row'}}>
-        <View>
-      <Image
-          style = {styles.headLogo, {height: 100, width: 100}}
-          source={require("../images/Logo1.png")}
-        />
-        <Text>{that.state.tutorObject.name}</Text>
+        <Animated.View style={{height:this.state.animation}}>
+          <MapView
+            style={{height: 516}}
+            showsUserLocation={true}
+            followUserLocation={true}/>
+        </Animated.View>
+        <View style={{backgroundColor:"#f6f6f6", paddingTop:10}}>
+          <View style={{justifyContent:'space-around', flexDirection:'row'}}>
+            <View>
+            <Image
+              style={{marginTop:-65, borderWidth:6, borderRadius:54,
+                borderColor:'#3498DB', width:108, height:108}}
+                source={require('../images/jeff.png')}/>
+                <Text style={{fontFamily:'Montserrat-Regular',
+                fontSize: 24, color: '#4a4a4a', textAlign: 'center'}}>
+                {this.state.tutorObject.name}</Text>
+            </View>
+            <View>
+            <TouchableHighlight
+                style={styles.menuButton}
+                onPress={this.toggle.bind(this)}
+                underlayColor="#f6f6f6">
+                <Image
+                    style={styles.hamburger}
+                    source={icon}
+                ></Image>
+            </TouchableHighlight>
+            <TouchableHighlight
+                style={[styles.menuButton, {marginTop:-20}]}
+                onPress={this.toggle.bind(this)}
+                underlayColor="#f6f6f6">
+                <Image
+                    style={styles.hamburger}
+                    source={icon}
+                ></Image>
+            </TouchableHighlight>
+            </View>
+            <View style={{alignItems:'center'}}>
+              <Text style={{color:'#3498DB', fontSize:24,
+                fontFamily: "Montserrat-Light"}}>Eta: </Text>
+              <Text style={{fontFamily: "Montserrat-Regular",
+                color:'#3498DB', fontSize:24}}>4 min.</Text>
+            </View>
+          </View>
+          <View style={{justifyContent:'space-between', marginTop: 20,
+          flexDirection:'row', paddingLeft: 20, paddingRight:20}}>
+          </View>
         </View>
-        <View>
-        <Text>4 Minutes Away</Text>
-        <Text>{that.state.tutorObject.number}</Text>
-        </View>
       </View>
-              <Text>{that.state.tutorObject.reviewCount} Reviews</Text>
-        <Text>{that.state.tutorObject.rating} Stars</Text>
-
-      </View>
-    );
-
-
-
-    const options = [
-      "Reviews",
-      "About"
-      ];
-
-      function setSelectedOption(selectedOption){
-        console.log(that.state);
-        that.setState({
-          info: selectedOption
-        });
-        that.forceUpdate();
-        console.log(that.state);
-      }
-
-      function renderOption(option, selected, onSelect, index){
-        const style = selected ? { fontWeight: 'bold', color: '#3498DB',
-        fontSize: 34, fontFamily: 'Montserrat-Regular'} :
-        {fontWeight: 'bold', color: '#E0E0E0',
-        fontSize: 34, fontFamily: 'Montserrat-Regular'};
-
-        return (
-          <TouchableWithoutFeedback onPress={onSelect} key={index}>
-            <Text style={style}>{option}</Text>
-          </TouchableWithoutFeedback>
-        );
-      }
-
-      function renderContainer(optionNodes){
-        return <View>{optionNodes}</View>;
-      }
-
-
-    var content = (
-      <View style={{marginBottom: 100, marginTop: 37,  alignItems:'center'}}>
-          <RadioButtons
-            options={ options }
-            onSelection={ setSelectedOption }
-            selectedOption={that.state.info}
-            renderOption={renderOption}
-            renderContainer={RadioButtons.getViewContainerRenderer({
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              width: 318,
-            })}
-          />
-
-      </View>
-    );
-
-    return (
-      <Accordion
-        header={header}
-        content={content}
-        easing="easeOutCubic"
-      />
     );
   }
 }

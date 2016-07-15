@@ -9,8 +9,8 @@ import {
 import Grasp from './home';
 var styles = require('./styles');
 import Signup1 from "./signup";
-import Login from "./login";
-import stuHome from "./tutorFound";
+import Login from "./tutorFound";
+import stuHome from "./stuInitial";
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export default class Welcome extends Component {
     signIn() {
       console.log(this);
 
-      this.props.navigator.push({component: stuHome});
+      this.props.navigator.push({component: Login});
     }
 
   render () {
