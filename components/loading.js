@@ -46,7 +46,7 @@ export default class loading extends Component{
         }
         this.setState({ progress });
       }, 5000);
-      this.props.navigator.push({component: Home});
+      this.found();
     }, 10000);
   }
 

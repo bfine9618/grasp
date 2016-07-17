@@ -16,8 +16,8 @@ import { RadioButtons } from 'react-native-radio-buttons';
 
 
 var styles = require('./styles');
-
 var that;
+
 export default class TutorFound extends Component {
   constructor(props) {
     super(props);
@@ -29,18 +29,25 @@ export default class TutorFound extends Component {
         reviewCount: "12",
         bio: 'I’m a Systems Engineering major from Dallas',
         year: '2019',
-        major: 'Systems Engineering'
+        major: 'Systems Engineering',
+        img: 'Grasp/images/tutorPin.png',
+        lat: 39.954359,
+        long: -75.201275,
       },
       selectedOption: "REVIEWS",
       animation: new Animated.Value(77),
       expanded: false,
+      initialPosition: "",
+      lastPosition: "",
+      lat: "",
+      long: "",
+      inSession: false,
     };
 
     this.icons = {
         'up'    : require('Grasp/images/up_blue.png'),
         'down'  : require('Grasp/images/down.png')
     };
-
     that = this;
   }
 
@@ -96,14 +103,50 @@ export default class TutorFound extends Component {
           return <View>{optionNodes}</View>;
         }
 
+        function getInitialState() {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              var init = JSON.stringify(position);
+              that.setState({
+                  initialPosition : init,
+                  lat: position.coords.latitude,
+                  long: position.coords.longitude,
+              });
+            },
+            (error) => alert(error.message),
+            {enableHighAccuracy: true, maximumAge: 3000}
+          );
+
+          if ()
+
+          //0.0094697 50' in deg.
+
+          return {
+            region: {
+              latitude: ((parseFloat(that.state.lat) + (parseFloat(that.state.tutorObject.lat)))/2),
+              longitude:((parseFloat(that.state.long) + (parseFloat(that.state.tutorObject.long)))/2),
+              latitudeDelta: 0.01517391,
+              longitudeDelta: 0.01014492,
+            }
+          };
+        }
+
+      var region = this.state.region || getInitialState().region;
+
     return (
       <View>
-        <Menu/>
+        <Menu navigator={this.props.navigator}/>
         <Animated.View style={{height:this.state.animation}}>
           <MapView
             style={{height: 516}}
             showsUserLocation={true}
-            followUserLocation={true}/>
+            region={region}
+            annotations={[{
+              latitude: this.state.tutorObject.lat,
+              longitude: this.state.tutorObject.long,
+              image: require('Grasp/images/tutorPin.png')
+            }]}
+            onAnnotationPress={this.toggle.bind(this)}/>
         </Animated.View>
         <View style={{backgroundColor:"#f6f6f6", paddingTop:10}}>
           <View style={{justifyContent:'space-around', flexDirection:'row'}}>

@@ -11,7 +11,7 @@ import Grasp from './home';
 var styles = require('./styles');
 import Signup1 from "./signup";
 import stuHome from "./stuInitial";
-import Welcome from "./welcome";
+import onBoarding from "./studentOnboarding";
 
 export default class Login extends Component {
   constructor(props) {
@@ -22,17 +22,13 @@ export default class Login extends Component {
   }
 
     prevStep() {
-     var component = Welcome;
-     if (this.state.user === "Student") {
-       component = StudentSignUp;
-     }
      this.props.navigator.pop();
    }
 
     signIn() {
       console.log(this);
       if (this.state.email && this.state.password){
-        this.props.navigator.push({component: stuHome});
+        this.props.navigator.push({component: onBoarding});
       }
     }
 
