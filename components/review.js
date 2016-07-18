@@ -4,6 +4,9 @@ import CustomStarExample from './helper/rating';
 import Menu from './helper/Menu';
 import Home from './stuInitial';
 import {
+  KeyboardAwareScrollView }
+  from 'react-native-keyboard-aware-scroll-view';
+import {
   Navigator,
   Text,
   View,
@@ -44,9 +47,11 @@ export default class Reciept extends Component{
     	<View style={[styles.mainContainer, {backgroundColor: '#f6f6f6'}]}>
       <Menu navigator={this.props.navigator}/>
 
+       <KeyboardAwareScrollView>
        <View style={[styles.container]}>
        <Image
-         style = {[styles.avatar, {borderWidth:5, borderColor:'#3498DB'}]}
+         style = {[styles.avatar, {flex: 1,
+           borderWidth:5, borderColor:'#3498DB'}]}
          source={img}
          />
          <Text style={styles.courseCodeAsk}>
@@ -72,11 +77,13 @@ export default class Reciept extends Component{
         multiline={true}
         numberOfLines= {5}
         maxLength={135}
+        blurOnSubmit={true}
+        returnKeyType={'done'}
         onChangeText={(text) => this.setState({comment: text})}
         value={this.state.text}></TextInput>
-
-
        </View>
+
+
        <TouchableHighlight
          style={[styles.fullWidthButton, {marginTop:40}]}
          activeOpacity={0.6}
@@ -85,7 +92,7 @@ export default class Reciept extends Component{
        <Text style={styles.fullWidthButtonText}>FINISH</Text>
        </TouchableHighlight>
        </View>
-
+       </KeyboardAwareScrollView>
     </View>
  );
 }
