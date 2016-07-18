@@ -61,6 +61,16 @@ export default class Location extends Component{
   });
  }
 
+ skype() {
+   this.props.navigator.push({component: Confirm,
+       passProps: { topic: this.props.topic || '',
+       coursecode: this.props.coursecode || '',
+       len: this.props.len || '',
+       loc: '{this.state.student.skype}'
+       }
+   });
+ }
+
   render() {
     return (
     	<View style={styles.mainContainer}>
@@ -93,9 +103,9 @@ export default class Location extends Component{
                 style={{width: 240, height: 34}}
                 activeOpacity={0.6}
                 underlayColor={'white'}
-                onPress={this.manLoc.bind(this)}>
+                onPress={this.skype.bind(this)}>
               <Text style={styles.footerText}>
-              No, I’ll type in where I want to meet manually
+              No, I want to skype
               </Text>
               </TouchableHighlight>
           </View>

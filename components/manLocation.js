@@ -60,6 +60,17 @@ export default class Location extends Component{
   render() {
     return (
     	<View style={styles.mainContainer}>
+      <View style={{paddingTop: 20}}>
+          <TouchableHighlight
+            style={{width: 240, height: 34}}
+            activeOpacity={0.6}
+            underlayColor={'white'}
+            onPress={this.manLoc.bind(this)}>
+          <Text style={styles.footerText}>
+          No, I’ll type in where I want to meet manually
+          </Text>
+          </TouchableHighlight>
+      </View>
          <Menu navigator={this.props.navigator}/>
 
           <View style={styles.container}>

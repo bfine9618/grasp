@@ -25,13 +25,15 @@ var that;
 var first = true;
 var timer;
 var image;
+var i;
+var near;
 
 export default class TutorFound extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tutorObject: {
-        name: "Braden",
+        name: "Braden F.",
         phone: "(123)-456-789",
         rating: "4.5",
         reviewCount: "12",
@@ -53,6 +55,9 @@ export default class TutorFound extends Component {
       time: 0,
       cancel: true,
       mixins: [TimerMixin],
+      centerLat: 0,
+      centerLong: 0,
+      watchID: '',
     };
 
     this.icons = {
@@ -94,6 +99,9 @@ export default class TutorFound extends Component {
         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'YES', onPress: () => this.props.navigator.push({component: Reciept,
           passProps: { cancelFee: true,
+            tutorObject: this.props.tutorObject,
+            seconds: "0",
+            minutes: "0"
           }})},
       ]
     );
@@ -102,7 +110,8 @@ export default class TutorFound extends Component {
 
   cancelTimer() {
     let cur = 0;
-    var i = setInterval(() => {
+    i = setInterval(() => {
+      console.log('cancel loop')
         cur += 1;
         this.setState({time:  cur});
         if(cur == 20){
@@ -113,31 +122,51 @@ export default class TutorFound extends Component {
   }
 
 
-  nearby() {
-    var near = setInterval(() => {
-      var deltaY = Math.pow((parseFloat(this.state.lat) -
-        (parseFloat(this.state.tutorObject.lat))), 2);
-      var deltaX = Math.pow((parseFloat(this.state.long) -
-      (parseFloat(this.state.tutorObject.long))), 2);
-
-      if (Math.sqrt(deltaX + deltaY) <= 0.00021) {
-        clearInterval(near);
-        navigator.geolocation.stopObserving(0);
-        that.props.navigator.push({component: Nearby,
-          passProps: { time: this.state.time || 0,
-          tutorObject: this.state.tutorObject,
-        }});
-      }
-    }, 15000);
+  locate() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var init = JSON.stringify(position);
+        this.setState({
+            initialPosition : init,
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+        });
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, maximumAge: 1000}
+    );
   }
 
+  nearby() {
+    near = setInterval(() => {
+    var deltaY = Math.pow((parseFloat(this.state.lat) -
+      (parseFloat(this.state.tutorObject.lat))), 2);
+    var deltaX = Math.pow((parseFloat(this.state.long) -
+    (parseFloat(this.state.tutorObject.long))), 2);
+
+    if (Math.sqrt(deltaX + deltaY) <= 0.00021) {
+      clearInterval(near);
+      clearInterval(i);
+      navigator.geolocation.stopObserving(0);
+      that.props.navigator.push({component: Nearby,
+        passProps: { time: this.state.time || 0,
+        tutorObject: this.state.tutorObject,
+      }});
+    }
+  }, 5000);
+}
+
   componentDidMount() {
+    this.locate();
     this.nearby();
     this.cancelTimer();
   }
 
   componentWillUnmount() {
   clearInterval(timer);
+  clearInterval(i);
+  clearInterval(near);
+  navigator.geolocation.clearWatch(this.watchID);
 }
 
 
@@ -176,31 +205,15 @@ export default class TutorFound extends Component {
           return <View>{optionNodes}</View>;
         }
 
-        function getInitialState() {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              var init = JSON.stringify(position);
-              that.setState({
-                  initialPosition : init,
-                  lat: position.coords.latitude,
-                  long: position.coords.longitude,
-              });
-            },
-            (error) => alert(error.message),
-            {enableHighAccuracy: true, maximumAge: 15000}
-          )
+    var region = {
+      latitude:((parseFloat(this.state.lat) +
+      (parseFloat(this.state.tutorObject.lat)))/2),
+      longitude:((parseFloat(this.state.long) +
+      (parseFloat(this.state.tutorObject.long)))/2),
+      latitudeDelta: 0.01517391,
+      longitudeDelta: 0.01014492,
+    }
 
-          return {
-            region: {
-              latitude: ((parseFloat(that.state.lat) + (parseFloat(that.state.tutorObject.lat)))/2),
-              longitude:((parseFloat(that.state.long) + (parseFloat(that.state.tutorObject.long)))/2),
-              latitudeDelta: 0.01517391,
-              longitudeDelta: 0.01014492,
-            }
-          };
-        }
-
-      var region = this.state.region || getInitialState().region;
     return (
       <View>
         <Menu navigator={this.props.navigator}/>
@@ -208,7 +221,6 @@ export default class TutorFound extends Component {
           <MapView
             style={{height: 516}}
             showsUserLocation={true}
-            followUserLocation={true}
             region={region}
             annotations={[{
               latitude: this.state.tutorObject.lat,
