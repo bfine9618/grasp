@@ -33,7 +33,7 @@ export default class Reciept extends Component{
   componentDidMount() {
     this.cost();
     if(this.props.cancelFee || false){
-      this.setState({cost: 3.50});
+      this.setState({cost: '3.50'});
     }
   }
 
@@ -68,14 +68,14 @@ export default class Reciept extends Component{
 
          {(() => {
            		if (this.props.cancelFee || false) {
-                <Text style={styles.courseCodeAsk}>
+              return (  <Text style={styles.courseCodeAsk}>
                   I{'\''}m sorry that you cancelled!
-                 </Text>
+                 </Text>);
          } else {
-           <Text style={styles.courseCodeAsk}>
+          return ( <Text style={styles.courseCodeAsk}>
              I hope that you enjoyed your session
              with {this.props.tutorObject.name}!
-            </Text>
+            </Text>);
           }
         })() }
 
@@ -98,13 +98,23 @@ export default class Reciept extends Component{
        <Text style={{fontFamily: 'Montserrat-Regular', fontSize:36,
        color: '#4a4a4a', marginTop: 5, textAlign:'center'}}>
        ${this.state.cost}</Text>
+       <KeyboardSpacer/>
        </View>
        <TouchableHighlight
          style={[styles.fullWidthButton, {marginTop:40}]}
          activeOpacity={0.6}
          underlayColor={'white'}
          onPress={this.review.bind(this)}>
-       <Text style={styles.fullWidthButtonText}>WRITE A REVIEW</Text>
+         {(() => {
+           		if (this.props.cancelFee || false) {
+              return (
+                <Text style={styles.fullWidthButtonText}>
+                FINSIH</Text>);
+         } else {
+          return ( <Text style={styles.fullWidthButtonText}>
+            WRITE A REVIEW</Text>);
+          }
+        })() }
        </TouchableHighlight>
        </View>
 
