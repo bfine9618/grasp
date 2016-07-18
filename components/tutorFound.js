@@ -111,7 +111,6 @@ export default class TutorFound extends Component {
   cancelTimer() {
     let cur = 0;
     i = setInterval(() => {
-      console.log('cancel loop')
         cur += 1;
         this.setState({time:  cur});
         if(cur == 20){
@@ -135,26 +134,34 @@ export default class TutorFound extends Component {
       (error) => alert(error.message),
       {enableHighAccuracy: true, maximumAge: 1000}
     );
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      var lastPosition = JSON.stringify(position);
+      this.setState({
+          initialPosition : lastPosition,
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+      });
+      this.nearby();
+    },
+    (error) => alert(error.message),
+    {enableHighAccuracy: true, maximumAge: 500});
   }
 
   nearby() {
-    near = setInterval(() => {
     var deltaY = Math.pow((parseFloat(this.state.lat) -
       (parseFloat(this.state.tutorObject.lat))), 2);
     var deltaX = Math.pow((parseFloat(this.state.long) -
     (parseFloat(this.state.tutorObject.long))), 2);
-
-    if (Math.sqrt(deltaX + deltaY) <= 0.00021) {
+    if (Math.sqrt(deltaX + deltaY) <= 0.0011) {
       clearInterval(near);
       clearInterval(i);
-      navigator.geolocation.stopObserving(0);
+      navigator.geolocation.clearWatch(this.watchID);
       that.props.navigator.push({component: Nearby,
         passProps: { time: this.state.time || 0,
         tutorObject: this.state.tutorObject,
       }});
     }
-  }, 5000);
-}
+  }
 
   componentDidMount() {
     this.locate();
@@ -225,8 +232,8 @@ export default class TutorFound extends Component {
             annotations={[{
               latitude: this.state.tutorObject.lat,
               longitude: this.state.tutorObject.long,
-              view: <Image style={{width:50, height:50,
-                borderRadius:25, borderWidth:3, borderColor:'#3498DB'}}
+              view: <Image style={{width:40, height:40,
+                borderRadius:20, borderWidth:3, borderColor:'#3498DB'}}
                 source={image}/>
             }]}
             onAnnotationPress={this.toggle.bind(this)}/>
