@@ -208,6 +208,7 @@ export default class TutorFound extends Component {
           <MapView
             style={{height: 516}}
             showsUserLocation={true}
+            followUserLocation={true}
             region={region}
             annotations={[{
               latitude: this.state.tutorObject.lat,

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import Menu from './helper/Menu';
 import Home from './stuInitial';
 import Active from './Session';
-
+import Reciept from './reciept';
 import {
   Navigator,
   Text,

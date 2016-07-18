@@ -44,11 +44,15 @@ export default class Reciept extends Component{
   }
 
   review(){
+    if (this.props.cancelFee || false) {
+      this.props.navigator.push({component: Home});
+    } else{
     this.props.navigator.push({component: Review,
       passProps: {
         tutorObject: this.props.tutorObject,
       }
       });
+    }
   }
 
   render() {
@@ -61,10 +65,19 @@ export default class Reciept extends Component{
          style = {styles.aceImg}
          source={require("../images/ace.png")}
          />
-         <Text style={styles.courseCodeAsk}>
-           I hope that you enjoyed your session
-           with {this.props.tutorObject.name}!
-          </Text>
+
+         {(() => {
+           		if (this.props.cancelFee || false) {
+                <Text style={styles.courseCodeAsk}>
+                  I{'\''}m sorry that you cancelled!
+                 </Text>
+         } else {
+           <Text style={styles.courseCodeAsk}>
+             I hope that you enjoyed your session
+             with {this.props.tutorObject.name}!
+            </Text>
+          }
+        })() }
 
           <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
           color: '#3498DB', marginTop:20}}>Session Ended</Text>
