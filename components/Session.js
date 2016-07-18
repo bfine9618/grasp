@@ -16,7 +16,7 @@ var i;
 
 export default class Session extends Component{
   static propTypes = {
-    tutorName: PropTypes.string.isRequired,
+    tutorObject: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -61,7 +61,7 @@ export default class Session extends Component{
       passProps: {
         minutes: this.state.minutes || 0,
         seconds: this.state.seconds || 0,
-        tutorName: this.props.tutorName || "",
+        tutorObject: this.props.tutorObject
       }});
   }
 
@@ -76,15 +76,16 @@ export default class Session extends Component{
           <Text style={styles.confirmHead}> Topic:</Text>
           <Text style={styles.confirmInput}>server ask/local cache</Text>
           <Text style={styles.confirmHead}> You{'\''}re working with::</Text>
-          <Text style={styles.confirmInput}>{this.props.tutorName}</Text>
+          <Text style={styles.confirmInput}>{this.props.tutorObject.name}</Text>
 
-          <View style={{backgroundColor: 'white', marginTop: 60,
-            alignItems:'center', height: 150, paddingTop:10, width: 300}}>
           <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
-          color: '#3498DB'}}>Session Started</Text>
+          color: '#3498DB', marginTop: 25}}>Session Started</Text>
+          <View style={{backgroundColor: 'white', marginTop: 5,
+          justifyContent: 'center', alignItems:'center',
+          height: 150, paddingTop:10, width: 300}}>
 
           <Text style={{fontFamily: 'Montserrat-Light', fontSize: 20,
-          color: '#4a4a4a', marginTop: 30}}> Elapsed Time: </Text>
+          color: '#4a4a4a'}}> Elapsed Time: </Text>
 
           <Text style={{fontFamily: 'Montserrat-Regular', fontSize:36,
           color: '#4a4a4a', marginTop: 5, textAlign:'center'}}>

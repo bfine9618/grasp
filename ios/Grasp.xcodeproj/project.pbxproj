@@ -29,6 +29,8 @@
 		F8E4D99E1D2D5F55005660CB /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8E4D99C1D2D5F55005660CB /* Montserrat-Light.otf */; };
 		F8E4D9A01D2D5F8F005660CB /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8E4D99F1D2D5F8F005660CB /* Montserrat-Regular.otf */; };
 		F8E4D9A11D2D5F8F005660CB /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8E4D99F1D2D5F8F005660CB /* Montserrat-Regular.otf */; };
+		F8EEFE451D3D1E9D004BEED4 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8EEFE441D3D1E9D004BEED4 /* Ionicons.ttf */; };
+		F8EEFE461D3D1E9D004BEED4 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8EEFE441D3D1E9D004BEED4 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +153,7 @@
 		F8A5B0251D31F26D009FD9BB /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		F8E4D99C1D2D5F55005660CB /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
 		F8E4D99F1D2D5F8F005660CB /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		F8EEFE441D3D1E9D004BEED4 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +358,7 @@
 		F8E4D99B1D2D5F3F005660CB /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F8EEFE441D3D1E9D004BEED4 /* Ionicons.ttf */,
 				F8E4D99C1D2D5F55005660CB /* Montserrat-Light.otf */,
 				F8E4D99F1D2D5F8F005660CB /* Montserrat-Regular.otf */,
 			);
@@ -581,6 +585,7 @@
 			files = (
 				F8E4D99E1D2D5F55005660CB /* Montserrat-Light.otf in Resources */,
 				F8E4D9A11D2D5F8F005660CB /* Montserrat-Regular.otf in Resources */,
+				F8EEFE461D3D1E9D004BEED4 /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +593,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8EEFE451D3D1E9D004BEED4 /* Ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				F8E4D99D1D2D5F55005660CB /* Montserrat-Light.otf in Resources */,

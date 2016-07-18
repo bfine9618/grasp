@@ -111,7 +111,7 @@ export default class Nearby extends Component{
               underlayColor={'white'}
               onPress={() => this.props.navigator.push({component: Active,
                 passProps:{
-                  tutorName: this.props.tutorObject.name,
+                  tutorObject: this.props.tutorObject
                 }})}>
                 <Text style={styles.fullWidthButtonText}>active</Text>
                 </TouchableHighlight>

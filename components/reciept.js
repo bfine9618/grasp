@@ -2,6 +2,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component, PropTypes } from 'react';
 import Menu from './helper/Menu';
 import Home from './stuInitial';
+import Review from './review';
 import {
   Navigator,
   Text,
@@ -17,7 +18,7 @@ export default class Reciept extends Component{
   static propTypes = {
     seconds: PropTypes.string.isRequired,
     minutes: PropTypes.string.isRequired,
-    tutorName: PropTypes.string.isRequired,
+    tutorObject: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -31,6 +32,9 @@ export default class Reciept extends Component{
 
   componentDidMount() {
     this.cost();
+    if(this.props.cancelFee || false){
+      this.setState({cost: 3.50});
+    }
   }
 
   cost() {
@@ -40,7 +44,11 @@ export default class Reciept extends Component{
   }
 
   review(){
-    this.props.navigator.push({component: Home});
+    this.props.navigator.push({component: Review,
+      passProps: {
+        tutorObject: this.props.tutorObject,
+      }
+      });
   }
 
   render() {
@@ -55,16 +63,17 @@ export default class Reciept extends Component{
          />
          <Text style={styles.courseCodeAsk}>
            I hope that you enjoyed your session
-           with {this.props.tutorName}!
+           with {this.props.tutorObject.name}!
           </Text>
 
-       <View style={{backgroundColor: 'white', marginTop: 40,
-         alignItems:'center', height: 250, paddingTop:10, width: 300}}>
-       <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
-       color: '#3498DB'}}>Session Ended</Text>
+          <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
+          color: '#3498DB', marginTop:20}}>Session Ended</Text>
 
+       <View style={{backgroundColor: 'white', marginTop: 5,
+       justifyContent: 'center', alignItems:'center',
+       height: 200, paddingTop:10, width: 300}}>
        <Text style={{fontFamily: 'Montserrat-Light', fontSize: 20,
-       color: '#4a4a4a', marginTop: 30}}> Total Time: </Text>
+       color: '#4a4a4a'}}> Total Time: </Text>
 
        <Text style={{fontFamily: 'Montserrat-Regular', fontSize:36,
        color: '#4a4a4a', marginTop: 5, textAlign:'center'}}>
