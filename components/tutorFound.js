@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Menu from './helper/Menu';
+import Communications from 'react-native-communications';
 import {
   Text,
   ListView,
@@ -262,6 +263,8 @@ export default class TutorFound extends Component {
             <TouchableOpacity>
               <View style={{marginTop:-30, marginBottom: 10,
                 backgroundColor:"blue", width: 50, height: 30}}>
+                onPress={onPress={() =>
+                  Communications.phonecall({this.state.tutorObject.phone}, true)};
                 <Text>Make phonecall</Text>
               </View>
             </TouchableOpacity>
