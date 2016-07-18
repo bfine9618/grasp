@@ -68,6 +68,9 @@ export default class Nearby extends Component{
         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'YES', onPress: () => this.props.navigator.push({component: Reciept,
           passProps: { cancelFee: true,
+            tutorObject: this.props.tutorObject,
+            seconds: "0",
+            minutes: "0"
           }})},
       ]
     );
