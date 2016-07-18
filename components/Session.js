@@ -57,6 +57,7 @@ export default class Session extends Component{
 
 
   cancel() {
+    clearInterval(i);
     this.props.navigator.push({component: Reciept,
       passProps: {
         minutes: this.state.minutes || 0,
