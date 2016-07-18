@@ -315,10 +315,10 @@ module.exports = StyleSheet.create({
       fontSize: 16,
       color: blue
     },
-    map: {
-      height: 150,
-      margin: 10,
-      borderWidth: 1,
-      borderColor: '#000000',
-    }
+    nearbyHeading: {
+      fontFamily:'Montserrat-Regular',
+      color: '#4a4a4a',
+      fontSize:24,
+      textAlign:'center'
+    },
 });

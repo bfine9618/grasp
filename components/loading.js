@@ -26,6 +26,10 @@ export default class loading extends Component{
     };
   }
 
+  cancel() {
+    this.props.navigator.push({component: Home});
+  }
+
   found() {
     this.props.navigator.push({component: Found});
   }
@@ -44,7 +48,7 @@ export default class loading extends Component{
         if (progress > 1) {
           progress = 1;
         }
-        this.setState({ progress });
+        this.setState({ progress: progress });
       }, 5000);
       this.found();
     }, 10000);
@@ -74,7 +78,7 @@ export default class loading extends Component{
                 style={{width: 50, height: 50}}
                 activeOpacity={0.6}
                 underlayColor={'white'}
-                onPress={this.found.bind(this)}>
+                onPress={this.cancel.bind(this)}>
               <Image
                   style = {{width:50, height:50}}
                   source={require("../images/cancel.png")}

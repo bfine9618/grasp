@@ -9,14 +9,22 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  MapView, Animated
+  MapView, Animated,
+  Alert,
 } from 'react-native';
+import TimerMixin from 'react-timer-mixin';
 
 import { RadioButtons } from 'react-native-radio-buttons';
+import Nearby from './nearby';
+import Home from './stuInitial';
+import Reciept from './reciept';
 
 
 var styles = require('./styles');
 var that;
+var first = true;
+var timer;
+var image;
 
 export default class TutorFound extends Component {
   constructor(props) {
@@ -30,7 +38,7 @@ export default class TutorFound extends Component {
         bio: 'I’m a Systems Engineering major from Dallas',
         year: '2019',
         major: 'Systems Engineering',
-        img: 'Grasp/images/tutorPin.png',
+        img: 'Grasp/images/jeff.png',
         lat: 39.954359,
         long: -75.201275,
       },
@@ -42,6 +50,9 @@ export default class TutorFound extends Component {
       lat: "",
       long: "",
       inSession: false,
+      time: 0,
+      cancel: true,
+      mixins: [TimerMixin],
     };
 
     this.icons = {
@@ -49,6 +60,7 @@ export default class TutorFound extends Component {
         'down'  : require('Grasp/images/down.png')
     };
     that = this;
+    image = require(this.state.tutorObject.img);
   }
 
   toggle() {
@@ -67,6 +79,67 @@ export default class TutorFound extends Component {
         }
     ).start();
   }
+
+  cancel() {
+    if(this.state.cancel){
+      navigator.geolocation.stopObserving(0);
+      this.props.navigator.push({component: Home});
+    }
+    else {
+        Alert.alert(
+      'Are you sure?',
+      'You will be charged a $3.50 inertia fee' +
+      'because you were assigned a tutor more than 5 minutes ago.',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'YES', onPress: () => this.props.navigator.push({component: Reciept,
+          passProps: { cancelFee: true,
+          }})},
+      ]
+    );
+    }
+  }
+
+  cancelTimer() {
+    let cur = 0;
+    var i = setInterval(() => {
+        cur += 1;
+        this.setState({time:  cur});
+        if(cur == 20){
+          this.setState({cancel: false});
+          clearInterval( i );
+        }
+      }, 15000);
+  }
+
+
+  nearby() {
+    var near = setInterval(() => {
+      var deltaY = Math.pow((parseFloat(this.state.lat) -
+        (parseFloat(this.state.tutorObject.lat))), 2);
+      var deltaX = Math.pow((parseFloat(this.state.long) -
+      (parseFloat(this.state.tutorObject.long))), 2);
+
+      if (Math.sqrt(deltaX + deltaY) <= 0.00021) {
+        clearInterval(near);
+        navigator.geolocation.stopObserving(0);
+        that.props.navigator.push({component: Nearby,
+          passProps: { time: this.state.time || 0,
+          tutorObject: this.state.tutorObject,
+        }});
+      }
+    }, 15000);
+  }
+
+  componentDidMount() {
+    this.nearby();
+    this.cancelTimer();
+  }
+
+  componentWillUnmount() {
+  clearInterval(timer);
+}
+
 
   render() {
     let icon = this.icons['down'];
@@ -114,12 +187,8 @@ export default class TutorFound extends Component {
               });
             },
             (error) => alert(error.message),
-            {enableHighAccuracy: true, maximumAge: 3000}
-          );
-
-          if ()
-
-          //0.0094697 50' in deg.
+            {enableHighAccuracy: true, maximumAge: 15000}
+          )
 
           return {
             region: {
@@ -132,7 +201,6 @@ export default class TutorFound extends Component {
         }
 
       var region = this.state.region || getInitialState().region;
-
     return (
       <View>
         <Menu navigator={this.props.navigator}/>
@@ -144,7 +212,9 @@ export default class TutorFound extends Component {
             annotations={[{
               latitude: this.state.tutorObject.lat,
               longitude: this.state.tutorObject.long,
-              image: require('Grasp/images/tutorPin.png')
+              view: <Image style={{width:50, height:50,
+                borderRadius:25, borderWidth:3, borderColor:'#3498DB'}}
+                source={image}/>
             }]}
             onAnnotationPress={this.toggle.bind(this)}/>
         </Animated.View>
@@ -154,7 +224,7 @@ export default class TutorFound extends Component {
             <Image
               style={{marginTop:-65, borderWidth:6, borderRadius:54,
                 borderColor:'#3498DB', width:108, height:108}}
-                source={require('../images/jeff.png')}/>
+                source={image}/>
                 <Text style={{fontFamily:'Montserrat-Regular',
                 fontSize: 24, color: '#4a4a4a', textAlign: 'center'}}>
                 {this.state.tutorObject.name}</Text>
@@ -231,6 +301,23 @@ export default class TutorFound extends Component {
             		default:      return <Text>""</Text>;
           	}
        		})() }
+          <View style={{paddingTop: 10, alignItems: 'center'}}>
+              <TouchableHighlight
+                style={{width: 50, height: 50}}
+                activeOpacity={0.6}
+                underlayColor={'white'}
+                onPress={this.cancel.bind(this)}>
+              <Image
+                  style = {{width:50, height:50}}
+                  source={require("../images/cancel.png")}
+                />
+
+              </TouchableHighlight>
+              <Text style={styles.footerText}>
+                <Text style={{marginTop:15}}>HOLD TO CANCEL</Text>
+              </Text>
+          </View>
+
           </View>
         </View>
       </View>
