@@ -94,7 +94,9 @@ export default class Nearby extends Component{
             Your tutor is nearby. Don{'\''}t see them? Here{'\''}s their number:
             </Text>
             <Text style={[styles.nearbyHeading, {marginTop:25}]}>
-            {this.props.tutorObject.phone}</Text>
+            ({this.props.tutorObject.phone}.subString(0,3)) +
+            {this.props.tutorObject.phone}.subString(4,6) "-" +
+            {this.props.tutorObject.phone}.subString(7,9) "-"</Text>
             <TouchableHighlight
               style={{width: 50, height: 50, marginTop:70}}
               activeOpacity={0.6}

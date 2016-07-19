@@ -35,7 +35,7 @@ export default class TutorFound extends Component {
     this.state = {
       tutorObject: {
         name: "Braden F.",
-        phone: "(123)-456-789",
+        phone: "1234567890",
         rating: "4.5",
         reviewCount: "12",
         bio: 'I’m a Systems Engineering major from Dallas',
@@ -100,7 +100,7 @@ export default class TutorFound extends Component {
         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'YES', onPress: () => this.props.navigator.push({component: Reciept,
           passProps: { cancelFee: true,
-            tutorObject: this.props.tutorObject,
+            tutorObject: this.state.tutorObject,
             seconds: "0",
             minutes: "0"
           }})},
@@ -263,8 +263,9 @@ export default class TutorFound extends Component {
             <TouchableOpacity>
               <View style={{marginTop:-30, marginBottom: 10,
                 backgroundColor:"blue", width: 50, height: 30}}>
-                onPress={onPress={() =>
-                  Communications.phonecall({this.state.tutorObject.phone}, true)};
+                onPress={() =>
+                  Communications.phonecall(this.state.tutorObject.phone,
+                    true)};
                 <Text>Make phonecall</Text>
               </View>
             </TouchableOpacity>
