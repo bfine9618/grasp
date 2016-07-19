@@ -15,8 +15,6 @@
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="g_r_a_s_p_name_tagline_vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tPU-bS-2Us">
                     <rect key="frame" x="97" y="94" width="287" height="292"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="tPU-bS-2Us" secondAttribute="height" multiplier="283:288" id="3oh-P9-yBN"/>
-                        <constraint firstAttribute="width" constant="287" id="XIa-jI-mIO"/>
                         <constraint firstAttribute="width" secondItem="tPU-bS-2Us" secondAttribute="height" multiplier="283:288" id="g7d-vk-FY0"/>
                     </constraints>
                     <variation key="default">
@@ -28,9 +26,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="tPU-bS-2Us" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5p1-r7-IKc"/>
+                <constraint firstItem="tPU-bS-2Us" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="94" id="CCs-ma-VzY"/>
                 <constraint firstItem="tPU-bS-2Us" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="96" id="EKQ-i7-Kr7"/>
-                <constraint firstItem="tPU-bS-2Us" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="T6m-hN-xK5"/>
+                <constraint firstItem="tPU-bS-2Us" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="97" placeholder="YES" id="caM-Wt-SmU"/>
+                <constraint firstItem="tPU-bS-2Us" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dew-8Z-EW9"/>
+                <constraint firstItem="tPU-bS-2Us" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="drc-SU-vJf"/>
                 <constraint firstItem="tPU-bS-2Us" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="95" id="x2I-ts-qH8"/>
                 <constraint firstItem="tPU-bS-2Us" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="y2g-jY-qOb"/>
             </constraints>
@@ -47,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="g_r_a_s_p_name_tagline_vertical" width="383" height="388"/>
+        <image name="g_r_a_s_p_name_tagline_vertical" width="569" height="576"/>
     </resources>
 </document>
