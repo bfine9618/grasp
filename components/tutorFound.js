@@ -260,12 +260,13 @@ export default class TutorFound extends Component {
                     source={icon}
                 ></Image>
             </TouchableHighlight>
-            <TouchableOpacity>
+            <TouchableOpacity
+            style={{width: 60, height: 40}}
+            onPress={() => {
+              Communications.phonecall(this.state.tutorObject.phone,
+                true)}}>
               <View style={{marginTop:-30, marginBottom: 10,
                 backgroundColor:"blue", width: 50, height: 30}}>
-                onPress={() =>
-                  Communications.phonecall(this.state.tutorObject.phone,
-                    true)};
                 <Text>Make phonecall</Text>
               </View>
             </TouchableOpacity>

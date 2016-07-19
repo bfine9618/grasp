@@ -31,16 +31,17 @@ export default class Reciept extends Component{
   }
 
   componentDidMount() {
-    this.cost();
     if(this.props.cancelFee || false){
       this.setState({cost: '3.50'});
+    } else {
+      this.cost();
     }
   }
 
   cost() {
     let totTime = this.props.minutes + (this.props.seconds/60);
     let timeRate = (.42*totTime).toFixed(2);
-    this.setState({cost: timeRate});
+    this.setState({cost: timeRate+''});
   }
 
   review(){

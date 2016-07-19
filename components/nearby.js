@@ -5,7 +5,7 @@ import Home from './stuInitial';
 import Active from './Session';
 import Reciept from './reciept';
 import {
-  Navigator,
+  Navigator, TouchableOpacity,
   Text,
   View,
   Image,
@@ -93,10 +93,19 @@ export default class Nearby extends Component{
             fontSize:18, textAlign:'center', marginTop: 5}}>
             Your tutor is nearby. Don{'\''}t see them? Here{'\''}s their number:
             </Text>
-            <Text style={[styles.nearbyHeading, {marginTop:25}]}>
-            ({this.props.tutorObject.phone}.subString(0,3)) +
-            {this.props.tutorObject.phone}.subString(4,6) "-" +
-            {this.props.tutorObject.phone}.subString(7,9) "-"</Text>
+            <View style={{marginTop: 15}}>
+            <TouchableOpacity
+            style={{width: 60, height: 40}}
+            onPress={() => {
+              Communications.phonecall(this.state.tutorObject.phone,
+                true)}}>
+              <View style={{marginTop:30,
+                backgroundColor:"blue", width: 50, height: 30}}>
+                <Text>Make phonecall</Text>
+              </View>
+            </TouchableOpacity>
+            </View>
+
             <TouchableHighlight
               style={{width: 50, height: 50, marginTop:70}}
               activeOpacity={0.6}

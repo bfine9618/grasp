@@ -68,6 +68,9 @@ export default class Login extends Component {
           keyboardType={'email-address'}
           returnKeyType={'next'}
           onChangeText={(text) => this.setState({email : text})}
+          onSubmitEditing={(event) => {
+            this.refs.Password.focus();
+          }}
           value={this.state.email}
           placeholder=".edu email"
         />
@@ -76,6 +79,7 @@ export default class Login extends Component {
           source={require("../images/Line.png")}
         />
         <TextInput
+          ref='Password'
           secureTextEntry={true}
           style={styles.wideInput}
           onChangeText={(text) => this.setState({password : text})}
