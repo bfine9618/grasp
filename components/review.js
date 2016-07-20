@@ -32,7 +32,7 @@ export default class Reciept extends Component{
       comment: "",
     };
 
-    img = require(this.props.tutorObject.img);
+    img = require('../images/jeff.png');
   }
 
   componentDidMount() {

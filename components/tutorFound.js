@@ -41,7 +41,7 @@ export default class TutorFound extends Component {
         bio: 'I’m a Systems Engineering major from Dallas',
         year: '2019',
         major: 'Systems Engineering',
-        img: 'Grasp/images/jeff.png',
+        img: '../images/jeff.png',
         lat: 39.954359,
         long: -75.201275,
       },
@@ -62,11 +62,11 @@ export default class TutorFound extends Component {
     };
 
     this.icons = {
-        'up'    : require('Grasp/images/up_blue.png'),
-        'down'  : require('Grasp/images/down.png')
+        'up'    : require('../images/up_blue.png'),
+        'down'  : require('../images/down.png')
     };
     that = this;
-    image = require(this.state.tutorObject.img);
+    image = require('../images/jeff.png');
   }
 
   toggle() {
@@ -133,7 +133,7 @@ export default class TutorFound extends Component {
         });
       },
       (error) => alert(error.message),
-      {enableHighAccuracy: true, maximumAge: 1000}
+      {enableHighAccuracy: true, maximumAge: 10000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
       var lastPosition = JSON.stringify(position);
@@ -143,8 +143,7 @@ export default class TutorFound extends Component {
           long: position.coords.longitude,
       });
       this.nearby();
-    },
-    (error) => alert(error.message),
+    }, (error) => {}, 
     {enableHighAccuracy: true, maximumAge: 500});
   }
 

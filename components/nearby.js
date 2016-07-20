@@ -4,6 +4,7 @@ import Menu from './helper/Menu';
 import Home from './stuInitial';
 import Active from './Session';
 import Reciept from './reciept';
+import Communications from 'react-native-communications';
 import {
   Navigator, TouchableOpacity,
   Text,
@@ -32,7 +33,7 @@ export default class Nearby extends Component{
       cancel: true,
     };
 
-    img = require(this.props.tutorObject.img);
+    img = require('../images/jeff.png');
   }
 
   componentDidMount() {
@@ -97,7 +98,7 @@ export default class Nearby extends Component{
             <TouchableOpacity
             style={{width: 60, height: 40}}
             onPress={() => {
-              Communications.phonecall(this.state.tutorObject.phone,
+              Communications.phonecall(this.props.tutorObject.phone,
                 true)}}>
               <View style={{marginTop:30,
                 backgroundColor:"blue", width: 50, height: 30}}>

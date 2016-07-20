@@ -41,7 +41,7 @@ export default class loading extends Component{
   animate() {
     let progress = 0;
     this.setState({ progress });
-    setTimeout(() => {
+    var t = setTimeout(() => {
       this.setState({ indeterminate: false });
       setInterval(() => {
         progress += Math.random() / 5;
@@ -51,6 +51,7 @@ export default class loading extends Component{
         this.setState({ progress: progress });
       }, 5000);
       this.found();
+      clearTimeout(t);
     }, 10000);
   }
 
@@ -69,7 +70,7 @@ export default class loading extends Component{
                 size={109}
                 thickness={10}
           />
-          <ProgressBar styleAttr="Large" color="blue"/>
+
           <Text style={styles.courseCodeAsk}>
             <Text style={{fontFamily: 'Montserrat-Light'}}>We{"\'"}re finding you a tutor.</Text>
           </Text>
