@@ -30,21 +30,14 @@ var i;
 var near;
 
 export default class TutorFound extends Component {
+  static propTypes = {
+    tutorObject: PropTypes.object.isRequired,
+    session: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      tutorObject: {
-        name: "Braden F.",
-        phone: "1234567890",
-        rating: "4.5",
-        reviewCount: "12",
-        bio: 'I’m a Systems Engineering major from Dallas',
-        year: '2019',
-        major: 'Systems Engineering',
-        img: '../images/jeff.png',
-        lat: 39.954359,
-        long: -75.201275,
-      },
       selectedOption: "REVIEWS",
       animation: new Animated.Value(77),
       expanded: false,
@@ -100,7 +93,7 @@ export default class TutorFound extends Component {
         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'YES', onPress: () => this.props.navigator.push({component: Reciept,
           passProps: { cancelFee: true,
-            tutorObject: this.state.tutorObject,
+            tutorObject: this.props.tutorObject,
             seconds: "0",
             minutes: "0"
           }})},
@@ -143,22 +136,23 @@ export default class TutorFound extends Component {
           long: position.coords.longitude,
       });
       this.nearby();
-    }, (error) => {}, 
+    }, (error) => {},
     {enableHighAccuracy: true, maximumAge: 500});
   }
 
   nearby() {
     var deltaY = Math.pow((parseFloat(this.state.lat) -
-      (parseFloat(this.state.tutorObject.lat))), 2);
+      (parseFloat(this.props.tutorObject.lat))), 2);
     var deltaX = Math.pow((parseFloat(this.state.long) -
-    (parseFloat(this.state.tutorObject.long))), 2);
+    (parseFloat(this.props.tutorObject.long))), 2);
     if (Math.sqrt(deltaX + deltaY) <= 0.0011) {
       clearInterval(near);
       clearInterval(i);
       navigator.geolocation.clearWatch(this.watchID);
       that.props.navigator.push({component: Nearby,
         passProps: { time: this.state.time || 0,
-        tutorObject: this.state.tutorObject,
+        tutorObject: this.props.tutorObject,
+        session: this.props.session
       }});
     }
   }
@@ -214,9 +208,9 @@ export default class TutorFound extends Component {
 
     var region = {
       latitude:((parseFloat(this.state.lat) +
-      (parseFloat(this.state.tutorObject.lat)))/2),
+      (parseFloat(this.props.tutorObject.lat)))/2),
       longitude:((parseFloat(this.state.long) +
-      (parseFloat(this.state.tutorObject.long)))/2),
+      (parseFloat(this.props.tutorObject.long)))/2),
       latitudeDelta: 0.01517391,
       longitudeDelta: 0.01014492,
     }
@@ -230,8 +224,8 @@ export default class TutorFound extends Component {
             showsUserLocation={true}
             region={region}
             annotations={[{
-              latitude: this.state.tutorObject.lat,
-              longitude: this.state.tutorObject.long,
+              latitude: this.props.tutorObject.lat,
+              longitude: this.props.tutorObject.long,
               view: <Image style={{width:40, height:40,
                 borderRadius:20, borderWidth:3, borderColor:'#3498DB'}}
                 source={image}/>
@@ -247,7 +241,7 @@ export default class TutorFound extends Component {
                 source={image}/>
                 <Text style={{fontFamily:'Montserrat-Regular',
                 fontSize: 24, color: '#4a4a4a', textAlign: 'center'}}>
-                {this.state.tutorObject.name}</Text>
+                {this.props.tutorObject.name}</Text>
             </View>
             <View>
             <TouchableHighlight
@@ -262,7 +256,7 @@ export default class TutorFound extends Component {
             <TouchableOpacity
             style={{width: 60, height: 40}}
             onPress={() => {
-              Communications.phonecall(this.state.tutorObject.phone,
+              Communications.phonecall(this.props.tutorObject.phone,
                 true)}}>
               <View style={{marginTop:-30, marginBottom: 10,
                 backgroundColor:"blue", width: 50, height: 30}}>
@@ -280,7 +274,7 @@ export default class TutorFound extends Component {
           <View style={{justifyContent:'center', alignItems:'center'}}>
             <Text style={{color:'#4a4a4a', fontSize:16, marginBottom: 7,
             fontFamily: "Montserrat-Light", marginTop: 10,}}>
-            {this.state.tutorObject.reviewCount} reviews</Text>
+            {this.props.tutorObject.reviewCount} reviews</Text>
             <Image style={{width: 168, resizeMode:'contain', height: 27}}
               source={require('../images/reviews.png')}/>
           </View>
@@ -307,18 +301,18 @@ export default class TutorFound extends Component {
                  <View>
                     <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
                     textAlign:'center', marginTop:30, width: 300}]}>{'\"'}
-                    {this.state.tutorObject.bio}{'\"'}</Text>
+                    {this.props.tutorObject.bio}{'\"'}</Text>
                 </View>
                  <View style={{paddingLeft: 30}}>
                    <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
                    textAlign:'left', marginTop:25}]}>Major:</Text>
                    <Text style={[styles.profileText, {fontFamily:'Montserrat-Regular',
                    textAlign:'left', marginTop:5}]}>
-                   {this.state.tutorObject.major}</Text>
+                   {this.props.tutorObject.major}</Text>
                    <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
                    textAlign:'left', marginTop:20}]}>Graduation Year:</Text>
                    <Text style={[styles.profileText, {fontFamily:'Montserrat-Regular',
-                   textAlign:'left', marginTop:5}]}>{this.state.tutorObject.year}</Text>
+                   textAlign:'left', marginTop:5}]}>{this.props.tutorObject.year}</Text>
                   </View>
                   </View>
             			);

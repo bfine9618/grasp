@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import * as Progress from 'react-native-progress';
 import TimerMixin from 'react-timer-mixin';
 import Home from './stuInitial';
 import Found from './tutorFound';
+import Nearby from './nearby';
 import {
   Navigator,
   Text,
@@ -17,13 +18,31 @@ var styles = require('./styles');
 var ProgressBar = require('ProgressBarAndroid');
 
 export default class loading extends Component{
+  static propTypes = {
+    session: PropTypes.object.isRequired,
+  }
+
 	constructor(props) {
     super(props);
     this.state = {
       loggedIn: true,
       progress: 0,
       indeterminate: true,
+      tutorObject: {
+        name: "Braden F.",
+        phone: "1234567890",
+        skype: 'braden.fineberg@gmail.com',
+        rating: "4.5",
+        reviewCount: "12",
+        bio: 'I’m a Systems Engineering major from Dallas',
+        year: '2019',
+        major: 'Systems Engineering',
+        img: '../images/jeff.png',
+        lat: 39.954359,
+        long: -75.201275,
+      }
     };
+    this.props.session.tutor = this.state.tutorObject.name;
   }
 
   cancel() {
@@ -31,7 +50,18 @@ export default class loading extends Component{
   }
 
   found() {
-    this.props.navigator.push({component: Found});
+    var component = Found;
+    if(this.props.session.loc.indexOf('@') >= 0 ) {
+      component = Nearby;
+    }
+
+    this.props.navigator.push({component: component,
+      passProps: {
+        session: this.props.session,
+        tutorObject: this.state.tutorObject,
+        time: 0,
+      }
+    });
   }
 
   componentDidMount() {

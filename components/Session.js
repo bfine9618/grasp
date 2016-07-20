@@ -17,6 +17,7 @@ var i;
 export default class Session extends Component{
   static propTypes = {
     tutorObject: PropTypes.object.isRequired,
+    session: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -62,7 +63,8 @@ export default class Session extends Component{
       passProps: {
         minutes: this.state.minutes || 0,
         seconds: this.state.seconds || 0,
-        tutorObject: this.props.tutorObject
+        tutorObject: this.props.tutorObject,
+        session: this.props.session
       }});
   }
 
@@ -73,9 +75,9 @@ export default class Session extends Component{
 
           <View style={[styles.container]}>
           <Text style={styles.confirmHead}> Course:</Text>
-          <Text style={styles.confirmInput}>server ask/local cache</Text>
+          <Text style={styles.confirmInput}>{this.props.session.coursecode}</Text>
           <Text style={styles.confirmHead}> Topic:</Text>
-          <Text style={styles.confirmInput}>server ask/local cache</Text>
+          <Text style={styles.confirmInput}>{this.props.session.coursecode}</Text>
           <Text style={styles.confirmHead}> You{'\''}re working with::</Text>
           <Text style={styles.confirmInput}>{this.props.tutorObject.name}</Text>
 

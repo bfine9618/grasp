@@ -67,6 +67,7 @@ export default class Login extends Component {
           style={styles.wideInput}
           keyboardType={'email-address'}
           returnKeyType={'next'}
+          autoCorrect={false}
           onChangeText={(text) => this.setState({email : text})}
           onSubmitEditing={(event) => {
             this.refs.Password.focus();
@@ -82,6 +83,7 @@ export default class Login extends Component {
           ref='Password'
           secureTextEntry={true}
           style={styles.wideInput}
+          autoCorrect={false}
           onChangeText={(text) => this.setState({password : text})}
           value={this.state.password}
           placeholder="password"

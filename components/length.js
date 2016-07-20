@@ -75,13 +75,15 @@ export default class length extends Component{
 
             <View style={{paddingTop:30}}>
                 <Text style={styles.courseCodeAsk}>
-                  For how long?
+                  For how long? {'\n'}(just a guess)
                 </Text>
                 <View style={styles.howLongView}>
                 <View>
                   <TextInput
                       style={styles.wideInput}
                       onChangeText={(text) => this.setState({len : text})}
+                      autoFocus={true}
+                      maxLength={3}
                       value={this.state.len}
                       keyboardType={'numeric'}
                       placeholder="20"

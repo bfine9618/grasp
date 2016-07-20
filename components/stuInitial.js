@@ -66,6 +66,8 @@ export default class stuInitial extends Component{
              <View style={{paddingTop: 49, alignItems: 'center', justifyContent: 'center'}}>
              <TextInput
               style={styles.wideInput}
+              autoFocus={true}
+              autoCorrect={false}
               onChangeText={(text) => this.setState({coursecode : text})}
               value={this.state.coursecode}
               placeholder="course code"

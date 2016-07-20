@@ -37,10 +37,6 @@ export default class topicInput extends Component{
      }
 
   prevStep() {
-   var component = Login;
-   if (this.state.user === "Student") {
-     component = StudentSignUp;
-   }
    this.props.navigator.pop();
  }
 
@@ -73,6 +69,8 @@ export default class topicInput extends Component{
              <TextInput
               style={styles.wideInput}
               onChangeText={(text) => this.setState({topic : text})}
+              autoFocus={true}
+              autoCorrect={false}
               value={this.state.topic}
               placeholder="ie. animal vs plant cells"
             />

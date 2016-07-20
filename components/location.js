@@ -26,6 +26,9 @@ export default class Location extends Component{
     this.state = {
       loggedIn: true,
       user: "Student",
+      student: {
+        skype: 'braden.fineberg@gmail.com',
+      }
     };
   }
 
@@ -35,10 +38,6 @@ export default class Location extends Component{
 
 
   prevStep() {
-   var component = Login;
-   if (this.state.user === "Student") {
-     component = StudentSignUp;
-   }
    this.props.navigator.pop();
  }
 
@@ -66,7 +65,7 @@ export default class Location extends Component{
        passProps: { topic: this.props.topic || '',
        coursecode: this.props.coursecode || '',
        len: this.props.len || '',
-       loc: '{this.state.student.skype}'
+       loc: this.state.student.skype
        }
    });
  }
@@ -93,6 +92,7 @@ export default class Location extends Component{
               <TouchableHighlight
                 style={styles.fullWidthButton}
                 activeOpacity={0.6}
+                autoFocus={true}
                 underlayColor={'white'}
                 onPress={this.nextStep.bind(this)}>
               <Text style={styles.fullWidthButtonText}>YES</Text>

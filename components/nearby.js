@@ -22,6 +22,7 @@ export default class Nearby extends Component{
   static propTypes = {
     time: PropTypes.number.isRequired,
     tutorObject: PropTypes.object.isRequired,
+    session: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -32,8 +33,6 @@ export default class Nearby extends Component{
       time: '0',
       cancel: true,
     };
-
-    img = require('../images/jeff.png');
   }
 
   componentDidMount() {
@@ -83,55 +82,81 @@ export default class Nearby extends Component{
     	<View style={styles.mainContainer}>
          <Menu navigator={this.props.navigator}/>
 
-          <View style={styles.container}>
-            <Image style={{width:210, height: 210, borderRadius:105,
-            borderWidth: 5, borderColor: '#3498DB', marginTop: 20}}
-            source={img}/>
+           <View style={styles.container}>
+         	{(() => {
+            if(this.props.session.loc.indexOf('@') >= 0) {
+              return(
+                <View style={{alignItems: 'center'}}>
+                <Image style={styles.aceImg}
+                source={require('../images/ace.png')}/>
+                <Text style={{fontFamily:'Montserrat-Light', color: '#4a4a4a',
+                fontSize:18, textAlign:'center', marginTop: 5}}>
+                Please log into Skype and begin your session with
+                {' '}{this.props.tutorObject.name}! Here is
+                 {' '}{this.props.tutorObject.name}{'\''}s Skype username:
+                </Text>
 
-            <Text style={[styles.nearbyHeading, {marginTop:15}]}>
-            {this.props.tutorObject.name}</Text>
-            <Text style={{fontFamily:'Montserrat-Light', color: '#4a4a4a',
-            fontSize:18, textAlign:'center', marginTop: 5}}>
-            Your tutor is nearby. Don{'\''}t see them? Here{'\''}s their number:
-            </Text>
-            <View style={{marginTop: 15}}>
-            <TouchableOpacity
-            style={{width: 60, height: 40}}
-            onPress={() => {
-              Communications.phonecall(this.props.tutorObject.phone,
-                true)}}>
-              <View style={{marginTop:30,
-                backgroundColor:"blue", width: 50, height: 30}}>
-                <Text>Make phonecall</Text>
+                <Text style={{fontFamily:'Montserrat-Light', color: '#3498DB',
+                fontSize:22, textAlign:'center', marginTop: 40}}>
+                {this.props.tutorObject.skype}
+                </Text>
+                </View>
+              );
+          } else {
+            return (
+              <View style={{alignItems:'center'}}>
+              <Image style={{width:210, height: 210, borderRadius:105,
+              borderWidth: 5, borderColor: '#3498DB', marginTop: 20}}
+              source={img}/>
+              <Text style={[styles.nearbyHeading, {marginTop:15}]}>
+              {this.props.tutorObject.name}</Text>
+              <Text style={{fontFamily:'Montserrat-Light', color: '#4a4a4a',
+              fontSize:18, textAlign:'center', marginTop: 5}}>
+              Your tutor is nearby. Don{'\''}t see them? Here{'\''}s their number:
+              </Text>
+              <View style={{marginTop: 15}}>
+              <TouchableOpacity
+              style={{width: 60, height: 40}}
+              onPress={() => {
+                Communications.phonecall(this.props.tutorObject.phone,
+                  true)}}>
+                <View style={{marginTop:30,
+                  backgroundColor:"blue", width: 50, height: 30}}>
+                  <Text>Make phonecall</Text>
+                </View>
+              </TouchableOpacity>
               </View>
-            </TouchableOpacity>
             </View>
+          );
+        }
+      })() }
 
-            <TouchableHighlight
-              style={{width: 50, height: 50, marginTop:70}}
-              activeOpacity={0.6}
-              underlayColor={'white'}
-              onPress={this.cancel.bind(this)}>
-            <Image
-                style = {{width:50, height:50}}
-                source={require("../images/cancel.png")}
-              />
+        <TouchableHighlight
+          style={{width: 50, height: 50, marginTop:70}}
+          activeOpacity={0.6}
+          underlayColor={'white'}
+          onPress={this.cancel.bind(this)}>
+        <Image
+            style = {{width:50, height:50}}
+            source={require("../images/cancel.png")}
+          />
+        </TouchableHighlight>
+        <Text style={styles.footerText}>
+          <Text style={{marginTop:15}}>HOLD TO CANCEL</Text>
+        </Text>
+        <TouchableHighlight
+          style={styles.fullWidthButton}
+          activeOpacity={0.6}
+          underlayColor={'white'}
+          onPress={() => this.props.navigator.push({component: Active,
+            passProps:{
+              tutorObject: this.props.tutorObject,
+              session: this.props.session
+            }})}>
+            <Text style={styles.fullWidthButtonText}>active</Text>
             </TouchableHighlight>
-            <Text style={styles.footerText}>
-              <Text style={{marginTop:15}}>HOLD TO CANCEL</Text>
-            </Text>
-            <TouchableHighlight
-              style={styles.fullWidthButton}
-              activeOpacity={0.6}
-              underlayColor={'white'}
-              onPress={() => this.props.navigator.push({component: Active,
-                passProps:{
-                  tutorObject: this.props.tutorObject
-                }})}>
-                <Text style={styles.fullWidthButtonText}>active</Text>
-                </TouchableHighlight>
-          </View>
       </View>
-    );
+    </View>
+  );
   }
 }
