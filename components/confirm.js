@@ -26,7 +26,7 @@ export default class Location extends Component{
       loggedIn: true,
       user: "Student",
       coursecode: this.props.coursecode,
-      topic: this.props.coursecode,
+      topic: this.props.topic,
       len: this.props.len,
       loc: this.props.loc,
       tutor: '',
@@ -47,6 +47,7 @@ export default class Location extends Component{
   }
 
  submit() {
+   console.log(this.state);
    if (this.canSubmit()){
    this.props.navigator.push({component: Loading,
      passProps: {

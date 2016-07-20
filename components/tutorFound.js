@@ -145,14 +145,15 @@ export default class TutorFound extends Component {
       (parseFloat(this.props.tutorObject.lat))), 2);
     var deltaX = Math.pow((parseFloat(this.state.long) -
     (parseFloat(this.props.tutorObject.long))), 2);
-    if (Math.sqrt(deltaX + deltaY) <= 0.0011) {
+    if (Math.sqrt(deltaX + deltaY) <= 0.0009) {
       clearInterval(near);
       clearInterval(i);
+      console.log(this.props.session);
       navigator.geolocation.clearWatch(this.watchID);
       that.props.navigator.push({component: Nearby,
         passProps: { time: this.state.time || 0,
         tutorObject: this.props.tutorObject,
-        session: this.props.session
+        session: this.props.session,
       }});
     }
   }

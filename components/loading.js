@@ -55,6 +55,8 @@ export default class loading extends Component{
       component = Nearby;
     }
 
+    console.log(this.props.session);
+
     this.props.navigator.push({component: component,
       passProps: {
         session: this.props.session,

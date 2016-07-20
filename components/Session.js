@@ -77,7 +77,7 @@ export default class Session extends Component{
           <Text style={styles.confirmHead}> Course:</Text>
           <Text style={styles.confirmInput}>{this.props.session.coursecode}</Text>
           <Text style={styles.confirmHead}> Topic:</Text>
-          <Text style={styles.confirmInput}>{this.props.session.coursecode}</Text>
+          <Text style={styles.confirmInput}>{this.props.session.topic}</Text>
           <Text style={styles.confirmHead}> You{'\''}re working with::</Text>
           <Text style={styles.confirmInput}>{this.props.tutorObject.name}</Text>
 

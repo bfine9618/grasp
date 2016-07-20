@@ -83,6 +83,7 @@ export default class Login extends Component {
           ref='Password'
           secureTextEntry={true}
           style={styles.wideInput}
+          returnKeyType={'done'}
           autoCorrect={false}
           onChangeText={(text) => this.setState({password : text})}
           value={this.state.password}

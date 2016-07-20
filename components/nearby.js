@@ -33,6 +33,8 @@ export default class Nearby extends Component{
       time: '0',
       cancel: true,
     };
+
+    img = require('../images/jeff.png');
   }
 
   componentDidMount() {

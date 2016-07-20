@@ -4,10 +4,7 @@ import CustomStarExample from './helper/rating';
 import Menu from './helper/Menu';
 import Home from './stuInitial';
 import {
-  KeyboardAwareScrollView }
-  from 'react-native-keyboard-aware-scroll-view';
-import {
-  Navigator,
+  Navigator, Animated,
   Text,
   View,
   Image,
@@ -29,17 +26,32 @@ export default class Reciept extends Component{
     this.state = {
       loggedIn: true,
       user: "Student",
-      comment: "",
+      expanded: true,
+      animation: new Animated.Value(185),
     };
 
     img = require('../images/jeff.png');
   }
 
-  componentDidMount() {
+  toggle() {
+    let initialValue    = this.state.expanded? 185 : 10,
+        finalValue      = this.state.expanded? 10 : 185;
+
+    this.setState({
+        expanded : !this.state.expanded
+    });
+
+    this.state.animation.setValue(initialValue);
+    Animated.spring(
+        this.state.animation,
+        {
+            toValue: finalValue
+        },
+    ).start();
   }
 
   home(){
-    this.props.navigator.push({component: Home});
+    this.props.navigator.resetTo({component: Home});
   }
 
   render() {
@@ -47,17 +59,18 @@ export default class Reciept extends Component{
     	<View style={[styles.mainContainer, {backgroundColor: '#f6f6f6'}]}>
       <Menu navigator={this.props.navigator}/>
 
-       <KeyboardAwareScrollView>
-       <View style={[styles.container]}>
+       <View style={[styles.container, {marginTop:15}]}>
+       <Animated.View style={{height:this.state.animation, overflow: 'hidden',
+        alignItems:'center', paddingTop:15}}>
        <Image
          style = {[styles.avatar, {flex: 1,
            borderWidth:5, borderColor:'#3498DB'}]}
          source={img}
          />
          <Text style={styles.courseCodeAsk}>
-           What did you think of {this.props.tutorObject.name}?
+           What did you think of this.props.tutorObject.name}?
           </Text>
-
+          </Animated.View>
 
         <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
           color: '#3498DB', marginTop:20}}>Session Ended</Text>
@@ -78,21 +91,22 @@ export default class Reciept extends Component{
         numberOfLines= {5}
         maxLength={135}
         blurOnSubmit={true}
+        onFocus={this.toggle.bind(this)}
         returnKeyType={'done'}
+        onSubmitEditing={this.toggle.bind(this)}
         onChangeText={(text) => this.setState({comment: text})}
         value={this.state.text}></TextInput>
        </View>
 
 
        <TouchableHighlight
-         style={[styles.fullWidthButton, {marginTop:40}]}
+         style={[styles.fullWidthButton, {marginTop:20}]}
          activeOpacity={0.6}
          underlayColor={'white'}
          onPress={this.home.bind(this)}>
        <Text style={styles.fullWidthButtonText}>FINISH</Text>
        </TouchableHighlight>
        </View>
-       </KeyboardAwareScrollView>
     </View>
  );
 }
