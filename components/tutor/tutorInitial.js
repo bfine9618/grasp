@@ -13,7 +13,7 @@ import {
   Alert,
 } from 'react-native';
 
-import Nearby from '../nearby';
+import Active from './active';
 import Home from '../welcome';
 
 var styles = require('../styles');
@@ -33,10 +33,12 @@ export default class TutorFound extends Component {
         coursecode: 'Econ 001',
         topic: 'Oligopoly Graphs',
         len: '25',
+        skype: 'dudejeff@gmail.com',
         loc: {
           long: -75.190677,
           lat: 39.953008,
           name: 'hill 419',
+          skype: false,
         },
       },
       initialPosition: "",
@@ -88,7 +90,7 @@ export default class TutorFound extends Component {
     console.log(this.state.inSession);
     if (Math.sqrt(deltaX + deltaY) <= 0.0009 && active) {
       navigator.geolocation.clearWatch(this.watchID);
-      that.props.navigator.push({component: Nearby,
+      that.props.navigator.push({component: Active,
         passProps: { time: this.state.time || 0,
         studentObject: this.state.studentObject,
         session: this.state.session,

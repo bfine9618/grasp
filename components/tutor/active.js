@@ -2,9 +2,10 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component, PropTypes } from 'react';
 import Menu from '../helper/Menu';
 import Reciept from '../reciept';
+import Communications from 'react-native-communications';
 import {
   Navigator,
-  Text,
+  Text, TouchableOpacity,
   View,
   Image,
   TextInput,
@@ -27,11 +28,11 @@ export default class Session extends Component{
       user: "Student",
       minutes: '00',
       seconds: '00',
+      inSession: false
     };
   }
 
   componentDidMount(){
-    this.timer();
   }
 
   timer() {
@@ -70,17 +71,20 @@ export default class Session extends Component{
 
   render() {
     return (
-    	<View style={[styles.mainContainer,{backgroundColor: '#f6f6f6'}]}>
-         <Menu navigator={this.props.navigator}/>
+       <View style={[styles.mainContainer, {backgroundColor: '#f6f6f6'}]}>
+          <Menu navigator={this.props.navigator}/>
 
-          <View style={[styles.container]}>
-          <Text style={styles.confirmHead}> Course:</Text>
-          <Text style={styles.confirmInput}>{this.props.session.coursecode}</Text>
-          <Text style={styles.confirmHead}> Topic:</Text>
-          <Text style={styles.confirmInput}>{this.props.session.topic}</Text>
-          <Text style={styles.confirmHead}> You{'\''}re working with::</Text>
-          <Text style={styles.confirmInput}>{this.props.studentObject.name}</Text>
+          <View style={styles.container}>
+          <Image style={{width:100, height: 100, borderRadius:50,
+          borderWidth: 5, borderColor: '#3498DB', marginTop: -10}}
+          source={require('../../images/ace.png')}/>
+          <Text style={[styles.nearbyHeading, {marginTop:10}]}>
+          {this.props.studentObject.name}</Text>
+          <Info inSession= {this.state.inSession}
+            session= {this.props.session}
+            studentObject={this.props.studentObject}/>
 
+          <View style={styles.container}>
           <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
           color: '#3498DB', marginTop: 25}}>Session Started</Text>
           <View style={{backgroundColor: 'white', marginTop: 5,
@@ -110,8 +114,75 @@ export default class Session extends Component{
             <Text style={{marginTop:15}}>HOLD TO END SESSION</Text>
           </Text>
           </View>
+        </View>
 
       </View>
     );
   }
 }
+
+var Info = React.createClass({
+  propTypes: {
+    inSession: React.PropTypes.bool.isRequired,
+    session: React.PropTypes.object.isRequired,
+    studentObject: React.PropTypes.object.isRequired,
+  },
+  render: function() {
+    if (this.props.inSession){
+      return (
+        <View style={{justifyContent: 'space-around', flexDirection: 'row',
+         flex: 1}}>
+          <View>
+          <Text style={styles.confirmHead}> Course:</Text>
+          <Text style={[styles.confirmInput,
+          {width: 100}]}>{this.props.session.coursecode}</Text>
+          </View>
+          <View>
+          <Text style={styles.confirmHead}> Topic:</Text>
+          <Text style={[styles.confirmInput, {width: 100}]}>
+          {this.props.session.topic}</Text>
+          </View>
+          <View>
+          <Text style={styles.confirmHead}>Length:</Text>
+          <Text style={[styles.confirmInput, {width: 100}]}>
+          {this.props.session.len} minutes</Text>
+          </View>
+        </View>
+      );} else {
+           if(this.props.session.loc.skype) {
+             return(
+               <View style={{alignItems: 'center'}}>
+               <Image style={styles.aceImg}
+               source={require('../../images/ace.png')}/>
+               <Text style={{fontFamily:'Montserrat-Light', color: '#4a4a4a',
+               fontSize:18, textAlign:'center', marginTop: 5}}>
+               Please log into Skype and begin your session with
+               {' '}{this.props.studentObject.name}! Here is
+                {' '}{this.props.StudentObject.name}{'\''}s Skype username:
+               </Text>
+
+               <Text style={{fontFamily:'Montserrat-Light', color: '#3498DB',
+               fontSize:22, textAlign:'center', marginTop: 40}}>
+               {this.props.studentObject.skype}
+               </Text>
+               </View>
+             );} else {
+            return (
+             <View style={{alignItems:'center'}}>
+             <Text style={{fontFamily:'Montserrat-Light', color: '#4a4a4a',
+             fontSize:18, textAlign:'center', marginTop: 5}}>
+             Your student is nearby. Don{'\''}t see them? Here{'\''}s their number:
+             </Text>
+             <TouchableOpacity
+             style={{width: 150, height: 20, marginTop: 10}}
+             onPress={() => {
+               Communications.phonecall(this.props.studentObject.phone,
+                 true)}}>
+                <Text style={{fontFamily:'Montserrat-Light', color: '#3498DB',
+                fontSize:22, textAlign:'center'}}>
+                {this.props.studentObject.phone}</Text>
+             </TouchableOpacity>
+           </View>
+         );}
+      }}
+  });
