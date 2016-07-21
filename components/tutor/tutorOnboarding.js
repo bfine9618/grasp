@@ -5,9 +5,10 @@ import {
   View,
   Image,
   TouchableHighlight } from 'react-native'
-import Swiper from 'react-native-swiper'
+import Swiper from 'react-native-swiper';
+import tutorInitial from './tutorInitial';
 //import StuHome from "./tutInitial";
-var styles = require('./onboardingStyles');
+var styles = require('../onboardingStyles');
 
 
 export default class BasicSample extends React.Component {
@@ -16,11 +17,9 @@ export default class BasicSample extends React.Component {
     console.log(state, context.state)
   }
 
-  /*stuHome ()  {
-         console.log(this);
-
-     this.props.navigator.push({component: StuHome});
-   }*/
+  home ()  {
+     this.props.navigator.push({component: tutorInitial});
+   }
 
   render() {
     return (
@@ -35,7 +34,7 @@ export default class BasicSample extends React.Component {
         <View style={styles.container}>
             <Image
               style = { styles.howToImg}
-              source={require("../images/tutorHowTo1.png")}
+              source={require("../../images/tutorHowTo1.png")}
             />
             <Text style={styles.heading}>
             Get notified when a student near you needs tutoring.
@@ -48,7 +47,7 @@ export default class BasicSample extends React.Component {
         <View style={styles.container}>
             <Image
               style = { styles.howToImg }
-              source={require("../images/tutorHowTo2.png")}
+              source={require("../../images/tutorHowTo2.png")}
             />
             <Text style={styles.heading}>
              Go to the student{"\'"}s location and provide some help!
@@ -61,7 +60,7 @@ export default class BasicSample extends React.Component {
         <View style={styles.container}>
             <Image
               style = { styles.howToImg }
-              source={require("../images/tutorHowTo3.png")}
+              source={require("../../images/tutorHowTo3.png")}
             />
             <Text style={styles.heading}>
              Make $16-$20 per hour!
@@ -70,6 +69,13 @@ export default class BasicSample extends React.Component {
              We{"\'"}ll deposit the money into your bank or Venmo
              account in 2-3 processing days.
              </Text>
+             <TouchableHighlight
+               style={[styles.linkButton, {marginTop: 15}]}
+               activeOpacity={0.6}
+               underlayColor={'white'}
+               onPress={this.home.bind(this)}>
+             <Text style={styles.linkText}>OKAY, LET{"\'"}S GET STARTED</Text>
+             </TouchableHighlight>
         </View>
       </Swiper>
     )

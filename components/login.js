@@ -11,7 +11,8 @@ import Grasp from './home';
 var styles = require('./styles');
 import Signup1 from "./signup";
 import stuHome from "./stuInitial";
-import onBoarding from "./studentOnboarding";
+import onBoardingStu from "./studentOnboarding";
+import onBoardingTut from './tutor/tutorOnboarding';
 
 export default class Login extends Component {
   constructor(props) {
@@ -26,11 +27,14 @@ export default class Login extends Component {
    }
 
     signIn() {
-      console.log(this);
+      var component = onBoardingStu;
       if (this.state.email && this.state.password){
-        this.props.navigator.push({component: onBoarding});
+        if(this.state.email === 'Tutor'){
+          component = onBoardingTut;
       }
+      this.props.navigator.push({component: component});
     }
+  }
 
     forgotPass() {
       console.log("well, fuck");

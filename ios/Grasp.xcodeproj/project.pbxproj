@@ -23,6 +23,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		F802E1BC1D40345A00D2A3B2 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F802E1AF1D40343E00D2A3B2 /* libAirMaps.a */; };
 		F82332501D36855000077CF8 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F823324F1D36853100077CF8 /* libRNImagePicker.a */; };
 		F8A5B0351D31F29E009FD9BB /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5B02A1D31F26D009FD9BB /* libART.a */; };
 		F8E4D99D1D2D5F55005660CB /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8E4D99C1D2D5F55005660CB /* Montserrat-Light.otf */; };
@@ -111,6 +112,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		F802E1AE1D40343E00D2A3B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F802E1AA1D40343E00D2A3B2 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 		F823324E1D36853100077CF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F823323F1D36853000077CF8 /* RNImagePicker.xcodeproj */;
@@ -149,6 +157,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		F802E1AA1D40343E00D2A3B2 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		F823323F1D36853000077CF8 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		F8A5B0251D31F26D009FD9BB /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		F8E4D99C1D2D5F55005660CB /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
@@ -169,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F802E1BC1D40345A00D2A3B2 /* libAirMaps.a in Frameworks */,
 				F82332501D36855000077CF8 /* libRNImagePicker.a in Frameworks */,
 				F8A5B0351D31F29E009FD9BB /* libART.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -294,6 +304,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F802E1AA1D40343E00D2A3B2 /* AirMaps.xcodeproj */,
 				F823323F1D36853000077CF8 /* RNImagePicker.xcodeproj */,
 				F8A5B0251D31F26D009FD9BB /* ART.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -335,6 +346,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Grasp.app */,
 				00E356EE1AD99517003FC87E /* GraspTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F802E1AB1D40343E00D2A3B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F802E1AF1D40343E00D2A3B2 /* libAirMaps.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -442,6 +461,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = F802E1AB1D40343E00D2A3B2 /* Products */;
+					ProjectRef = F802E1AA1D40343E00D2A3B2 /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = F8A5B0261D31F26D009FD9BB /* Products */;
 					ProjectRef = F8A5B0251D31F26D009FD9BB /* ART.xcodeproj */;
@@ -568,6 +591,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F802E1AF1D40343E00D2A3B2 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = F802E1AE1D40343E00D2A3B2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F823324F1D36853100077CF8 /* libRNImagePicker.a */ = {
