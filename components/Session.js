@@ -100,7 +100,7 @@ export default class Session extends Component{
             style={{width: 50, height: 50, marginTop:10}}
             activeOpacity={0.6}
             underlayColor={'white'}
-            onPress={this.cancel.bind(this)}>
+            onLongPress={this.cancel.bind(this)}>
           <Image
               style = {{width:50, height:50}}
               source={require("../images/cancel.png")}

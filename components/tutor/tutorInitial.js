@@ -14,14 +14,11 @@ import {
 } from 'react-native';
 
 import Nearby from '../nearby';
+import Home from '../welcome';
 
 var styles = require('../styles');
-var that;
-var first = true;
-var timer;
 var image;
-var i;
-var near;
+var active = false;
 
 export default class TutorFound extends Component {
 
@@ -29,7 +26,8 @@ export default class TutorFound extends Component {
     super(props);
     this.state = {
       studentObject: {
-
+        name: 'Jeff W',
+        phone: '1234567899',
       },
       session: {
         coursecode: 'Econ 001',
@@ -41,18 +39,12 @@ export default class TutorFound extends Component {
           name: 'hill 419',
         },
       },
-      selectedOption: "REVIEWS",
-      animation: new Animated.Value(75),
-      expanded: false,
       initialPosition: "",
       lat: "",
       long: "",
       inSession: false,
-      time: 0,
-      cancel: true,
-      centerLat: 0,
-      centerLong: 0,
       watchID: '',
+      opacity: 1,
     };
 
     this.icons = {
@@ -61,28 +53,6 @@ export default class TutorFound extends Component {
     };
     that = this;
     image = require('../../images/jeff.png');
-  }
-
-  toggle() {
-    let initialValue    = this.state.expanded? 260 : 77,
-        finalValue      = this.state.expanded? 77 : 260;
-
-    this.setState({
-        expanded : !this.state.expanded
-    });
-
-    this.state.animation.setValue(initialValue);
-    Animated.spring(
-        this.state.animation,
-        {
-            toValue: finalValue
-        }
-    ).start();
-  }
-
-  cancel() {
-      navigator.geolocation.stopObserving(0);
-      this.props.navigator.push({component: Home});
   }
 
   locate() {
@@ -115,10 +85,8 @@ export default class TutorFound extends Component {
       (parseFloat(this.state.session.loc.lat))), 2);
     var deltaX = Math.pow((parseFloat(this.state.long) -
     (parseFloat(this.state.session.loc.long))), 2);
-    if (Math.sqrt(deltaX + deltaY) <= 0.0009) {
-      clearInterval(near);
-      clearInterval(i);
-      console.log(this.props.session);
+    console.log(this.state.inSession);
+    if (Math.sqrt(deltaX + deltaY) <= 0.0009 && active) {
       navigator.geolocation.clearWatch(this.watchID);
       that.props.navigator.push({component: Nearby,
         passProps: { time: this.state.time || 0,
@@ -126,6 +94,13 @@ export default class TutorFound extends Component {
         session: this.state.session,
       }});
     }
+  }
+
+  where() {
+    active = true;
+    this.setState({inSession: true,
+      opacity: 0});
+    this.nearby();
   }
 
   componentDidMount() {
@@ -139,8 +114,6 @@ export default class TutorFound extends Component {
   clearInterval(near);
   navigator.geolocation.clearWatch(this.watchID);
 }
-
-
   render() {
     let icon = this.icons['down'];
 
@@ -153,15 +126,27 @@ export default class TutorFound extends Component {
       (parseFloat(this.state.session.loc.lat)))/2),
       longitude:((parseFloat(this.state.long) +
       (parseFloat(this.state.session.loc.long)))/2),
-      latitudeDelta: 0.01517391,
+      latitudeDelta: 0.01217391,
       longitudeDelta: 0.00614492,
     }
-
-    var mapHeight = (1075 - this.state.animation);
 
     return (
       <View>
         <Menu navigator={this.props.navigator}/>
+        <View style={{height: 260,
+          overflow: 'hidden', alignItems: 'center', paddingTop:15,
+          backgroundColor:'#f6f6f6',
+          borderBottomColor:'rgba(74, 74, 74, 0.08)',
+          borderBottomWidth: 4}}>
+          <SessionInfo inSession={this.state.inSession}
+          session={this.state.session}
+          studentObject={this.state.studentObject}
+          />
+
+            <Text style={styles.confirmHead}> Where:</Text>
+            <Text style={[styles.cInput]}>
+              {this.state.session.loc.name}</Text>
+          </View>
         <MapView
           style={{height: 1000}}
           showsUserLocation={true}
@@ -172,67 +157,119 @@ export default class TutorFound extends Component {
             view: <Image style={{width:40, height:40,
               borderRadius:20, borderWidth:3, borderColor:'#3498DB'}}
               source={image}/>
-          }]}
-          onAnnotationPress={this.toggle.bind(this)}>
+          }]}>
           </MapView>
-        <TouchableWithoutFeedback
-            style={{height: this.state.animation, position: 'absolute',
-            left: 0, top: 60}}
-            onPress={this.toggle.bind(this)}
-            underlayColor="#f6f6f6">
-            <Animated.View style={{height: this.state.animation,
-              overflow: 'hidden', alignItems: 'center', paddingTop:15,
-              backgroundColor:'#f6f6f6', position: 'absolute',
-              left: 0, top: 60,
-              borderBottomColor:'rgba(74, 74, 74, 0.08)',
-              borderBottomWidth: 4}}>
-              <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
-              textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
-                Hey! A student nearby needs your help!
-                </Text>
-                <Text style={[styles.confirmHead, {marginTop:15}]}> Course:</Text>
-                <Text style={[styles.cInput]}>
-                  {this.state.session.coursecode}
-                 </Text>
-                <Text style={styles.confirmHead}> Topic:</Text>
-                <Text style={[styles.cInput]}>
-                  {this.state.session.topic}</Text>
-                  <Text style={styles.confirmHead}> For how long (minutes):</Text>
-                  <Text style={[styles.cInput]}>
-                    {this.state.session.len}
-                   </Text>
-                  <Text style={styles.confirmHead}> Where:</Text>
-                  <Text style={[styles.cInput]}>
-                    {this.state.session.loc.name}</Text>
-            </Animated.View>
-        </TouchableWithoutFeedback>
 
         <View style={{height: 70, paddingTop: 5, alignItems: 'center',
+        opacity: this.state.opacity,
         paddingLeft: 20, backgroundColor:'transparent', position: 'absolute',
           justifyContent: 'space-around', left: 0, top: 570, width: 180}}>
           <TouchableHighlight
             style={[styles.fullWidthButton, {width: 154}]}
             activeOpacity={0.6}
             underlayColor={'white'}
-            onPress={this.toggle.bind(this)}>
+            onPress={() => this.where()}>
           <Text style={styles.fullWidthButtonText}>ACCEPT</Text>
           </TouchableHighlight>
         </View>
-        <View style={{height: 70, paddingTop: 5, alignItems: 'center',
-        paddingLeft: 20, backgroundColor:'transparent', position: 'absolute',
-          justifyContent: 'space-around', left: 180, top: 570, width: 180}}>
-          <TouchableHighlight
-            style={[styles.fullWidthButton, {width: 154,
-              borderColor: 'rgba(0,0,0,.1)', borderWidth: 1,
-              backgroundColor:'rgba(255,255,255, .7)'}]}
-            activeOpacity={0.6}
-            underlayColor={'white'}
-            onPress={this.toggle.bind(this)}>
-          <Text style={[styles.fullWidthButtonText,
-            {color: '#4a4a4a'}]}>Ignore</Text>
-          </TouchableHighlight>
-        </View>
+        <Ignore inSession={this.state.inSession}
+        navigator={this.props.navigator}/>
       </View>
     );
   }
 }
+
+var SessionInfo = React.createClass({
+  propTypes: {
+    inSession: React.PropTypes.bool.isRequired,
+    session: React.PropTypes.object.isRequired,
+    studentObject: React.PropTypes.object.isRequired,
+  },
+
+  render: function() {
+    if (!this.props.inSession){
+      return (
+        <View>
+        <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
+        textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
+          Hey! A student nearby needs your help!
+          </Text>
+          <Text style={[styles.confirmHead, {marginTop:15}]}> Course:</Text>
+          <Text style={[styles.cInput]}>
+            {this.props.session.coursecode}
+           </Text>
+          <Text style={styles.confirmHead}> Topic:</Text>
+          <Text style={[styles.cInput]}>
+            {this.props.session.topic}</Text>
+          <Text style={styles.confirmHead}> For how long (minutes):</Text>
+          <Text style={[styles.cInput]}>
+            {this.props.session.len}
+           </Text>
+          </View>
+      );} else {
+        return (
+          <View>
+          <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
+          textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
+            {this.props.studentObject.name} is excited to work with you!
+            </Text>
+            <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
+            textAlign: 'center', fontSize:18, paddingLeft: 30, paddingRight: 30}}>
+              {this.props.studentObject.phone}
+            </Text>
+            <Text style={styles.confirmHead}> Topic:</Text>
+            <Text style={[styles.cInput]}>
+              {this.props.session.topic}</Text>
+            </View>
+          );}
+        }
+  });
+
+  var Ignore = React.createClass({
+    propTypes: {
+      inSession: React.PropTypes.bool.isRequired,
+    },
+
+    ignore: function() {
+      this.props.navigator.push({component: Home});
+    },
+
+    render: function() {
+      if (!this.props.inSession){
+        return (
+          <View style={{height: 70, paddingTop: 5, alignItems: 'center',
+          paddingLeft: 20, backgroundColor:'transparent', position: 'absolute',
+            justifyContent: 'space-around', left: 180, top: 570, width: 180}}>
+            <TouchableHighlight
+              style={[styles.fullWidthButton, {width: 154,
+                borderColor: 'rgba(0,0,0,.1)', borderWidth: 1,
+                backgroundColor:'rgba(255,255,255, .7)'}]}
+              activeOpacity={0.6}
+              underlayColor={'white'}
+              onPress={() => this.ignore()}>
+            <Text style={[styles.fullWidthButtonText,
+              {color: '#4a4a4a'}]}>IGNORE</Text>
+            </TouchableHighlight>
+          </View>
+        );} else {
+          return (
+            <View style={{height: 70, paddingTop: 5, alignItems: 'center',
+            paddingLeft: 20, backgroundColor:'transparent', position: 'absolute',
+              justifyContent: 'space-around', left: 100, top: 570, width: 180}}>
+            <TouchableHighlight
+              style={{width: 50, height: 50}}
+              activeOpacity={0.6}
+              underlayColor={'transparent'}
+              onLongPress={() => this.ignore()}>
+            <Image
+                style = {{width:50, height:50}}
+                source={require("../../images/cancel.png")}
+              />
+            </TouchableHighlight>
+            <Text style={styles.footerText}>
+              <Text style={{marginTop:15}}>HOLD TO CANCEL</Text>
+            </Text>
+            </View>
+            );}
+          }
+    });

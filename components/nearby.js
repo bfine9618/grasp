@@ -137,7 +137,7 @@ export default class Nearby extends Component{
           style={{width: 50, height: 50, marginTop:70}}
           activeOpacity={0.6}
           underlayColor={'white'}
-          onPress={this.cancel.bind(this)}>
+          onLongPress={this.cancel.bind(this)}>
         <Image
             style = {{width:50, height:50}}
             source={require("../images/cancel.png")}

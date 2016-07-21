@@ -1,7 +1,7 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component, PropTypes } from 'react';
-import Menu from './helper/Menu';
-import Reciept from './reciept';
+import Menu from '../helper/Menu';
+import Reciept from '../reciept';
 import {
   Navigator,
   Text,
@@ -11,12 +11,12 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-var styles = require('./styles');
+var styles = require('../styles');
 var i;
 
 export default class Session extends Component{
   static propTypes = {
-    tutorObject: PropTypes.object.isRequired,
+    studentObject: PropTypes.object.isRequired,
     session: PropTypes.object.isRequired,
   }
 
@@ -79,7 +79,7 @@ export default class Session extends Component{
           <Text style={styles.confirmHead}> Topic:</Text>
           <Text style={styles.confirmInput}>{this.props.session.topic}</Text>
           <Text style={styles.confirmHead}> You{'\''}re working with::</Text>
-          <Text style={styles.confirmInput}>{this.props.tutorObject.name}</Text>
+          <Text style={styles.confirmInput}>{this.props.studentObject.name}</Text>
 
           <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
           color: '#3498DB', marginTop: 25}}>Session Started</Text>
@@ -100,10 +100,10 @@ export default class Session extends Component{
             style={{width: 50, height: 50, marginTop:10}}
             activeOpacity={0.6}
             underlayColor={'white'}
-            onPress={this.cancel.bind(this)}>
+            onLongPress={this.cancel.bind(this)}>
           <Image
               style = {{width:50, height:50}}
-              source={require("../images/cancel.png")}
+              source={require("../../images/cancel.png")}
             />
           </TouchableHighlight>
           <Text style={styles.footerText}>
