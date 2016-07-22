@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 var styles = require('./styles');
-import ManLoc from "./manLocation";
 import Confirm from "./confirm";
 
 export default class Location extends Component{
