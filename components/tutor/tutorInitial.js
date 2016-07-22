@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Menu from '../helper/Menu';
+import Communications from 'react-native-communications';
 import {
   Text,
   ListView,
@@ -135,20 +136,11 @@ export default class TutorFound extends Component {
     return (
       <View>
         <Menu navigator={this.props.navigator}/>
-        <View style={{height: 260,
-          overflow: 'hidden', alignItems: 'center', paddingTop:15,
-          backgroundColor:'#f6f6f6',
-          borderBottomColor:'rgba(74, 74, 74, 0.08)',
-          borderBottomWidth: 4}}>
-          <SessionInfo inSession={this.state.inSession}
-          session={this.state.session}
-          studentObject={this.state.studentObject}
-          />
+        <SessionInfo inSession={this.state.inSession}
+        session={this.state.session}
+        studentObject={this.state.studentObject}
+        />
 
-            <Text style={styles.confirmHead}> Where:</Text>
-            <Text style={[styles.cInput]}>
-              {this.state.session.loc.name}</Text>
-          </View>
         <MapView
           style={{height: 1000}}
           showsUserLocation={true}
@@ -188,41 +180,80 @@ var SessionInfo = React.createClass({
     studentObject: React.PropTypes.object.isRequired,
   },
 
+  formatPhone: function() {
+    var tel = this.props.studentObject.phone;
+    return '(' + tel.substring(0,3) + ') ' + tel.substring(3,6) +
+      '-' + tel.substring(6);
+  },
+
   render: function() {
     if (!this.props.inSession){
       return (
-        <View>
-        <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
-        textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
-          A student nearby needs your help!
-          </Text>
-          <Text style={[styles.confirmHead, {marginTop:15}]}> Course:</Text>
-          <Text style={[styles.cInput]}>
-            {this.props.session.coursecode}
-           </Text>
-          <Text style={styles.confirmHead}> Topic:</Text>
-          <Text style={[styles.cInput]}>
-            {this.props.session.topic}</Text>
-          <Text style={styles.confirmHead}> For how long (minutes):</Text>
-          <Text style={[styles.cInput]}>
-            {this.props.session.len}
-           </Text>
-          </View>
-      );} else {
-        return (
-          <View>
+        <View style={{height: 260,
+          overflow: 'hidden', alignItems: 'center', paddingTop:15,
+          backgroundColor:'#f6f6f6',
+          borderBottomColor:'rgba(74, 74, 74, 0.08)',
+          borderBottomWidth: 4}}>
           <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
           textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
-            {this.props.studentObject.name} is excited to work with you!
+            A student nearby needs your help!
             </Text>
-            <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
-            textAlign: 'center', fontSize:18, paddingLeft: 30, paddingRight: 30}}>
-              {this.props.studentObject.phone}
-            </Text>
+            <Text style={[styles.confirmHead, {marginTop:15}]}> Course:</Text>
+            <Text style={[styles.cInput]}>
+              {this.props.session.coursecode}
+             </Text>
             <Text style={styles.confirmHead}> Topic:</Text>
             <Text style={[styles.cInput]}>
               {this.props.session.topic}</Text>
+            <Text style={styles.confirmHead}> For how long (minutes):</Text>
+            <Text style={[styles.cInput]}>
+              {this.props.session.len}
+             </Text>
+            <Text style={styles.confirmHead}> Where:</Text>
+            <Text style={[styles.cInput]}>
+              {this.props.session.loc.name}</Text>
+          </View>
+      );} else {
+        return (
+          <View style={{height: 260,
+            overflow: 'hidden', alignItems: 'center', paddingTop:15,
+            backgroundColor:'#f6f6f6',
+            borderBottomColor:'rgba(74, 74, 74, 0.08)',
+            borderBottomWidth: 4}}>
+          <Image style={{borderWidth:6, borderRadius:54,
+            borderColor:'#3498DB', width:108, height:108}}
+            source={require('../../images/jeff.png')}/>
+          <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
+          textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
+            {this.props.studentObject.name}
+          </Text>
+          <TouchableOpacity
+          style={{height: 20}}
+          onPress={() => {
+            Communications.phonecall(this.props.studentObject.phone,
+              true)}}>
+             <Text style={{fontFamily:'Montserrat-Light', color: '#3498DB',
+             fontSize:22, textAlign:'center'}}>
+             {this.formatPhone()}</Text>
+          </TouchableOpacity>
+          <View style={{justifyContent: 'space-around', flexDirection: 'row',
+          marginTop: 15}}>
+            <View>
+            <Text style={[styles.confirmHead,{marginBottom: 0}]}> Course:</Text>
+            <Text style={[styles.confirmInput,{width: 100}]}>{this.props.session.coursecode}</Text>
             </View>
+            <View>
+            <Text style={[styles.confirmHead,{marginBottom: 0}]}> Topic:</Text>
+            <Text style={[styles.confirmInput, {width: 100}]}>
+            {this.props.session.topic}</Text>
+            </View>
+            <View>
+            <Text style={[styles.confirmHead,{marginBottom: 0}]}>Length:</Text>
+            <Text style={[styles.confirmInput, {width: 100}]}>
+            {this.props.session.len} minutes</Text>
+            </View>
+          </View>
+        </View>
           );}
         }
   });
@@ -257,7 +288,7 @@ var SessionInfo = React.createClass({
           return (
             <View style={{height: 70, paddingTop: 5, alignItems: 'center',
             paddingLeft: 20, backgroundColor:'transparent', position: 'absolute',
-              justifyContent: 'space-around', left: 100, top: 570, width: 180}}>
+              justifyContent: 'space-around', left: 90, top: 570, width: 180}}>
             <TouchableHighlight
               style={{width: 50, height: 50}}
               activeOpacity={0.6}
