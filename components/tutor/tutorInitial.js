@@ -194,7 +194,7 @@ var SessionInfo = React.createClass({
         <View>
         <Text style={{fontFamily: 'Montserrat-Light', color: '#4a4a4a',
         textAlign: 'center', fontSize:22, paddingLeft: 30, paddingRight: 30}}>
-          Hey! A student nearby needs your help!
+          A student nearby needs your help!
           </Text>
           <Text style={[styles.confirmHead, {marginTop:15}]}> Course:</Text>
           <Text style={[styles.cInput]}>

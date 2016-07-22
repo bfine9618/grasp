@@ -1,7 +1,7 @@
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import React, { Component, PropTypes } from 'react';
 import Menu from '../helper/Menu';
-import Reciept from '../reciept';
+import Reciept from './payStamp';
 import Communications from 'react-native-communications';
 import {
   Navigator,
@@ -28,11 +28,9 @@ export default class Session extends Component{
       user: "Student",
       minutes: '00',
       seconds: '00',
-      inSession: false
+      inSession: false,
+      cur: 'start'
     };
-  }
-
-  componentDidMount(){
   }
 
   timer() {
@@ -57,6 +55,18 @@ export default class Session extends Component{
     }, 1000);
   }
 
+  start() {
+    if(!this.state.inSession){
+      this.timer();
+      this.setState({
+        inSession: true,
+        cur: 'stop'
+      });
+    } else{
+      this.cancel()
+    }
+  }
+
 
   cancel() {
     clearInterval(i);
@@ -64,7 +74,7 @@ export default class Session extends Component{
       passProps: {
         minutes: this.state.minutes || 0,
         seconds: this.state.seconds || 0,
-        tutorObject: this.props.tutorObject,
+        studentObject: this.props.studentObject,
         session: this.props.session
       }});
   }
@@ -84,7 +94,7 @@ export default class Session extends Component{
             session= {this.props.session}
             studentObject={this.props.studentObject}/>
 
-          <View style={styles.container}>
+          <View style={[styles.container, {marginTop:10}]}>
           <Text style={{fontFamily: 'Montserrat-Regular', fontSize:24,
           color: '#3498DB', marginTop: 25}}>Session Started</Text>
           <View style={{backgroundColor: 'white', marginTop: 5,
@@ -98,24 +108,17 @@ export default class Session extends Component{
           color: '#4a4a4a', marginTop: 5, textAlign:'center'}}>
           {this.state.minutes} : {this.state.seconds}</Text>
           </View>
-          <Text style={[styles.footerText, {fontSize: 22, marginTop:75}]}>
-          Has there been a mistake?</Text>
-          <TouchableHighlight
-            style={{width: 50, height: 50, marginTop:10}}
-            activeOpacity={0.6}
-            underlayColor={'white'}
-            onLongPress={this.cancel.bind(this)}>
-          <Image
-              style = {{width:50, height:50}}
-              source={require("../../images/cancel.png")}
-            />
-          </TouchableHighlight>
-          <Text style={styles.footerText}>
-            <Text style={{marginTop:15}}>HOLD TO END SESSION</Text>
-          </Text>
+          <View style={{marginTop: 40}}>
+            <TouchableHighlight
+              style={styles.fullWidthButton}
+              activeOpacity={0.6}
+              underlayColor={'white'}
+              onLongPress={() => this.start()}>
+            <Text style={styles.fullWidthButtonText}>Hold to {this.state.cur}</Text>
+            </TouchableHighlight>
+          </View>
           </View>
         </View>
-
       </View>
     );
   }
@@ -131,7 +134,7 @@ var Info = React.createClass({
     if (this.props.inSession){
       return (
         <View style={{justifyContent: 'space-around', flexDirection: 'row',
-         flex: 1}}>
+        marginTop: 5}}>
           <View>
           <Text style={styles.confirmHead}> Course:</Text>
           <Text style={[styles.confirmInput,
