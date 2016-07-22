@@ -55,15 +55,6 @@ export default class Location extends Component{
  }
  }
 
- manLoc() {
-  this.props.navigator.push({component: ManLoc,
-      passProps: { topic: this.props.topic || '',
-      coursecode: this.props.coursecode || '',
-      len: this.props.len || '',
-      }
-  });
- }
-
  skype() {
    this.props.navigator.push({component: Confirm,
        passProps: { topic: this.props.topic || '',
