@@ -35,20 +35,24 @@ export default class Location extends Component{
   menu() {
 
   }
-
+  canNext() {
+         return this.state.loc
+     }
 
   prevStep() {
    this.props.navigator.pop();
  }
 
  nextStep() {
-  this.props.navigator.push({component: Confirm,
-      passProps: { topic: this.props.topic || '',
-      coursecode: this.props.coursecode || '',
-      len: this.props.len || '',
-      loc: 'Your current location'
-      }
-  });
+  if(this.canNext()) {
+    this.props.navigator.push({component: Confirm,
+        passProps: { topic: this.props.topic || '',
+        coursecode: this.props.coursecode || '',
+        len: this.props.len || '',
+        loc: this.state.loc
+        }
+    });
+ }
  }
 
  manLoc() {
@@ -83,32 +87,48 @@ export default class Location extends Component{
           <Text style={styles.confirmHead}> For how long:</Text>
           <Text style={styles.confirmInput}>{this.props.len} minutes</Text>
 
-          <View style={{paddingTop:34}}>
-            <Text style={styles.courseCodeAsk}>
-              Meet at your current location?
-            </Text>
-          </View>
-          <View style={{paddingTop: 39}}>
-              <TouchableHighlight
-                style={styles.fullWidthButton}
-                activeOpacity={0.6}
-                autoFocus={true}
-                underlayColor={'white'}
-                onPress={this.nextStep.bind(this)}>
-              <Text style={styles.fullWidthButtonText}>YES</Text>
-              </TouchableHighlight>
-          </View>
-          <View style={{paddingTop: 20}}>
+          <Text style={[{marginBottom: 34}, styles.courseCodeAsk]}>
+            Where are you, specifically?
+           </Text>
+           <TextInput
+            style={styles.wideInput}
+            onChangeText={(text) => this.setState({loc : text})}
+            autoFocus={true}
+            autoCorrect={false}
+            value={this.state.loc}
+            placeholder="library basement, by the cafe"
+          />
+          <View style={[styles.line, !this.canNext() && styles.disabledLine]}/>
+          <View style={{paddingTop: 10}}>
               <TouchableHighlight
                 style={{width: 240, height: 34}}
                 activeOpacity={0.6}
                 underlayColor={'white'}
                 onPress={this.skype.bind(this)}>
               <Text style={styles.footerText}>
-              No, I want to skype
+              I want to skype
               </Text>
               </TouchableHighlight>
           </View>
+        </View>
+        <View>
+            <View style={styles.nextBackView}>
+              <TouchableHighlight
+                style={styles.textLinkButton}
+                activeOpacity={0.6}
+                underlayColor={'white'}
+                onPress={this.prevStep.bind(this)}>
+                <Text style={styles.textLink}>BACK</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.textLinkButton}
+                activeOpacity={0.6}
+                underlayColor={'white'}
+                onPress={this.nextStep.bind(this)}>
+              <Text style={[styles.textLink, !this.canNext() && styles.disabled]}>NEXT</Text>
+              </TouchableHighlight>
+            </View>
+          <KeyboardSpacer/>
         </View>
       </View>
     );

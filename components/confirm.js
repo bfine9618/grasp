@@ -90,12 +90,19 @@ export default class Location extends Component{
           <Text style={[styles.cInput]}>
             {this.state.len}
            </Text>
-          <Text style={styles.confirmHead}> Where:</Text>
-          <Text style={[styles.cInput]}>
-            {this.props.loc}</Text>
-
+        {(() => {
+          if(this.props.loc.indexOf('@') >= 0 ){
+            return(
+            <Text style={styles.confirmHead}> Skype Email:</Text>
+          );} else {
+            return(
+            <Text style={styles.confirmHead}> Where:</Text>
+          );}
+        })() }
+        <Text style={[styles.cInput]}>
+          {this.props.loc}</Text>
            <KeyboardSpacer/>
-          <View style={{paddingTop: 50}}>
+          <View style={{paddingTop: 80}}>
               <TouchableHighlight
                 style={styles.fullWidthButton}
                 activeOpacity={0.6}
