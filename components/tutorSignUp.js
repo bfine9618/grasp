@@ -116,10 +116,7 @@ export default class TutorPayment extends Component {
           				value={this.state.accountNumber}
           				placeholder="Account Number"
         			/>
-              <Image
-                style = {styles.line}
-                source={require("../images/Line.png")}
-              />
+              <View style={[styles.line]}/>
         			<TextInput
           				style={styles.wideInput}
           				onChangeText={(text) => this.setState({routingNumber : text})}

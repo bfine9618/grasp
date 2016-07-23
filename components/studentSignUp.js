@@ -66,10 +66,7 @@ export default class StudentPayment extends Component {
           		value={this.state.creditCardNumber}
           		placeholder="Credit Card Number"
         	/>
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
           <View style={{alignItems:"center"}}>
               <TextInput

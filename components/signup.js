@@ -87,7 +87,7 @@ export default class Signup1 extends Component {
         <View style={styles.container}>
         <Image
           style = { styles.headLogo }
-          source={require("../images/Logo1.png")}
+          source={require("../images/logo1.png")}
         />
          <Text style={styles.heading}>
          Sign up as...
@@ -179,40 +179,28 @@ class BasicInfo extends Component {
             value={this.state.name}
             placeholder="Name"
           />
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
           <TextInput
             style={styles.wideInput}
             onChangeText={(text) => this.setState({email : text})}
             value={this.state.email}
             placeholder="School Email"
           />
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
           <TextInput
             style={styles.wideInput}
             onChangeText={(text) => this.setState({password : text})}
             value={this.state.password}
             placeholder="Password"
           />
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
           <TextInput
             style={styles.wideInput}
             onChangeText={(text) => this.setState({password : text})}
             value={this.state.password}
             placeholder="Confirm Password"
           />
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
             <View style={{height:50}}></View>
             <TouchableHighlight
             style={styles.fullWidthButton}
@@ -348,20 +336,14 @@ class BasicInfo2 extends Component {
           		value={this.state.phoneNumber}
           		placeholder="Phone number (xxx)-xxx-xxxx"
         	/>
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
         	<TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({skype : text})}
           		value={this.state.skype}
           		placeholder="Skype Username (optional)"
         	/>
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+        <View style={[styles.line]}/>
           <View style={{height:30}}></View>
         	<TouchableHighlight
           style={styles.fullWidthButton}
@@ -439,10 +421,7 @@ class BasicInfo3 extends Component {
           		value={this.state.major}
           		placeholder="Major"
         	/>
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
         	<TextInput
           		style={styles.wideInput}
               keyboardType={'numeric'}
@@ -451,10 +430,7 @@ class BasicInfo3 extends Component {
           		value={this.state.graduatingYear}
           		placeholder="graduation year"
         	/>
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
           <TextInput
           		style={styles.wideInput}
           		onChangeText={(text) => this.setState({bio : text})}
@@ -462,10 +438,7 @@ class BasicInfo3 extends Component {
               maxLength={60}
           		placeholder="Short bio (optional)"
         	/>
-          <Image
-            style = {styles.line}
-            source={require("../images/Line.png")}
-          />
+          <View style={[styles.line]}/>
           <View style={{height:30}}></View>
         	<TouchableHighlight
           style={styles.fullWidthButton}

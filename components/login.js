@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {
-  Text,
+  Text, Animated,
   View,
   Image,
   TextInput,
@@ -18,7 +18,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false
+      loggedIn: false,
     };
   }
 
@@ -26,13 +26,18 @@ export default class Login extends Component {
      this.props.navigator.pop();
    }
 
+   canNext() {
+     return this.state.email && this.state.password;
+   }
+
     signIn() {
-      var component = onBoardingStu;
-      if (this.state.email && this.state.password){
+      if (this.canNext){
         if(this.state.email === 'Tutor'){
-          component = onBoardingTut;
+          this.props.navigator.push({component: onBoardingTut});
+      } else if(this.state.email=== 'Student'){
+        this.props.navigator.push({component: onBoardingStu});
       }
-      this.props.navigator.push({component: component});
+    } else {
     }
   }
 
@@ -60,14 +65,15 @@ export default class Login extends Component {
         <View style={styles.container}>
         <Image
           style = {styles.headLogo}
-          source={require("../images/Logo1.png")}
+          source={require("../images/logo1.png")}
         />
         <View style={{height:15}}></View>
         <Text style={styles.heading}>
           Login
          </Text>
          <View style={{height:25}}></View>
-         <TextInput
+         <View style={{alignItems: 'center'}} ref='inputs'>
+         <TextInput ref={component => this.usrname = component}
           style={styles.wideInput}
           keyboardType={'email-address'}
           returnKeyType={'next'}
@@ -79,10 +85,8 @@ export default class Login extends Component {
           value={this.state.email}
           placeholder=".edu email"
         />
-        <Image
-          style = {styles.line}
-          source={require("../images/Line.png")}
-        />
+        <View style={[styles.line]}>
+        </View>
         <TextInput
           ref='Password'
           secureTextEntry={true}
@@ -93,6 +97,7 @@ export default class Login extends Component {
           value={this.state.password}
           placeholder="password"
         />
+        </View>
 
         <KeyboardSpacer/>
         <View style={{height: 20}}></View>

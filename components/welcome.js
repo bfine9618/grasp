@@ -9,7 +9,7 @@ import {
 import Grasp from './home';
 var styles = require('./styles');
 import Signup1 from "./signup";
-import Login from "./length";
+import Login from "./login";
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export default class Welcome extends Component {
        <View style={styles.container}>
         <Image
           style = {styles.logo}
-          source={require("../images/Logo1.png")}
+          source={require("../images/logo1.png")}
         />
 
         <Text style={styles.heading}>

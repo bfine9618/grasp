@@ -53,7 +53,7 @@ export default class Menu extends Component{
     }
 
     settings(){
-      
+
     }
     history(){
       this.props.navigator.push({component: History});
@@ -110,7 +110,7 @@ export default class Menu extends Component{
                           underlayColor="#3498DB">
                           <Image
                               style={styles.menuImg}
-                              source={require("Grasp/images/settings.png")}
+                              source={require("Grasp/images/Settings.png")}
                           ></Image>
                       </TouchableHighlight>
                       <Text style={styles.menuText}>SETTINGS</Text>
@@ -122,7 +122,7 @@ export default class Menu extends Component{
                           underlayColor="#3498DB">
                           <Image
                               style={styles.menuImg}
-                              source={require("Grasp/images/history.png")}
+                              source={require("Grasp/images/History.png")}
                           ></Image>
                       </TouchableHighlight>
                       <Text style={styles.menuText}>HISTORY </Text>

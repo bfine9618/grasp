@@ -16,6 +16,7 @@ import {
 
 var styles = require('./styles');
 var ProgressBar = require('ProgressBarAndroid');
+var t;
 
 export default class loading extends Component{
   static propTypes = {
@@ -46,6 +47,7 @@ export default class loading extends Component{
   }
 
   cancel() {
+    clearTimeout(t);
     this.props.navigator.push({component: Home});
   }
 
@@ -73,7 +75,7 @@ export default class loading extends Component{
   animate() {
     let progress = 0;
     this.setState({ progress });
-    var t = setTimeout(() => {
+    t = setTimeout(() => {
       this.setState({ indeterminate: false });
       setInterval(() => {
         progress += Math.random() / 5;
