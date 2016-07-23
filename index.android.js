@@ -5,5 +5,6 @@ import {
 
 } from 'react-native';
 import Navigation from "./components/Navigation";
+import TutorFound from "./components/tutorFound";
 
-AppRegistry.registerComponent('Grasp', () => Navigation);
+AppRegistry.registerComponent('Grasp', () => TutorFound);
