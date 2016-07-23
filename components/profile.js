@@ -16,7 +16,7 @@ import {
 var styles = require('./styles');
 var that;
 
-export default class stuInitial extends Component{
+export default class Profile extends Component{
 
 
 	constructor(props) {
@@ -60,7 +60,7 @@ export default class stuInitial extends Component{
 
   render() {
     if (this.state.loading) {
-      // Data retrieval is asynchronous and React is strictly non-blocking, 
+      // Data retrieval is asynchronous and React is strictly non-blocking,
       // so we need a loading screen while we're grabbing data
       return <View><Text>Loading...</Text></View>;
     } else {
