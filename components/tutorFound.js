@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Menu from './helper/Menu';
 import Communications from 'react-native-communications';
+import CustomStarExample from './helper/rating';
 import {
   Text,
   ListView,
@@ -216,6 +217,9 @@ export default class TutorFound extends Component {
       longitudeDelta: 0.01014492,
     }
 
+
+    var stars = (Math.round(this.props.tutorObject.rating * 2) / 2).toFixed(1);
+
     return (
       <View>
         <Menu navigator={this.props.navigator}/>
@@ -276,10 +280,10 @@ export default class TutorFound extends Component {
             <Text style={{color:'#4a4a4a', fontSize:16, marginBottom: 7,
             fontFamily: "Montserrat-Light", marginTop: 10,}}>
             {this.props.tutorObject.reviewCount} reviews</Text>
-            <Image style={{width: 168, resizeMode:'contain', height: 27}}
-              source={require('../images/reviews.png')}/>
+            <View style={{width: 180}}>
+            <CustomStarExample starCount={parseFloat(stars)} disabled={true}/></View>
           </View>
-          <View style={{height: 350, alignItems:'center', marginTop: 25}}>
+          <View style={{height: 350, alignItems:'center', marginTop: 15}}>
           <RadioButtons
             options={options}
             onSelection={ setSelectedOption.bind(this) }
@@ -301,7 +305,7 @@ export default class TutorFound extends Component {
                 <View>
                  <View>
                     <Text style={[styles.profileText, {fontFamily:'Montserrat-Light',
-                    textAlign:'center', marginTop:30, width: 300}]}>{'\"'}
+                    textAlign:'center', marginTop:20, width: 300}]}>{'\"'}
                     {this.props.tutorObject.bio}{'\"'}</Text>
                 </View>
                  <View style={{paddingLeft: 30}}>
