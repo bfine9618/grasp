@@ -10,11 +10,15 @@ import {
 } from 'react-native';
 
 class CustomStarExample extends Component {
+  static propTypes = {
+    disabled: PropTypes.bool.isRequired,
+    starCount: PropTypes.number.isRequired
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      starCount: 0
+      starCount: this.props.starCount
     };
   }
 
@@ -27,7 +31,8 @@ class CustomStarExample extends Component {
   render() {
     return (
       <StarRating
-        disabled={false}
+        disabled={this.props.disabled}
+        halfStar={'md-contrast'}
         emptyStar={'md-radio-button-off'}
         fullStar={'md-radio-button-on'}
         iconSet={'Ionicons'}
