@@ -99,8 +99,8 @@ module.exports = StyleSheet.create({
   },
 
   prevButton: {
-    width:25,
-    height:25,
+    width:40,
+    height:40,
     position: 'absolute',
     top: 25,
     left: 12,

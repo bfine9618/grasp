@@ -250,7 +250,7 @@ export default class TutorFound extends Component {
             </View>
             <View>
             <TouchableHighlight
-                style={styles.menuButton}
+                style={{width: 30, height: 30, alignItems: 'center'}}
                 onPress={this.toggle.bind(this)}
                 underlayColor="#f6f6f6">
                 <Image
@@ -259,14 +259,12 @@ export default class TutorFound extends Component {
                 ></Image>
             </TouchableHighlight>
             <TouchableOpacity
-            style={{width: 60, height: 40}}
+            style={{width: 40, height: 40}}
             onPress={() => {
               Communications.phonecall(this.props.tutorObject.phone,
                 true)}}>
-              <View style={{marginTop:-30, marginBottom: 10,
-                backgroundColor:"blue", width: 50, height: 30}}>
-                <Text>Make phonecall</Text>
-              </View>
+              <Image style={[styles.menuButton, {marginTop: -10}]}
+                source={require("../images/call_icon.png")}/>
             </TouchableOpacity>
             </View>
             <View style={{alignItems:'center'}}>

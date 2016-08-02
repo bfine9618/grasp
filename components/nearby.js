@@ -79,6 +79,12 @@ export default class Nearby extends Component{
     }
   }
 
+  formatPhone() {
+    var tel = this.props.tutorObject.phone;
+    return '(' + tel.substring(0,3) + ') ' + tel.substring(3,6) +
+      '-' + tel.substring(6);
+  }
+
   render() {
     return (
     	<View style={styles.mainContainer}>
@@ -86,7 +92,7 @@ export default class Nearby extends Component{
 
            <View style={styles.container}>
          	{(() => {
-            if(this.props.session.loc.indexOf('@') >= 0) {
+            if(false) {
               return(
                 <View style={{alignItems: 'center'}}>
                 <Image style={styles.aceImg}
@@ -111,21 +117,20 @@ export default class Nearby extends Component{
               borderWidth: 5, borderColor: '#3498DB', marginTop: 20}}
               source={img}/>
               <Text style={[styles.nearbyHeading, {marginTop:15}]}>
-              {this.props.tutorObject.name}</Text>
+              this.props.tutorObject.name}</Text>
               <Text style={{fontFamily:'Montserrat-Light', color: '#4a4a4a',
               fontSize:18, textAlign:'center', marginTop: 5}}>
-              Your tutor is nearby. Don{'\''}t see them? Here{'\''}s their number:
+              Your tutor is nearby. Can{'\''}t find them? Here{'\''}s their number:
               </Text>
-              <View style={{marginTop: 15}}>
+              <View style={{marginTop: 20}}>
               <TouchableOpacity
-              style={{width: 60, height: 40}}
+              style={{height: 60, alignItems: 'center'}}
               onPress={() => {
                 Communications.phonecall(this.props.tutorObject.phone,
                   true)}}>
-                <View style={{marginTop:30,
-                  backgroundColor:"blue", width: 50, height: 30}}>
-                  <Text>Make phonecall</Text>
-                </View>
+                  <Text style={[styles.nearbyHeading,
+                    {color: '#3498DB'}]}>
+                  {this.formatPhone()}</Text>
               </TouchableOpacity>
               </View>
             </View>
@@ -134,7 +139,7 @@ export default class Nearby extends Component{
       })() }
 
         <TouchableHighlight
-          style={{width: 50, height: 50, marginTop:70}}
+          style={{width: 50, height: 50, marginTop:45}}
           activeOpacity={0.6}
           underlayColor={'white'}
           onLongPress={this.cancel.bind(this)}>
