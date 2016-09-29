@@ -8,7 +8,7 @@ import Profile from '../profile';
 import History from '../history';
 var styles = require('../styles');
 
-export default class Menu extends Component{
+export class Menu extends Component{
     constructor(props){
         super(props);
 

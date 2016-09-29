@@ -7,7 +7,7 @@ import {Text,
 import Profile from '../profile';
 var styles = require('../styles');
 
-export default class HistoryTags extends Component{
+export class HistoryTags extends Component{
     constructor(props){
         super(props);
         this.state = {

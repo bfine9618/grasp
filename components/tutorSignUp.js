@@ -76,18 +76,62 @@ export default class TutorPayment extends Component {
              </TouchableHighlight>
              <Text style={styles.toolbarTitle}>Tutor sign up</Text>
          </View>
-         <View style={styles.stepbar}>
-                <Text style={styles.stepComplete}>Step 1</Text>
-                <Text style={styles.stepComplete}>Step 2</Text>
-                <Text style={styles.stepComplete}>Step 3</Text>
-                <Text style={styles.stepActive}>Step 4</Text>
-          </View>
-          <View style={styles.statusBar}>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarActive}></View>
-          </View>
+         <View style={styles.statusBar}>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalComplete.png")}
+                 />
+                 <Text style={styles.stepComplete}>{'\nBasic'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineComplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalComplete.png")}
+                 />
+                 <Text style={styles.stepText}>{'\nPersonal'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineComplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalComplete.png")}
+                 />
+                 <Text style={styles.stepText}>{'\nAcademic'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineComplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalActive.png")}
+                 />
+                 <Text style={styles.stepActive}>{'\nPayment'.toUpperCase()}</Text>
+             </View>
+         </View>
 
        <View style={styles.container}>
 

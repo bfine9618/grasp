@@ -8,7 +8,7 @@ var {
 
 var blue = '#3498DB';
 var darkGrey = '#4A4A4A';
-var lightGrey = "#D3D3D3";
+var lightGrey = '#DBDBDB';
 
 module.exports = StyleSheet.create({
   baseText: {
@@ -26,7 +26,16 @@ module.exports = StyleSheet.create({
   heading: {
     fontSize: 32,
     textAlign: 'center',
-    margin: 10,
+    marginBottom: 10,
+    marginTop: 40,
+    fontFamily: 'Montserrat-Light'
+  },
+  smallHeading: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 0,
+    marginTop: 0,
+    color: '#4A4A4A',
     fontFamily: 'Montserrat-Light'
   },
   caption: {
@@ -76,22 +85,85 @@ module.exports = StyleSheet.create({
     fontSize: 18,
     color: '#3498DB'
   },
-  fullWidthButton: {
-    backgroundColor: '#3498DB',
+  inputFormDefault: {
     height:60,
-    width: 228,
+    width: 344,
+    alignSelf: 'stretch',
+    marginTop:12,
+    marginBottom: 12,
+    textAlign: 'left',
+    fontSize: 16,
+    color: darkGrey,
+    borderWidth: 1,
+    borderColor: lightGrey
+  },
+  // inputFormActive: {
+  //   height:60,
+  //   width: 344,
+  //   alignSelf: 'stretch',
+  //   marginTop:12,
+  //   marginBottom: 12,
+  //   textAlign: 'left',
+  //   fontSize: 16,
+  //   color: darkGrey,
+  //   borderWidth: 1,
+  //   borderColor: blue
+  // },
+  fullWidthButton: {
+    backgroundColor: '#3FAAE2',
+    height:60,
+    width: 344,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 30,
+    borderRadius: 3,
+    shadowOffset:  {
+            width: 0,
+            height: 2,
+    },
+    shadowRadius: 4,
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
     alignSelf: 'center',
     marginBottom: 10
   },
   fullWidthButtonText: {
-    fontSize:24,
-    color: 'white'
+    fontSize: 20,
+    color: 'white',
+    letterSpacing: 0.32
   },
 
+  fullWidthButtonWhite: {
+    backgroundColor: 'white',
+    height:60,
+    width: 344,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
+    shadowOffset:  {
+            width: 0,
+            height: 2,
+    },
+    shadowRadius: 4,
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    alignSelf: 'center',
+    marginBottom: 10
+  },
+
+  fullWidthButtonTextWhite: {
+      fontSize: 20,
+      color: '#4A4A4A',
+      letterSpacing: 0.32
+  },
+  progressCircle: {
+      width: 16,
+      height: 16,
+  },
+  progressLine: {
+      marginTop: 8,
+  },
   prevImg: {
     left: 14,
     width: 12,
@@ -111,42 +183,52 @@ module.exports = StyleSheet.create({
   },
 
   toolbar:{
-        backgroundColor: '#3498DB',
+        backgroundColor: '#3FAAE2',
         paddingTop:25,
         paddingBottom:10,
         height: 60,
     },
   stepbar:{
-    backgroundColor: '#f5f5f5',
-    paddingTop:13,
-    paddingBottom:13,
+    backgroundColor: '#ffffff',
+    paddingTop:0,
+    paddingBottom:0,
     flexDirection:'row',
-    height: 35,
+    height: 50,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   stepText:{
     fontFamily: 'Montserrat-Regular',
-    fontSize:20,
-    height: 24,
-    marginLeft:15,
-    marginRight:15,
-    color: '#D3D3D3',
+    fontSize:12,
+    // height: 12,
+    // marginLeft:15,
+    marginTop:-10,
+    color: '#C0C0C0',
+    width: 75,
+    textAlign: 'center',
+    // justifyContent:'space-around',
   },
   stepActive:{
     fontFamily: 'Montserrat-Regular',
-    fontSize:20,
-    marginLeft:15,
-    height: 24,
-    marginRight:15,
-    color: '#4A4A4A',
+    fontSize:12,
+    // marginLeft:15,
+    // height: 12,
+    marginTop:-10,
+    color: '#3498DB',
+    width: 75,
+    textAlign: 'center',
+    // justifyContent:'space-around',
+
   },
   stepComplete:{
     fontFamily: 'Montserrat-Regular',
-    fontSize:20,
-    height: 24,
-    marginLeft:15,
-    marginRight:15,
-    color: '#1ABC9C',
+    fontSize:12,
+    // height: 12,
+    // marginLeft:0,
+    marginTop:-10,
+    width: 75,
+    textAlign: 'center',
+    color: '#C0C0C0',
   },
     toolbarButton:{
         width: 50,            //Step 2
@@ -219,7 +301,7 @@ module.exports = StyleSheet.create({
     },
 
   progress: {
-    marginTop:250,
+    marginTop:0,
     marginBottom: 24,
   },
   footerText: {
@@ -238,16 +320,26 @@ module.exports = StyleSheet.create({
     statusbarActive: {
       height:6,
       width: 93.75,
-      backgroundColor: '#1ABC9C',
+      backgroundColor: '#3498DB',
     },
     statusbarGrey: {
       height:6,
       width: 93.75,
-      backgroundColor: '#E0E0E0',
+      backgroundColor: '#C0C0C0',
     },
     statusBar: {
-      height: 6,
+      height: 0,
+      flex: 1,
       flexDirection:'row',
+    //   alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 0,
+      marginTop: 15,
+      marginBottom: 0,
+    },
+    statusBarNode: {
+      width: 45,
+      height: 45,
       alignItems: 'center',
     },
     avatarContainer: {
@@ -296,7 +388,7 @@ module.exports = StyleSheet.create({
     historyView: {
       marginLeft: 12,
       marginRight: 12,
-      borderLeftColor: '#3498DB',
+      borderLeftColor: '#3FAAE2',
       borderLeftWidth: 4,
       height: 124,
       backgroundColor: 'white',

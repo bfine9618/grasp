@@ -17,11 +17,16 @@ export default class Navigation extends Component{
   render() {
     return (
       <Navigator
+        configureScene={ this.configureScene }
         style = {{ flex: 1}}
         initialRoute={{component: Grasp}}
         renderScene={this.navigatorRenderScene}/>
     );
   }
+
+  configureScene(route, routeStack){
+   return Navigator.SceneConfigs.HorizontalSwipeJump
+}
 
   navigatorRenderScene(route, navigator) {
     _navigator = navigator;

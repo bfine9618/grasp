@@ -23,9 +23,13 @@ export default class Signup1 extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {
-     	 user: "Student",
+     	 user: "Tutor",
+         myBorderColor1: '#DBDBDB',
+         myBorderColor2: '#DBDBDB',
+         myBorderColor3: '#DBDBDB',
     	};
  	 }
+
  	 nextStep() {
      var component = BasicInfo;
  	 	this.props.navigator.push({component: component,
@@ -35,14 +39,19 @@ export default class Signup1 extends Component {
 
  	 }
 
+
    prevStep() {
     this.props.navigator.pop();
   }
 
+  canNext() {
+    return this.state.name && this.state.email && this.state.password;
+  }
+
 	render() {
 		  const options = [
-			"Student",
-			"Tutor"
+			"Tutor",
+            "Student",
 			];
 
       function setSelectedOption(selectedOption){
@@ -59,7 +68,7 @@ export default class Signup1 extends Component {
 
         return (
           <TouchableWithoutFeedback onPress={onSelect} key={index}>
-            <View><Text style={style}>{option}</Text></View>
+            <View><Text style={style}>{option.toUpperCase()}</Text></View>
           </TouchableWithoutFeedback>
         );
       }
@@ -71,54 +80,151 @@ export default class Signup1 extends Component {
 		return (
        <View style={styles.mainContainer}>
 
-       <View style={{paddingTop:25}}>
+       <View style={styles.toolbar}>
+             <Text style={styles.toolbarTitle}>{this.props.user}Register</Text>
              <TouchableHighlight
                 style={styles.prevButton}
                 activeOpacity={0.6}
-                underlayColor={'white'}
+                underlayColor={'#3498DB'}
                 onPress={this.prevStep.bind(this)}>
                 <Image
                   style = {styles.prevImg}
-                  source={require("../images/back.png")}
+                  source={require("../images/back_white.png")}
                 />
               </TouchableHighlight>
+
+      </View>
+      <View style={styles.statusBar}>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressCircle}
+                source={require("../images/OvalActive.png")}
+              />
+              <Text style={styles.stepActive}>{'\nBasic'.toUpperCase()}</Text>
+
           </View>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressLine}
+                source={require("../images/LineIncomplete.png")}
+              />
+              <Text>{'\n'}</Text>
+          </View>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressCircle}
+                source={require("../images/OvalIncomplete.png")}
+              />
+              <Text style={styles.stepText}>{'\nPersonal'.toUpperCase()}</Text>
 
-        <View style={styles.container}>
-        <Image
-          style = { styles.headLogo }
-          source={require("../images/logo1.png")}
-        />
-         <Text style={styles.heading}>
-         Sign up as...
-         </Text>
+          </View>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressLine}
+                source={require("../images/LineIncomplete.png")}
+              />
+              <Text>{'\n'}</Text>
 
-         <View style={{marginBottom: 100, marginTop: 37,  alignItems:'center'}}>
-          <RadioButtons
-            options={ options }
-            onSelection={ setSelectedOption.bind(this) }
-            selectedOption={this.state.user}
-            renderOption={renderOption}
-            renderContainer={RadioButtons.getViewContainerRenderer({
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              width: 318,
-            })}
-          />
-        </View>
+          </View>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressCircle}
+                source={require("../images/OvalIncomplete.png")}
+              />
+              <Text style={styles.stepText}>{'\nAcademic'.toUpperCase()}</Text>
 
-        <TouchableHighlight
-          style={styles.fullWidthButton}
-          activeOpacity={0.6}
-          onPress={this.nextStep.bind(this)}>
-        <Text style={styles.fullWidthButtonText}>Next</Text>
-        </TouchableHighlight>
-        </View>
-        </View>
-         );
+          </View>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressLine}
+                source={require("../images/LineIncomplete.png")}
+              />
+              <Text>{'\n'}</Text>
+
+          </View>
+          <View style={styles.statusBarNode}>
+              <Image
+                style = {styles.progressCircle}
+                source={require("../images/OvalIncomplete.png")}
+              />
+              <Text style={styles.stepText}>{'\nPayment'.toUpperCase()}</Text>
+          </View>
+      </View>
+        <Text style={styles.smallHeading}>
+        I want to sign up as a...
+        </Text>
+     <View style={{marginBottom: 80, marginTop: 20,  alignItems:'center'}}>
+      <RadioButtons
+        options={ options }
+        onSelection={ setSelectedOption.bind(this) }
+        selectedOption={this.state.user}
+        renderOption={renderOption}
+        renderContainer={RadioButtons.getViewContainerRenderer({
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          width: 318,
+        })}
+      />
+    </View>
+    <View style={{alignItems: 'center'}} ref='inputs'>
+    <TextInput ref={component => this.usrname = component}
+     style={{fontFamily:'FontAwesome', height:60, width: 344, paddingLeft: 20, paddingRight: 20, alignSelf: 'center', marginTop:0, marginBottom: 0, textAlign: 'left', fontSize: 16, color: '#4A4A4A' ,borderWidth: 1, borderColor: this.state.myBorderColor1}}
+     onBlur={ () => this.setState({myBorderColor1 : '#DBDBDB'}) }
+     onFocus={ () => this.setState({myBorderColor1 : '#3498DB'}) }
+     keyboardType={'email-address'}
+     returnKeyType={'next'}
+     autoCorrect={false}
+     onChangeText={(text) => this.setState({name : text})}
+     onSubmitEditing={(event) => {
+       this.refs.Password.focus();
+     }}
+     value={this.state.name}
+     placeholder="&#xf007;    name"
+   />
+   </View>
+    <View style={{alignItems: 'center'}} ref='inputs'>
+    <TextInput ref={component => this.usrname = component}
+     style={{fontFamily:'FontAwesome', height:60, width: 344, paddingLeft: 20, paddingRight: 20, alignSelf: 'center', marginTop:10, marginBottom: 0, textAlign: 'left', fontSize: 16, color: '#4A4A4A' ,borderWidth: 1, borderColor: this.state.myBorderColor2}}
+     onBlur={ () => this.setState({myBorderColor2 : '#DBDBDB'}) }
+     onFocus={ () => this.setState({myBorderColor2 : '#3498DB'}) }
+     keyboardType={'email-address'}
+     returnKeyType={'next'}
+     autoCorrect={false}
+     onChangeText={(text) => this.setState({email : text})}
+     onSubmitEditing={(event) => {
+       this.refs.Password.focus();
+     }}
+     value={this.state.email}
+     placeholder="&#xf003;    .edu email"
+   />
+   </View>
+   <View style={{alignItems: 'center'}} ref='inputs'>
+   <TextInput
+     ref='Password'
+     secureTextEntry={true}
+     style={{fontFamily:'FontAwesome', height:60, width: 344, paddingLeft: 20, paddingRight: 20, alignSelf: 'center', marginTop:10, marginBottom: 35, textAlign: 'left', fontSize: 16, letterSpacing: 9, color: '#4A4A4A' ,borderWidth: 1, borderColor: this.state.myBorderColor3}}
+     onBlur={ () => this.setState({myBorderColor3 : '#DBDBDB'}) }
+     onFocus={ () => this.setState({myBorderColor3 : '#3498DB'}) }
+     returnKeyType={'done'}
+     autoCorrect={false}
+     onChangeText={(text) => this.setState({password : text})}
+     value={this.state.password}
+     placeholder="&#xf023;     password"
+   />
+   </View>
+   <View style={{marginBottom: 40}}>
+    <TouchableHighlight
+      style={styles.fullWidthButton}
+      onPress={this.nextStep.bind(this)}>
+    <Text style={styles.fullWidthButtonText}>{'next'.toUpperCase()}</Text>
+    </TouchableHighlight>
+    </View>
+    </View>
+     );
 	}
 }
 
+/*
 class BasicInfo extends Component {
   static propTypes = {
     user: PropTypes.string.isRequired,
@@ -214,8 +320,9 @@ class BasicInfo extends Component {
         );
       }
 }
+*/
 
-class BasicInfo2 extends Component {
+class BasicInfo extends Component {
   static propTypes = {
     user: PropTypes.string.isRequired,
   }
@@ -229,7 +336,7 @@ class BasicInfo2 extends Component {
   }
 
   nextStep() {
-   this.props.navigator.push({component: BasicInfo3,
+   this.props.navigator.push({component: BasicInfo2,
        passProps: { user: this.props.user,
          phoneNumber: this.state.phoneNumber || '',
   	 		  	skype: this.state.skype || '',
@@ -255,16 +362,16 @@ class BasicInfo2 extends Component {
    };
 
    ImagePicker.showImagePicker(options, (response) => {
-     console.log('Response = ', response);
+    //  console.log('Response = ', response);
 
      if (response.didCancel) {
-       console.log('User cancelled photo picker');
+    //    console.log('User cancelled photo picker');
      }
      else if (response.error) {
-       console.log('ImagePicker Error: ', response.error);
+    //    console.log('ImagePicker Error: ', response.error);
      }
      else if (response.customButton) {
-       console.log('User tapped custom button: ', response.customButton);
+    //    console.log('User tapped custom button: ', response.customButton);
      }
      else {
        var source;
@@ -302,18 +409,62 @@ class BasicInfo2 extends Component {
                />
              </TouchableHighlight>
          </View>
-         <View style={styles.stepbar}>
-                <Text style={styles.stepComplete}>Step 1</Text>
-                <Text style={styles.stepActive}>Step 2</Text>
-                <Text style={styles.stepText}>Step 3</Text>
-                <Text style={styles.stepText}>Step 4</Text>
-          </View>
-          <View style={styles.statusBar}>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarGrey}></View>
-              <View style={styles.statusbarGrey}></View>
-          </View>
+         <View style={styles.statusBar}>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalComplete.png")}
+                 />
+                 <Text style={styles.stepComplete}>{'\nBasic'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineComplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalActive.png")}
+                 />
+                 <Text style={styles.stepActive}>{'\nPersonal'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineIncomplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalIncomplete.png")}
+                 />
+                 <Text style={styles.stepText}>{'\nAcademic'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineIncomplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalIncomplete.png")}
+                 />
+                 <Text style={styles.stepText}>{'\nPayment'.toUpperCase()}</Text>
+             </View>
+         </View>
 
           <View style={styles.avatarContainer}>
            <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
@@ -359,7 +510,7 @@ class BasicInfo2 extends Component {
 	}
 }
 
-class BasicInfo3 extends Component {
+class BasicInfo2 extends Component {
   static propTypes = {
     user: PropTypes.string.isRequired,
   }
@@ -401,18 +552,62 @@ class BasicInfo3 extends Component {
                />
              </TouchableHighlight>
          </View>
-         <View style={styles.stepbar}>
-                <Text style={styles.stepComplete}>Step 1</Text>
-                <Text style={styles.stepComplete}>Step 2</Text>
-                <Text style={styles.stepActive}>Step 3</Text>
-                <Text style={styles.stepText}>Step 4</Text>
-          </View>
-          <View style={styles.statusBar}>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarActive}></View>
-              <View style={styles.statusbarGrey}></View>
-          </View>
+         <View style={styles.statusBar}>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalComplete.png")}
+                 />
+                 <Text style={styles.stepComplete}>{'\nBasic'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineComplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalComplete.png")}
+                 />
+                 <Text style={styles.stepComplete}>{'\nPersonal'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineComplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalActive.png")}
+                 />
+                 <Text style={styles.stepActive}>{'\nAcademic'.toUpperCase()}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressLine}
+                   source={require("../images/LineIncomplete.png")}
+                 />
+                 <Text>{'\n'}</Text>
+
+             </View>
+             <View style={styles.statusBarNode}>
+                 <Image
+                   style = {styles.progressCircle}
+                   source={require("../images/OvalIncomplete.png")}
+                 />
+                 <Text style={styles.stepText}>{'\nPayment'.toUpperCase()}</Text>
+             </View>
+         </View>
 
        <View style={styles.container}>
           <TextInput
